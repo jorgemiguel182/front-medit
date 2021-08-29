@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   Avatar,
   Card,
@@ -49,55 +48,3 @@ const TotalProfit = (props) => (
 );
 
 export default TotalProfit;
-=======
-import {
-  Avatar,
-  Card,
-  CardContent,
-  Grid,
-  Typography
-} from '@material-ui/core';
-import { indigo } from '@material-ui/core/colors';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-
-const TotalProfit = (props) => (
-  <Card {...props}>
-    <CardContent>
-      <Grid
-        container
-        spacing={3}
-        sx={{ justifyContent: 'space-between' }}
-      >
-        <Grid item>
-          <Typography
-            color="textSecondary"
-            gutterBottom
-            variant="h6"
-          >
-            TOTAL PROFIT
-          </Typography>
-          <Typography
-            color="textPrimary"
-            variant="h3"
-          >
-            $23,200
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Avatar
-            sx={{
-              backgroundColor: indigo[600],
-              height: 56,
-              width: 56
-            }}
-          >
-            <AttachMoneyIcon />
-          </Avatar>
-        </Grid>
-      </Grid>
-    </CardContent>
-  </Card>
-);
-
-export default TotalProfit;
->>>>>>> 9884c39db954c1951e3286d14e4fe7e6c6b89e21
