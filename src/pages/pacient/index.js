@@ -147,7 +147,13 @@ const Pacient = () => {
                           required
                           value={values.gender}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value=" ">Selecione*</option>
+                          <option value="F">Feminino</option>
+                          <option value="M">Masculino</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={2} xs={12}>
                         <TextField
@@ -159,7 +165,16 @@ const Pacient = () => {
                           required
                           value={values.ethnicity}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value=" ">Selecione*</option>
+                          <option value="branco">Branco</option>
+                          <option value="negro">Negro</option>
+                          <option value="pardo">Pardo</option>
+                          <option value="amarelo">Amarelo</option>
+                          <option value="indigena">Indígena</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={1} xs={12}>
                         <TextField
@@ -406,9 +421,12 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option selected="" value="none">Não tive nenhuma das doenças acima</option>
+                          <option value="zika">Zika</option>
+                          <option value="dengue">Dengue</option>
+                          <option value="chikungunya">Chikungunya</option>
+                          <option value="tuberculose">Tuberculose</option>
+                          <option value="febre_amarela">Febre Amarela</option>
                         </Select>
                       </Grid>
                     </Grid>
@@ -428,9 +446,12 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option value="none">Não tenho</option>
+                          <option value="1">Física</option>
+                          <option value="2">Auditiva</option>
+                          <option value="3">Visual</option>
+                          <option value="4">Mental</option>
+                          <option value="5">Outros</option>
                         </Select>
                       </Grid>
                       <Grid item md={3} xs={12}>
@@ -454,7 +475,12 @@ const Pacient = () => {
                           onChange={handleChange}
                           value={values.bald}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="none">Não sou Careca</option>
+                          <option value="yes">Sou Careca</option>
+                        </TextField>
                       </Grid>
                     </Grid>
                     <br />
@@ -472,7 +498,13 @@ const Pacient = () => {
                           required
                           value={values.pregnant}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="none">Não Estou Grávida</option>
+                          <option value="1">Estou Grávida</option>
+                          <option value="2">Não Sei Dizer</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -483,7 +515,12 @@ const Pacient = () => {
                           onChange={handleChange}
                           value={values.breastfeeding}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="none">Não</option>
+                          <option value="1">Sim</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -506,7 +543,13 @@ const Pacient = () => {
                           required
                           value={values.polycystic_ovary}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="yes">Sim</option>
+                          <option value="dont_know">Não sei dizer</option>
+                        </TextField>
                       </Grid>
                     </Grid>
                     <br />
@@ -524,7 +567,16 @@ const Pacient = () => {
                           required
                           value={values.any_covid}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="1">1 vez</option>
+                          <option value="2">2 vezes</option>
+                          <option value="3">3 vezes</option>
+                          <option value="4_more">4 +</option>
+                          <option value="dont_know">Não sei dizer</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -536,7 +588,15 @@ const Pacient = () => {
                           required
                           value={values.got_vaccinated_covid}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não tomei</option>
+                          <option value="CORONAVAC">CORONAVAC</option>
+                          <option value="ASTRA_ZENECA">ASTRA ZENECA</option>
+                          <option value="JOHNSON">JOHNSON &amp; JOHNSON</option>
+                          <option value="PFIZER">PFIZER</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -580,7 +640,12 @@ const Pacient = () => {
                           required
                           value={values.symptom_covid_now}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={6} xs={12}>
                         <TextField
@@ -636,9 +701,44 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option value="none">Nenhum sintoma</option>
+                          <option value="purple_lip">Labios roxos</option>
+                          <option value="purple_finger">Pontas dos dedos roxa</option>
+                          <option value="chills">Calafrios</option>
+                          <option value="nausea">Nauseas</option>
+                          <option value="pallor">Palidez</option>
+                          <option value="mental_confusion">Confusão mental</option>
+                          <option value="nasal_congestion">Congestão nasal</option>
+                          <option value="swollen_eyes">Olhos Inchados (EDEMA)</option>
+                          <option value="coriza">Coriza</option>
+                          <option value="difficulty_swallowing">Dificuldade de engolir</option>
+                          <option value="loss_of_taste">Perda de paladar</option>
+                          <option value="hot_body_37">Corpo quente (Temp menor 37.5)</option>
+                          <option value="loss_of_smell">Perda de olfato (Cheiro)</option>
+                          <option value="high_pressure">Pressão alta</option>
+                          <option value="low_pressure">Pressão baixa</option>
+                          <option value="difficulty_breathing">Dificuldade para respirar</option>
+                          <option value="joint_pain">Dores articulares</option>
+                          <option value="chest_pain">Dor no peito</option>
+                          <option value="headache">Dor de cabeça</option>
+                          <option value="shortness_of_breathe">Falta de ar</option>
+                          <option value="backache">Dor nas costas</option>
+                          <option value="short_breath">Respiração curta/rapida</option>
+                          <option value="throat_pain">Dor de garganta</option>
+                          <option value="fainting_sensation">Sensação de desmaio</option>
+                          <option value="pain_in_eyes">Dor nos olhos</option>
+                          <option value="sinusitis">Sinusite</option>
+                          <option value="chest_paint">Dor no peito</option>
+                          <option value="sweating">Sudorese</option>
+                          <option value="muscle_aches">Dores Musculares</option>
+                          <option value="dry_cough">Tosse Seca</option>
+                          <option value="pain_in_the_lower_back">Dor na região lombar</option>
+                          <option value="cough_with_phlegm">Tosse com catarro</option>
+                          <option value="diarrhea">Diarréia</option>
+                          <option value="cough_with_blood">Tosse com sangue</option>
+                          <option value="fatigue">Fraqueza/fadiga (Falta energia)</option>
+                          <option value="tremors">Tremores</option>
+                          <option value="vomiting">Vômitos</option>
                         </Select>
                       </Grid>
                       <Grid item md={3} xs={12}>
@@ -650,7 +750,16 @@ const Pacient = () => {
                           onChange={handleChange}
                           value={values.average_temp_if_have_fever}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="not_measured">Não medi a temperatura</option>
+                          <option value="hypothermia">Abaixo de 35.8C [HIPOTERMIA]</option>
+                          <option value="normal_temp">Entre 37.6C a 37.5C [TEMPERATURA NORMAL]</option>
+                          <option value="fever">Entre 37.6C a 39.5C [FEBRE]</option>
+                          <option value="high_fever">Entre 39.6C a 41.0C [FEBRE ATLTA]</option>
+                          <option value="hyperthermia">Acima 41.0C [HIPERTERMIA]</option>
+                        </TextField>
                       </Grid>
                     </Grid>
                     <br />
@@ -668,7 +777,15 @@ const Pacient = () => {
                           required
                           value={values.oxygen_saturation}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="not_measured">Não medi minha saturação</option>
+                          <option value="98_100">98% a 100%</option>
+                          <option value="95_97">95% a 97%</option>
+                          <option value="91_94">91% a 94%</option>
+                          <option value="less_than_90">Menor que 90%</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <p>Antes de iniciar este tratamento procurou algum serviço hospitalar de pronto socorro ou lagum outro médico para tratar a COVID-19 ?</p>
@@ -681,7 +798,12 @@ const Pacient = () => {
                           required
                           value={values.pre_treatment}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -693,7 +815,13 @@ const Pacient = () => {
                           required
                           value={values.pre_treatment_yes}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value=" ">Selecione uma opção</option>
+                          <option value="public">Publico</option>
+                          <option value="private">Privado</option>
+                        </TextField>
                       </Grid>
                     </Grid>
                     <br />
@@ -711,7 +839,12 @@ const Pacient = () => {
                           required
                           value={values.pre_treatment_hospitalized}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -723,7 +856,13 @@ const Pacient = () => {
                           required
                           value={values.pre_treatment_yes_hospitalized}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value=" ">Selecione uma opção</option>
+                          <option value="nursery">Enfermaria</option>
+                          <option value="uti">UTI</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -735,7 +874,15 @@ const Pacient = () => {
                           required
                           value={values.days_hospitalized}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value=" ">Selecione uma opção</option>
+                          <option value="0_4">0 a 4 dias</option>
+                          <option value="5_10">5 a 10 dias</option>
+                          <option value="11_15">11 a 15 dias</option>
+                          <option value="15_more">+15 dias</option>
+                        </TextField>
                       </Grid>
                     </Grid>
                     <br />
@@ -754,9 +901,12 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option value="none">Não fiz teste</option>
+                          <option value="quick_swab_test">Teste rápido - cotonete (farmácia)</option>
+                          <option value="quick_blood_test">Teste rápido - sangue (farmácia)</option>
+                          <option value="rt_pcr_swab">RT PCR - cotonete</option>
+                          <option value="serology">Sorologia IgM/IgG</option>
+                          <option value="neutralizing_antibodies">Pesquisa anticorpos neutralizantes</option>
                         </Select>
                       </Grid>
                       <Grid item md={4} xs={12}>
@@ -769,7 +919,12 @@ const Pacient = () => {
                           required
                           value={values.test_before_treatment_result}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="negative">Não detectado / Negativo</option>
+                          <option value="positive">Detectado / Positivo</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={4} xs={12}>
                         <p>Se não fez o teste, qual o motivo?</p>
@@ -782,9 +937,11 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option value="not_symptoms">Não achou necessário / Não teve sintomas</option>
+                          <option value="soft_symptoms">Não achou necessário / Sintomas leves gripais</option>
+                          <option value="not_medical_insurance">Não tem convênio</option>
+                          <option value="financial">Financeiro</option>
+                          <option value="no_doctor_asked">Nenhum médico solicitou</option>
                         </Select>
                       </Grid>
                     </Grid>
@@ -804,9 +961,21 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option value="did_not_pass">Não passou</option>
+                          <option value="amoxacilina">Amoxacilina</option>
+                          <option value="azitromicina">Azitromicina</option>
+                          <option value="claritromicina">Claritromicina</option>
+                          <option value="levofloxacina">Levofloxacina</option>
+                          <option value="carelto">Xarelto</option>
+                          <option value="dipirona">Dipirona</option>
+                          <option value="predinisona">Predinisona</option>
+                          <option value="dexametasona">Dexametasona</option>
+                          <option value="zinnat">Zinnat</option>
+                          <option value="oseltamivir">Oseltamivir [Tamiflu]</option>
+                          <option value="aas">A A S</option>
+                          <option value="paracetamol">Paracetamol</option>
+                          <option value="doxiciclina">Doxiciclina</option>
+                          <option value="none_of_previous">Nenhuma das anteriores</option>
                         </Select>
                       </Grid>
                       <Grid item md={4} xs={12}>
@@ -819,7 +988,12 @@ const Pacient = () => {
                           required
                           value={values.study_for_prophylaxis}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={4} xs={12}>
                         <TextField
@@ -848,7 +1022,12 @@ const Pacient = () => {
                           onChange={handleChange}
                           value={values.took_it_on_its_own}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={2} xs={12}>
                         <TextField
@@ -873,9 +1052,17 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option value="hydroxychloroquine">Hidroxicloroquina</option>
+                          <option value="ivermectin">Ivermectina</option>
+                          <option value="chloroquine">Cloroquina</option>
+                          <option value="nitazoxanide">Nitazoxadina [Anitta]</option>
+                          <option value="pyrantel_pamoate">Pomoato de pirantel</option>
+                          <option value="vitamin_a">Vitamina A</option>
+                          <option value="vitamin_b">Vitamina B1, B6, B12</option>
+                          <option value="vitamin_c">Vitamina C</option>
+                          <option value="zinc">Zinco</option>
+                          <option value="azitromicina">Azitromicina</option>
+                          <option value="others">Outra</option>
                         </Select>
                       </Grid>
                       <Grid item md={2} xs={12}>
@@ -906,9 +1093,21 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option value="no">Não</option>
+                          <option value="asthma">Asma</option>
+                          <option value="bronchitis">Bronquite alérgica</option>
+                          <option value="diabetes">Diabetes</option>
+                          <option value="kidney">Doença renal</option>
+                          <option value="auto_immune">Doença auto imune</option>
+                          <option value="hypertension">Hipertensão [Pressão Alta]</option>
+                          <option value="obesity">Obesidade / Esteatose</option>
+                          <option value="avc">AVC (Derrame)</option>
+                          <option value="heart_disease">Cardiopatia (Doença do Coração)</option>
+                          <option value="heart">Doença do coração</option>
+                          <option value="hepatitis">Doença hepática</option>
+                          <option value="thyroid">Doença tireoide</option>
+                          <option value="cancer">Câncer</option>
+                          <option value="others">Outros</option>
                         </Select>
                       </Grid>
                       <Grid item md={3} xs={12}>
@@ -939,7 +1138,12 @@ const Pacient = () => {
                           required
                           value={values.daily_medication}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -964,9 +1168,10 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option value="never">Nunca fumou</option>
+                          <option value="yes">Sim</option>
+                          <option value="ex">Ex fumante</option>
+                          <option value="proved">Provou</option>
                         </Select>
                       </Grid>
                       <Grid item md={6} xs={12}>
@@ -980,9 +1185,9 @@ const Pacient = () => {
                           }}
                           fullWidth
                         >
-                          <option>
-                            Selecione
-                          </option>
+                          <option value="sociel">Social</option>
+                          <option value="never">Nunca fez uso</option>
+                          <option value="ex">Ex alcólatra</option>
                         </Select>
                       </Grid>
                       <Grid item md={3} xs={12}>
@@ -994,7 +1199,12 @@ const Pacient = () => {
                           onChange={handleChange}
                           value={values.drugs}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -1060,7 +1270,12 @@ const Pacient = () => {
                           required
                           value={values.term_accept_1}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value=" ">Selecione uma opção</option>
+                          <option value="yes">Estou de acordo</option>
+                        </TextField>
                       </Grid>
                     </Grid>
                     <br />
@@ -1080,7 +1295,12 @@ const Pacient = () => {
                           required
                           value={values.term_accept_2}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value=" ">Selecione uma opção</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                     </Grid>
                     <br />
@@ -1100,7 +1320,12 @@ const Pacient = () => {
                           required
                           value={values.term_accept_3}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value=" ">Selecione uma opção</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                     </Grid>
                     <br />
