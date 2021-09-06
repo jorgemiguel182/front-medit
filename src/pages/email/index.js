@@ -16,12 +16,7 @@ import {
 const Email = () => {
 
   const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
     email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
   });
 
   const handleChange = (event) => {
