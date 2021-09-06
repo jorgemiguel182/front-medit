@@ -16,7 +16,7 @@
 
 export default {
   cognito: {
-    authUrl: "localhost:3000",
+    authUrl: process.env.REACT_APP_COGNITO_AUTH_URL,
     clientId: "localhost:3000"
   },
   backend: {

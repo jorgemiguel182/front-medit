@@ -1,16 +1,19 @@
 import jwt_decode from 'jwt-decode';
+import config from '../config';
+import API from '../services/api';
 
 const getRefreshToken = () => {
   return localStorage.getItem('refresh_token');
 };
 
 const setAccessTokens = tokenPayload => {
-  if (tokenPayload.idToken) {
-    localStorage.setItem('access_token', tokenPayload.idToken);
+
+  if (tokenPayload.id_token) {
+    localStorage.setItem('access_token', tokenPayload.id_token);
   }
 
-  if (tokenPayload.refreshToken) {
-    localStorage.setItem('refresh_token', tokenPayload.refreshToken);
+  if (tokenPayload.refresh_token) {
+    localStorage.setItem('refresh_token', tokenPayload.refresh_token);
   }
 };
 
@@ -42,26 +45,21 @@ const removeFilters = () => {
 };
 
 const logout = (redirect, linkRedirect) => {
-  cleanTokens();
-  redirectToLogin(redirect, linkRedirect);
+  // cleanTokens();
+  // redirectToLogin(redirect, linkRedirect);
   removeFilters();
 };
 
 const refreshToken = async (snack, redirect, success) => {
-
+  
   if (isTokenTimeValid()) {
     if (success) success();
     return;
   }
-  const response = await API.post(`${config.cognito.authUrl}/refresh-token`, { refreshToken: getRefreshToken() },
-    {
-      headers: {
-        Accept: '*/*',
-        'Content-Type': 'application/json'
-      }
-    }
-  );
-  setAccessTokens(response.data);
+
+  const response = await API.post(`${config.cognito.authUrl}/refresh-token`, { refresh_token: getRefreshToken() });
+  setAccessTokens(response.data.data);
+
   if (success) {
     success();
   }

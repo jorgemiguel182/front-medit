@@ -10,6 +10,7 @@ import DashboardPrivateRoute from './utils/routes/dashboardPrivateRoute';
 import Login from 'src/pages/auth/Login';
 import NotFoundView from './pages/errors/NotFoundView';
 import pacientList from './pages/pacient/List'; 
+import pacientView from './pages/pacient'; 
 import emailView from './pages/email'; 
 
 export default function Routes() {
@@ -18,6 +19,7 @@ export default function Routes() {
       <Switch>
         <MainLayoutPublicRoute component={Login} path="/" exact />
         <DashboardPrivateRoute component={pacientList} path="/pacients" exact />
+        <DashboardPrivateRoute component={pacientView} path="/pacient" exact />
         <DashboardPrivateRoute component={emailView} path="/emails" exact />
 
         {/* <MainLayoutPublicRoute component={LoginView} path="/login" exact />

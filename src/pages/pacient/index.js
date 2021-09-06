@@ -10,7 +10,8 @@ import {
   CardContent,
   Divider,
   Button,
-  TextField
+  TextField,
+  Select
 } from '@material-ui/core';
 
 const Pacient = () => {
@@ -46,8 +47,266 @@ const Pacient = () => {
               <form autoComplete="off" noValidate >
                 <Card>
                   <CardHeader
-                    // subheader="The information can be edited"
-                    title="Email"
+                    title="Dados do paciente"
+                  />
+                  <Divider />
+                  <CardContent>
+                    <Grid container spacing={3}>
+                      <Grid item md={4} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          type="date"
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={2} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </Grid>
+                    <br />
+                    <br />
+                    <Grid container spacing={3}>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          type="date"
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={2} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={2} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={1} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={1} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </Grid>
+                    <br />
+                    <br />
+                    <Grid container spacing={3}>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={4} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          type="date"
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={4} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                  <Divider />
+                  <CardHeader
+                    title="Endereço atual"
+                  />
+                  <Divider />
+                  <CardContent>
+                    <Grid container spacing={3}>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </Grid>
+                    <br />
+                    <br />
+                    <Grid container spacing={3}>
+                      <Grid item md={5} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          type="date"
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={1} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </Grid>
+                    <br />
+                    <br />
+                    <Grid container spacing={3}>
+                      <Grid item md={4} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          type="date"
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={4} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                  <Divider />
+                  <CardHeader
+                    title="Dados do tratamento"
                   />
                   <Divider />
                   <CardContent>
@@ -62,6 +321,58 @@ const Pacient = () => {
                           value={values.email}
                           variant="outlined"
                         />
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </Grid>
+                    <br />
+                    <br />
+                    <Grid container spacing={3}>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          type="date"
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          fullWidth
+                          label="Email Address"
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          value={values.email}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item md={6} xs={12}>
+                        <Select
+                          multiple
+                          native
+                          inputProps={{
+                            id: 'select-multiple-native',
+                          }}
+                          fullWidth
+                        >
+                          <option>
+                            Selecione
+                          </option>
+                        </Select>
                       </Grid>
                     </Grid>
                   </CardContent>

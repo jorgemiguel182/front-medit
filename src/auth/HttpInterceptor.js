@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 import config from '../config';
-// import { translateWithParams } from '../i18n';
+import { translateWithParams } from '../i18n';
 import API from '../services/api';
 import AuthService from './auth.service';
 
@@ -26,11 +26,13 @@ const HttpInterceptor = ({ children }) => {
   API.interceptors.request.use(
     async request => {
       if (notAnAuthenticationRequest(request)) {
+
         try {
           await AuthService.refreshToken(snack, redirect, () => {
             request.headers.Authorization = AuthService.getAccessToken();
           });
         } catch (e) {
+
           AuthService.logout(redirect);
           enqueueSnackbar(t('i18n.simplephrases.NOT_AUTHORIZED'), {
             variant: 'error'
@@ -52,7 +54,8 @@ const HttpInterceptor = ({ children }) => {
       if (!!data && !!data.message) {
         const message = translateWithParams(data);
         enqueueSnackbar(message, {
-          variant: 'success'
+          variant: 'success',
+          preventDuplicate: true
         });
       }
 

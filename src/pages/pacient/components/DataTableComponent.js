@@ -45,7 +45,13 @@ const DatatableComponent = ({...rest}) => {
     });
   }
 
+  // const handleTeste = async () => {
+  //   const response = await api.post(`${process.env.REACT_APP_COGNITO_AUTH_URL}/refresh-token`, { refresh_token: localStorage.getItem("refresh_token") })
+  //   console.log(response)
+  // }
+
   useEffect(() => {
+    // handleTeste();
     handleSearch();
   }, [])
 
