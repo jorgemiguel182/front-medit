@@ -1,25 +1,34 @@
 import React, {useEffect, useState} from 'react';
+import moment from 'moment';
 
 import {
   Box, Card,
-  Button
+  Button,
+  TextField
 } from '@material-ui/core';
 import DataTable from 'react-data-table-component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import api from '../../../services/api';
 
-import ControlPointIcon from '@material-ui/icons/ControlPoint'; 
-
-
 const columns = [
   {
     name: 'Nome',
-    selector: row => row.title,
+    selector: row => row.name,
+    sortable: true,
+		reorder: true,
   },
   {
-    name: 'Data',
-    selector: row => row.year,
+    name: 'Data de nascimento',
+    selector: row => moment(row.born_date).format('DD/MM/YYYY'),
+    sortable: true,
+		reorder: true,
+  },
+  {
+    name: 'Data de criação',
+    selector: row => moment(row.date_created).format('DD/MM/YYYY'),
+    sortable: true,
+		reorder: true,
   },
 ];
 
@@ -28,10 +37,16 @@ const DatatableComponent = ({...rest}) => {
 
   const [data, setData] = useState([]);
 
+  const handleSearch = (filter) => {
+    api.post("/filter-researchs", filter).then((response) => {
+      setData(response.data);
+    }).catch(() => {
+      
+    });
+  }
+
   useEffect(() => {
-    api.get("/filter-researchs").then((response) => {
-      console.log(response);
-    })
+    handleSearch();
   }, [])
 
   return (

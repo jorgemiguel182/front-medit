@@ -36,9 +36,14 @@ const items = [
   //   title: 'Dashboard'
   // },
   {
-    href: '/app/customers',
+    href: '/pacients',
     icon: UsersIcon,
     title: 'Pacientes'
+  },
+  {
+    href: '/emails',
+    icon: UserIcon,
+    title: 'Emails'
   },
   // {
   //   href: '/app/products',

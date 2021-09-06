@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 const ProductList = () => (
   <>
     <Helmet>
-      <title>Customers | Material Kit</title>
+      <title>Pacientes | Material Kit</title>
     </Helmet>
     <Box
       sx={{
@@ -22,9 +22,7 @@ const ProductList = () => (
     >
       <Container maxWidth={false}>
         {/* <CustomerListToolbar /> */}
-        <Box sx={{ pt: 3 }}>
           <DataTableComponent data={data} />
-        </Box>
       </Container>
     </Box>
   </>
