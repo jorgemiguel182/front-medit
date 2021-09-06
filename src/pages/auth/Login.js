@@ -26,7 +26,7 @@ const Login = () => {
     axios.post('https://9flfzc9e5g.execute-api.us-east-2.amazonaws.com/Prod/login', values)
         .then((response) => {
           localStorage.setItem('refresh_token', response.data.data.refresh_token);
-          localStorage.setItem('access_token', response.data.data.access_token);
+          localStorage.setItem('access_token', response.data.data.id_token);
         }).then(() => {
           history.push('/pacients');
         }).catch((err) => {

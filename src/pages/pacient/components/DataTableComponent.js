@@ -41,7 +41,7 @@ const DatatableComponent = ({...rest}) => {
           <DataTable
             columns={columns}
             data={data}
-            title="Lista de tarefas"
+            title="Lista de pacientes"
             pagination
             pointerOnHover
             // onRowClicked={(row) => handleGoToTask(row)}
