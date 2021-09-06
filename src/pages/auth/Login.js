@@ -20,18 +20,15 @@ const Login = () => {
   const history = useHistory();
 
   const handleOnSubmit = (values) => {
-    console.log(values)
-
     // POST request using axios with set headers
     // const article = { title: 'React POST Request Example' };
   
     axios.post('https://9flfzc9e5g.execute-api.us-east-2.amazonaws.com/Prod/login', values)
         .then((response) => {
-          console.log(response);
           localStorage.setItem('refresh_token', response.data.data.refresh_token);
           localStorage.setItem('access_token', response.data.data.access_token);
-
-          navigate('/');
+        }).then(() => {
+          history.push('/pacients');
         }).catch((err) => {
           console.log(err)
         })
@@ -54,8 +51,8 @@ const Login = () => {
         <Container maxWidth="sm">
           <Formik
             initialValues={{
-              username: '',
-              password: ''
+              username: 'jmdinfo123@gmail.com',
+              password: 'teste@123'
             }}
             validationSchema={Yup.object().shape({
               username: Yup.string().email('Must be a valid email').max(255).required('Email is required'),

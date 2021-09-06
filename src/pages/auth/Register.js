@@ -163,7 +163,7 @@ const Register = () => {
                   {' '}
                   <Link
                     component={RouterLink}
-                    to="/login"
+                    to="/"
                     variant="h6"
                   >
                     Sign in

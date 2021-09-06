@@ -140,5 +140,61 @@ export default [
     email: 'merrile.burgett@devias.io',
     name: 'Merrile Burgett',
     phone: '801-301-7894'
+  },
+  {
+    id: uuid(),
+    address: {
+      country: 'USA',
+      state: 'Utah',
+      city: 'Salt Lake City',
+      street: '368 Lamberts Branch Road'
+    },
+    avatarUrl: '/static/images/avatars/avatar_10.png',
+    createdAt: 1522702800000,
+    email: 'merrile.burgett@devias.io',
+    name: 'Merrile Burgett',
+    phone: '801-301-7894'
+  },
+  {
+    id: uuid(),
+    address: {
+      country: 'USA',
+      state: 'Utah',
+      city: 'Salt Lake City',
+      street: '368 Lamberts Branch Road'
+    },
+    avatarUrl: '/static/images/avatars/avatar_10.png',
+    createdAt: 1522702800000,
+    email: 'merrile.burgett@devias.io',
+    name: 'Merrile Burgett',
+    phone: '801-301-7894'
+  },
+  {
+    id: uuid(),
+    address: {
+      country: 'USA',
+      state: 'Utah',
+      city: 'Salt Lake City',
+      street: '368 Lamberts Branch Road'
+    },
+    avatarUrl: '/static/images/avatars/avatar_10.png',
+    createdAt: 1522702800000,
+    email: 'merrile.burgett@devias.io',
+    name: 'Merrile Burgett',
+    phone: '801-301-7894'
+  },
+  {
+    id: uuid(),
+    address: {
+      country: 'USA',
+      state: 'Utah',
+      city: 'Salt Lake City',
+      street: '368 Lamberts Branch Road'
+    },
+    avatarUrl: '/static/images/avatars/avatar_10.png',
+    createdAt: 1522702800000,
+    email: 'merrile.burgett@devias.io',
+    name: 'Merrile Burgett',
+    phone: '801-301-7894'
   }
 ];

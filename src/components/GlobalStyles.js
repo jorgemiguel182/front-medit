@@ -16,7 +16,9 @@ const useStyles = makeStyles(() => createStyles({
     body: {
       backgroundColor: '#f4f6f8',
       height: '100%',
-      width: '100%'
+      width: '100%',
+      fontFamily: "Roboto, Helvetica, Arial, sans-serif"
+
     },
     a: {
       textDecoration: 'none'

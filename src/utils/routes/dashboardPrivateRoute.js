@@ -6,6 +6,7 @@ import NotAuthorized from '../../auth/NotAuthorized';
 import DashboardLayout from '../../layouts/DashboardLayout';
 
 const DashboardPrivateRoute = ({ component: Component, ...rest }) => {
+
   const privateContent = (
     <Route
       {...rest}
@@ -16,14 +17,15 @@ const DashboardPrivateRoute = ({ component: Component, ...rest }) => {
       )}
     />
   );
-  if (!AuthService.getAccessToken()) {
-    return <NotAuthorized />;
-  }
+  // if (!AuthService.getAccessToken()) {
+  //   return <NotAuthorized />;
+  // }
 
-  const { mustHaveRole } = rest;
-  if (mustHaveRole && !userService.hasRole(mustHaveRole)) {
-    return <NotAuthorized />;
-  }
+  // const { mustHaveRole } = rest;
+  // if (mustHaveRole && !userService.hasRole(mustHaveRole)) {
+  //   return <NotAuthorized />;
+  // }
+
   return privateContent;
 };
 

@@ -1,21 +1,21 @@
 import jwt_decode from 'jwt-decode';
 
 const getRefreshToken = () => {
-  return localStorage.getItem('refreshToken');
+  return localStorage.getItem('refresh_token');
 };
 
 const setAccessTokens = tokenPayload => {
   if (tokenPayload.idToken) {
-    localStorage.setItem('accessToken', tokenPayload.idToken);
+    localStorage.setItem('access_token', tokenPayload.idToken);
   }
 
   if (tokenPayload.refreshToken) {
-    localStorage.setItem('refreshToken', tokenPayload.refreshToken);
+    localStorage.setItem('refresh_token', tokenPayload.refreshToken);
   }
 };
 
 const getAccessToken = () => {
-  return localStorage.getItem('accessToken');
+  return localStorage.getItem('access_token');
 };
 
 const isTokenTimeValid = () => {
@@ -24,13 +24,13 @@ const isTokenTimeValid = () => {
 };
 
 const cleanTokens = () => {
-  localStorage.setItem('accessToken', '');
-  localStorage.setItem('refreshToken', '');
+  localStorage.setItem('access_token', '');
+  localStorage.setItem('refresh_token', '');
 };
 
 const redirectToLogin = (redirect, linkRedirect) => {
   redirect.push({
-    pathname: '/login',
+    pathname: '/',
     state: {
       link: linkRedirect
     }
@@ -48,25 +48,23 @@ const logout = (redirect, linkRedirect) => {
 };
 
 const refreshToken = async (snack, redirect, success) => {
-  console.log("ENTREI REFRESH TOKEN")
-  // if (isTokenTimeValid()) {
-  //   if (success) success();
-  //   return;
-  // }
-  // const response = await API.post(
-  //   `${config.cognito.authUrl}/refresh-token`,
-  //   { refreshToken: getRefreshToken() },
-  //   {
-  //     headers: {
-  //       Accept: '*/*',
-  //       'Content-Type': 'application/json'
-  //     }
-  //   }
-  // );
-  // setAccessTokens(response.data);
-  // if (success) {
-  //   success();
-  // }
+
+  if (isTokenTimeValid()) {
+    if (success) success();
+    return;
+  }
+  const response = await API.post(`${config.cognito.authUrl}/refresh-token`, { refreshToken: getRefreshToken() },
+    {
+      headers: {
+        Accept: '*/*',
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  setAccessTokens(response.data);
+  if (success) {
+    success();
+  }
 };
 
 export default {

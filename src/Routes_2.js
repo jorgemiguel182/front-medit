@@ -3,15 +3,21 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 // import './mixins/chartjs';
 import { LastLocationProvider } from 'react-router-last-location';
+
 import MainLayoutPublicRoute from './utils/routes/mainLayoutPublicRoute';
+import DashboardPrivateRoute from './utils/routes/dashboardPrivateRoute';
+
 import Login from 'src/pages/auth/Login';
 import NotFoundView from './pages/errors/NotFoundView';
+import pacientList from './pages/pacient/List'; 
 
 export default function Routes() {
   return (
     <LastLocationProvider>
       <Switch>
-        <MainLayoutPublicRoute component={Login} path="/login" exact />
+        <MainLayoutPublicRoute component={Login} path="/" exact />
+        <DashboardPrivateRoute component={pacientList} path="/pacients" exact />
+
         {/* <MainLayoutPublicRoute component={LoginView} path="/login" exact />
         <MainLayoutPublicRoute
           component={ChangePasswordView}

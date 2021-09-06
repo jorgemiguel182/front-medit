@@ -2,13 +2,13 @@ import axios from "axios";
 import { getToken } from "./auth";
 
 const api = axios.create({
-  baseURL: "https://9flfzc9e5g.execute-api.us-east-2.amazonaws.com/Prod"
+  baseURL: "https://gj4gkccyyj.execute-api.us-east-2.amazonaws.com/Prod"
 });
-
 // api.interceptors.request.use(async config => {
-//   const token = getToken();
+//   const token = localStorage.getItem('access_token');
+
 //   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
+//     config.headers.Authorization = `${token}`;
 //   }
 //   return config;
 // });
