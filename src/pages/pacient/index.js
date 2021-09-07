@@ -41,12 +41,39 @@ const Pacient = () => {
     start_date_symptoms: "1111-11-11",
   });
 
+  const [deficiency, set_deficiency] = useState([])
+  const [any_desease, set_any_desease] = useState([])
+  const [symptons_now, set_symptons_now] = useState([])
+  const [test_before_treatment, set_test_before_treatment] = useState([])
+  const [why_not_tested, set_why_not_tested] = useState([])
+  const [medicine_before_treatment, set_medicine_before_treatment] = useState([])
+  const [took_it_on_its_own_medicines, set_took_it_on_its_own_medicines] = useState([])
+  const [have_any_deseases, set_have_any_deseases] = useState([])
+  const [smoker, set_smoker] = useState([])
+  const [alcohool, set_alcohool] = useState([])
+
   const handleChange = (event) => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
     });
   };
+
+  const handleChangeMultiple = (event, set) => {
+    const { options } = event.target;
+    const value = [];
+    for (let i = 0, l = options.length; i < l; i += 1) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    set(value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values)
+  }
 
   useEffect(() => {
 
@@ -55,8 +82,19 @@ const Pacient = () => {
     }
 
     api.post('/filter-researchs', filter).then((response) => {
-      console.log(response.data[0]);
       setValues(response.data[0]);
+
+      set_deficiency(response.data[0].deficiency);
+      set_any_desease(response.data[0].any_desease);
+      set_symptons_now(response.data[0].symptons_now);
+      set_test_before_treatment(response.data[0].test_before_treatment);
+      set_why_not_tested(response.data[0].why_not_tested);
+      set_medicine_before_treatment(response.data[0].medicine_before_treatment);
+      set_took_it_on_its_own_medicines(response.data[0].took_it_on_its_own_medicines);
+      set_have_any_deseases(response.data[0].have_any_deseases);
+      set_smoker(response.data[0].smoker);
+      set_alcohool(response.data[0].alcohool);
+
     })
   }, [])
   return (
@@ -77,7 +115,7 @@ const Pacient = () => {
             spacing={3}
           >
             <Grid item lg={12} md={12} xs={12}>
-              <form autoComplete="off" noValidate >
+              <form autoComplete="off" onSubmit={(e) => handleSubmit(e)} >
                 <Card>
                   <CardHeader
                     title="Dados do paciente"
@@ -94,7 +132,6 @@ const Pacient = () => {
                           label="Nome"
                           name="name"
                           onChange={handleChange}
-                          required
                           value={values.name}
                           variant="filled"
                         />
@@ -106,7 +143,6 @@ const Pacient = () => {
                           label="Data de nascimento"
                           name="born_date"
                           onChange={handleChange}
-                          required
                           type="date"
                           value={values.born_date}
                           variant="filled"
@@ -119,7 +155,6 @@ const Pacient = () => {
                           label="CPF"
                           name="cpf"
                           onChange={handleChange}
-                          required
                           value={values.cpf}
                           variant="filled"
                         />
@@ -131,7 +166,6 @@ const Pacient = () => {
                           label="Telefone (com ddd)"
                           name="tel"
                           onChange={handleChange}
-                          required
                           value={values.tel}
                           variant="filled"
                         />
@@ -150,7 +184,6 @@ const Pacient = () => {
                           label="Estado onde nasceu"
                           name="born_state"
                           onChange={handleChange}
-                          required
                           value={values.born_state}
                           variant="filled"
                         />
@@ -162,7 +195,6 @@ const Pacient = () => {
                           label="Cidade onde nasceu"
                           name="born_city"
                           onChange={handleChange}
-                          required
                           value={values.born_city}
                           variant="filled"
                         />
@@ -174,7 +206,6 @@ const Pacient = () => {
                           label="Gênero"
                           name="gender"
                           onChange={handleChange}
-                          required
                           value={values.gender}
                           variant="filled"
                           select
@@ -192,7 +223,6 @@ const Pacient = () => {
                           label="Etnia"
                           name="ethnicity"
                           onChange={handleChange}
-                          required
                           value={values.ethnicity}
                           variant="filled"
                           select
@@ -213,7 +243,6 @@ const Pacient = () => {
                           label="Altura"
                           name="height"
                           onChange={handleChange}
-                          required
                           value={values.height}
                           variant="filled"
                         />
@@ -225,7 +254,6 @@ const Pacient = () => {
                           label="Peso"
                           name="weight"
                           onChange={handleChange}
-                          required
                           value={values.weight}
                           variant="filled"
                         />
@@ -278,7 +306,6 @@ const Pacient = () => {
                           label="Nome da mãe"
                           name="mother_name"
                           onChange={handleChange}
-                          required
                           value={values.mother_name}
                           variant="filled"
                         />
@@ -302,7 +329,6 @@ const Pacient = () => {
                           label="CEP"
                           name="postal_code"
                           onChange={handleChange}
-                          required
                           value={values.postal_code}
                           variant="filled"
                         />
@@ -319,7 +345,6 @@ const Pacient = () => {
                           label="Endereço"
                           name="atual_address_street"
                           onChange={handleChange}
-                          required
                           value={values.atual_address_street}
                           variant="filled"
                         />
@@ -331,7 +356,6 @@ const Pacient = () => {
                           label="Número"
                           name="atual_address_number"
                           onChange={handleChange}
-                          required
                           value={values.atual_address_number}
                           variant="filled"
                         />
@@ -354,7 +378,6 @@ const Pacient = () => {
                           label="Bairro"
                           name="atual_address_district"
                           onChange={handleChange}
-                          required
                           value={values.atual_address_district}
                           variant="filled"
                         />
@@ -371,7 +394,6 @@ const Pacient = () => {
                           label="Estado"
                           name="atual_address_state"
                           onChange={handleChange}
-                          required
                           value={values.atual_address_state}
                           variant="filled"
                         />
@@ -383,7 +405,6 @@ const Pacient = () => {
                           label="Cidade"
                           name="atual_address_city"
                           onChange={handleChange}
-                          required
                           value={values.atual_address_city}
                           variant="filled"
                         />
@@ -407,7 +428,6 @@ const Pacient = () => {
                           label="Tratamento"
                           name="treatment"
                           onChange={handleChange}
-                          required
                           value={values.treatment}
                           variant="filled"
                           select
@@ -426,7 +446,6 @@ const Pacient = () => {
                           name="first_symptom_date_covid"
                           type="date"
                           onChange={handleChange}
-                          required
                           value={values.first_symptom_date_covid}
                           variant="filled"
                         />
@@ -445,7 +464,6 @@ const Pacient = () => {
                           label="Alergia à medicamento?"
                           name="alergy_medication"
                           onChange={handleChange}
-                          required
                           value={values.alergy_medication}
                           variant="filled"
                           select
@@ -462,7 +480,6 @@ const Pacient = () => {
                           label="Qual medicamento?"
                           name="alergy_medication_other"
                           onChange={handleChange}
-                          required
                           value={values.alergy_medication_other}
                           variant="filled"
                         />
@@ -477,8 +494,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.any_desease}
+                          onChange={(e) => handleChangeMultiple(e, set_any_desease)}
+                          value={any_desease}
                         >
                           <option selected="" value="none">Não tive nenhuma das doenças acima</option>
                           <option value="zika">Zika</option>
@@ -505,8 +522,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.deficiency}
+                          onChange={(e) => handleChangeMultiple(e, set_deficiency)}
+                          value={deficiency}
                         >
                           <option value="none">Não tenho</option>
                           <option value="1">Física</option>
@@ -523,7 +540,6 @@ const Pacient = () => {
                           label="Se marcou Outros, diga-nos qual."
                           name="deficiency_other"
                           onChange={handleChange}
-                          required
                           value={values.deficiency_other}
                           variant="filled"
                         />
@@ -558,7 +574,6 @@ const Pacient = () => {
                           label="Você esta grávida, ou existe a possibilidade?"
                           name="pregnant"
                           onChange={handleChange}
-                          required
                           value={values.pregnant}
                           variant="filled"
                           select
@@ -603,7 +618,6 @@ const Pacient = () => {
                           label="Você tem ovários policisticos?"
                           name="polycystic_ovary"
                           onChange={handleChange}
-                          required
                           value={values.polycystic_ovary}
                           variant="filled"
                           select
@@ -628,7 +642,6 @@ const Pacient = () => {
                           label="Você ja teve a COVID-19?"
                           name="any_covid"
                           onChange={handleChange}
-                          required
                           value={values.any_covid}
                           variant="filled"
                           select
@@ -649,7 +662,6 @@ const Pacient = () => {
                           label="Se vacinou contra a COVID-19?"
                           name="got_vaccinated_covid"
                           onChange={handleChange}
-                          required
                           value={values.got_vaccinated_covid}
                           variant="filled"
                           select
@@ -669,7 +681,6 @@ const Pacient = () => {
                           label="Qual a data da primeira dose tomada?"
                           name="vaccine_first_date"
                           onChange={handleChange}
-                          required
                           type="date"
                           value={values.vaccine_first_date}
                           variant="filled"
@@ -682,7 +693,6 @@ const Pacient = () => {
                           label="Se tomou a segunda dose, qual a data?"
                           name="vaccine_second_date"
                           onChange={handleChange}
-                          required
                           type="date"
                           value={values.vaccine_second_date}
                           variant="filled"
@@ -702,7 +712,6 @@ const Pacient = () => {
                           label="Você esta com sintomas agora?"
                           name="symptom_covid_now"
                           onChange={handleChange}
-                          required
                           value={values.symptom_covid_now}
                           variant="filled"
                           select
@@ -720,7 +729,6 @@ const Pacient = () => {
                           name="start_date_symptoms"
                           onChange={handleChange}
                           type="date"
-                          required
                           value={values.start_date_symptoms}
                           variant="filled"
                         />
@@ -732,7 +740,6 @@ const Pacient = () => {
                           label="Há quantos dias você esta com sintomas?"
                           name="many_days_symptons"
                           onChange={handleChange}
-                          required
                           value={values.many_days_symptons}
                           variant="filled"
                         />
@@ -751,7 +758,6 @@ const Pacient = () => {
                           label="Se está com sintomas, teve contato com quantas pessoas?"
                           name="have_contact_with_others"
                           onChange={handleChange}
-                          required
                           value={values.have_contact_with_others}
                           variant="filled"
                         />
@@ -766,8 +772,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.symptons_now}
+                          onChange={(e) => handleChangeMultiple(e, set_symptons_now)}
+                          value={symptons_now}
                         >
                           <option value="none">Nenhum sintoma</option>
                           <option value="purple_lip">Labios roxos</option>
@@ -843,7 +849,6 @@ const Pacient = () => {
                           label="Você mediu sua saturação oxigênio?"
                           name="oxygen_saturation"
                           onChange={handleChange}
-                          required
                           value={values.oxygen_saturation}
                           variant="filled"
                           select
@@ -864,7 +869,6 @@ const Pacient = () => {
                           label="Antes de iniciar este tratamento procurou algum serviço hospitalar de pronto socorro ou lagum outro médico para tratar a COVID-19 ?"
                           name="pre_treatment"
                           onChange={handleChange}
-                          required
                           value={values.pre_treatment}
                           variant="filled"
                           select
@@ -881,7 +885,6 @@ const Pacient = () => {
                           label="Se sim, qual?"
                           name="pre_treatment_yes"
                           onChange={handleChange}
-                          required
                           value={values.pre_treatment_yes}
                           variant="filled"
                           select
@@ -906,7 +909,6 @@ const Pacient = () => {
                           fullWidth
                           name="pre_treatment_hospitalized"
                           onChange={handleChange}
-                          required
                           value={values.pre_treatment_hospitalized}
                           variant="filled"
                           select
@@ -923,7 +925,6 @@ const Pacient = () => {
                           label="Se sim, qual?"
                           name="pre_treatment_yes_hospitalized"
                           onChange={handleChange}
-                          required
                           value={values.pre_treatment_yes_hospitalized}
                           variant="filled"
                           select
@@ -941,7 +942,6 @@ const Pacient = () => {
                           label="Se sim, quanto tempo ficou internado?"
                           name="days_hospitalized"
                           onChange={handleChange}
-                          required
                           value={values.days_hospitalized}
                           variant="filled"
                           select
@@ -971,8 +971,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.test_before_treatment}
+                          onChange={(e) => handleChangeMultiple(e, set_test_before_treatment)}
+                          value={test_before_treatment}
                         >
                           <option value="none">Não fiz teste</option>
                           <option value="quick_swab_test">Teste rápido - cotonete (farmácia)</option>
@@ -989,7 +989,6 @@ const Pacient = () => {
                           label="Qual resultado"
                           name="test_before_treatment_result"
                           onChange={handleChange}
-                          required
                           value={values.test_before_treatment_result}
                           variant="filled"
                           select
@@ -1009,8 +1008,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.why_not_tested}
+                          onChange={(e) => handleChangeMultiple(e, set_why_not_tested)}
+                          value={why_not_tested}
                         >
                           <option value="not_symptoms">Não achou necessário / Não teve sintomas</option>
                           <option value="soft_symptoms">Não achou necessário / Sintomas leves gripais</option>
@@ -1036,8 +1035,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.medicine_before_treatment}
+                          onChange={(e) => handleChangeMultiple(e, set_medicine_before_treatment)}
+                          value={medicine_before_treatment}
                         >
                           <option value="did_not_pass">Não passou</option>
                           <option value="amoxacilina">Amoxacilina</option>
@@ -1063,7 +1062,6 @@ const Pacient = () => {
                           fullWidth
                           name="study_for_prophylaxis"
                           onChange={handleChange}
-                          required
                           value={values.study_for_prophylaxis}
                           variant="filled"
                           select
@@ -1080,7 +1078,6 @@ const Pacient = () => {
                           label="Está tomando há quantos dias?"
                           name="many_days_medicines"
                           onChange={handleChange}
-                          required
                           value={values.many_days_medicines}
                           variant="filled"
                         />
@@ -1115,7 +1112,6 @@ const Pacient = () => {
                           label="Se sim, está tomando ha quantos dias?"
                           name="took_it_on_its_own_days"
                           onChange={handleChange}
-                          required
                           value={values.took_it_on_its_own_days}
                           variant="filled"
                         />
@@ -1130,8 +1126,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.took_it_on_its_own_medicines}
+                          onChange={(e) => handleChangeMultiple(e, set_took_it_on_its_own_medicines)}
+                          value={took_it_on_its_own_medicines}
                         >
                           <option value="hydroxychloroquine">Hidroxicloroquina</option>
                           <option value="ivermectin">Ivermectina</option>
@@ -1174,8 +1170,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.have_any_deseases}
+                          onChange={(e) => handleChangeMultiple(e, set_have_any_deseases)}
+                          value={have_any_deseases}
                         >
                           <option value="no">Não</option>
                           <option value="asthma">Asma</option>
@@ -1201,7 +1197,6 @@ const Pacient = () => {
                           label="Outros"
                           name="have_any_deseases_others"
                           onChange={handleChange}
-                          required
                           value={values.have_any_deseases_others}
                           variant="filled"
                         />
@@ -1220,7 +1215,6 @@ const Pacient = () => {
                           label="Você toma alguma medicação diariamente?"
                           name="daily_medication"
                           onChange={handleChange}
-                          required
                           value={values.daily_medication}
                           variant="filled"
                           select
@@ -1237,7 +1231,6 @@ const Pacient = () => {
                           label="Se sim, qual?"
                           name="daily_medication_yes"
                           onChange={handleChange}
-                          required
                           value={values.daily_medication_yes}
                           variant="filled"
                         />
@@ -1252,8 +1245,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.smoker}
+                          onChange={(e) => handleChangeMultiple(e, set_smoker)}
+                          value={smoker}
                         >
                           <option value="never">Nunca fumou</option>
                           <option value="yes">Sim</option>
@@ -1271,8 +1264,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={handleChange}
-                          value={values.alcohool}
+                          onChange={(e) => handleChangeMultiple(e, set_alcohool)}
+                          value={alcohool}
                         >
                           <option value="sociel">Social</option>
                           <option value="never">Nunca fez uso</option>
@@ -1302,7 +1295,6 @@ const Pacient = () => {
                           label="Se sim, qual?"
                           name="drugs_yes"
                           onChange={handleChange}
-                          required
                           value={values.drugs_yes}
                           variant="filled"
                         />
@@ -1342,9 +1334,7 @@ const Pacient = () => {
                                 variant="body2"
                                 href={item.public_url}
                                 target="_blank"
-                                noreferrer
                               >
-                                {console.log(item)}
                                 Baixar exame Anexado
                               </Link>
                             ))}
@@ -1379,7 +1369,6 @@ const Pacient = () => {
                           fullWidth
                           name="term_accept_1"
                           onChange={handleChange}
-                          required
                           value={values.term_accept_1}
                           variant="filled"
                           select
@@ -1405,7 +1394,6 @@ const Pacient = () => {
                           fullWidth
                           name="term_accept_2"
                           onChange={handleChange}
-                          required
                           value={values.term_accept_2}
                           variant="filled"
                           select
@@ -1431,7 +1419,6 @@ const Pacient = () => {
                           fullWidth
                           name="term_accept_3"
                           onChange={handleChange}
-                          required
                           value={values.term_accept_3}
                           variant="filled"
                           select
@@ -1452,6 +1439,7 @@ const Pacient = () => {
                     <Button
                       color="primary"
                       variant="contained"
+                      type="submit"
                     >
                       Enviar
                     </Button>
