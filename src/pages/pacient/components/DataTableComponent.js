@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import moment from 'moment';
-
+import { useHistory } from 'react-router';
 import {
   Box, Card,
   Button,
@@ -35,6 +35,7 @@ const columns = [
 
 const DatatableComponent = ({...rest}) => {
 
+  const history = useHistory();
   const [data, setData] = useState([]);
 
   const handleSearch = (filter) => {
@@ -45,13 +46,11 @@ const DatatableComponent = ({...rest}) => {
     });
   }
 
-  // const handleTeste = async () => {
-  //   const response = await api.post(`${process.env.REACT_APP_COGNITO_AUTH_URL}/refresh-token`, { refresh_token: localStorage.getItem("refresh_token") })
-  //   console.log(response)
-  // }
+  const handleGoToTask = (row) => {
+    history.push(`/pacient/${row.cpf}`);
+  }
 
   useEffect(() => {
-    // handleTeste();
     handleSearch();
   }, [])
 
@@ -65,7 +64,7 @@ const DatatableComponent = ({...rest}) => {
             title="Lista de pacientes"
             pagination
             pointerOnHover
-            // onRowClicked={(row) => handleGoToTask(row)}
+            onRowClicked={(row) => handleGoToTask(row)}
             // actions={
             //   <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleGoToNew()}>
             //     Nova tarefa

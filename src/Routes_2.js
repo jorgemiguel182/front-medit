@@ -19,7 +19,7 @@ export default function Routes() {
       <Switch>
         <MainLayoutPublicRoute component={Login} path="/" exact />
         <DashboardPrivateRoute component={pacientList} path="/pacients" exact />
-        <DashboardPrivateRoute component={pacientView} path="/pacient" exact />
+        <DashboardPrivateRoute component={pacientView} path="/pacient/:cpf" exact />
         <DashboardPrivateRoute component={emailView} path="/emails" exact />
 
         {/* <MainLayoutPublicRoute component={LoginView} path="/login" exact />

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { useParams } from 'react-router-dom';
 
 import {
   Box,
@@ -11,12 +12,28 @@ import {
   Divider,
   Button,
   TextField,
-  Select
+  Select,
+  Link
 } from '@material-ui/core';
+
+import api from '../../services/api';
 
 const Pacient = () => {
 
+  const { cpf } = useParams();
   const [values, setValues] = useState({
+    name: " ",
+    cpf: " ",
+    tel: " ",
+    born_state: " ",
+    born_city: " ",
+    height: " ",
+    weight: " ",
+    blood_type: " ",
+    responsible_name: " ",
+    mother_name: " ",
+    took_it_on_its_own_days: " ",
+    indication_person: " ",
     born_date: "1111-11-11",
     first_symptom_date_covid: "1111-11-11",
     vaccine_first_date: "1111-11-11",
@@ -30,6 +47,18 @@ const Pacient = () => {
       [event.target.name]: event.target.value
     });
   };
+
+  useEffect(() => {
+
+    const filter = {
+      cpf
+    }
+
+    api.post('/filter-researchs', filter).then((response) => {
+      console.log(response.data[0]);
+      setValues(response.data[0]);
+    })
+  }, [])
   return (
     <>
       <Helmet>
@@ -109,6 +138,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* dados pessoais */}
@@ -202,6 +232,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* dados médicos */}
@@ -215,7 +246,19 @@ const Pacient = () => {
                           onChange={handleChange}
                           value={values.blood_type}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="ns">Não Sei</option>
+                          <option value="a_pos">A+</option>
+                          <option value="a_neg">A-</option>
+                          <option value="b_pos">B+</option>
+                          <option value="b_neg">B-</option>
+                          <option value="ab_pos">AB+</option>
+                          <option value="ab_neg">AB-</option>
+                          <option value="o+">O+</option>
+                          <option value="o-">O-</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={4} xs={12}>
                         <TextField
@@ -266,6 +309,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
                     <Grid container spacing={3}>
                       <Grid item md={5} xs={12}>
@@ -317,6 +361,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
                     <Grid container spacing={3}>
                       <Grid item md={4} xs={12}>
@@ -365,7 +410,13 @@ const Pacient = () => {
                           required
                           value={values.treatment}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value=" ">Selecione uma opção</option>
+                          <option value="preventive_prophylactic">Quero tratamento Profilático / Preventivo</option>
+                          <option value="symptom_treatment">Quero tratamento pelos sintomas</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -382,6 +433,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* alergia */}
@@ -396,7 +448,12 @@ const Pacient = () => {
                           required
                           value={values.alergy_medication}
                           variant="filled"
-                        />
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected="" value="no">Não</option>
+                          <option value="yes">Sim</option>
+                        </TextField>
                       </Grid>
                       <Grid item md={3} xs={12}>
                         <TextField
@@ -420,6 +477,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.any_desease}
                         >
                           <option selected="" value="none">Não tive nenhuma das doenças acima</option>
                           <option value="zika">Zika</option>
@@ -431,6 +490,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- deficiencia --> */}
@@ -445,6 +505,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.deficiency}
                         >
                           <option value="none">Não tenho</option>
                           <option value="1">Física</option>
@@ -484,6 +546,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Gravida --> */}
@@ -553,6 +616,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Covid --> */}
@@ -626,6 +690,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Sintomas --> */}
@@ -674,6 +739,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Saturação --> */}
@@ -700,6 +766,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.symptons_now}
                         >
                           <option value="none">Nenhum sintoma</option>
                           <option value="purple_lip">Labios roxos</option>
@@ -763,6 +831,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Saturação --> */}
@@ -825,6 +894,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Tratamento covid --> */}
@@ -886,6 +956,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Tratamento covid --> */}
@@ -900,6 +971,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.test_before_treatment}
                         >
                           <option value="none">Não fiz teste</option>
                           <option value="quick_swab_test">Teste rápido - cotonete (farmácia)</option>
@@ -936,6 +1009,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.why_not_tested}
                         >
                           <option value="not_symptoms">Não achou necessário / Não teve sintomas</option>
                           <option value="soft_symptoms">Não achou necessário / Sintomas leves gripais</option>
@@ -946,6 +1021,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Tratamento covid --> */}
@@ -960,6 +1036,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.medicine_before_treatment}
                         >
                           <option value="did_not_pass">Não passou</option>
                           <option value="amoxacilina">Amoxacilina</option>
@@ -1009,6 +1087,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Medicamento --> */}
@@ -1051,6 +1130,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.took_it_on_its_own_medicines}
                         >
                           <option value="hydroxychloroquine">Hidroxicloroquina</option>
                           <option value="ivermectin">Ivermectina</option>
@@ -1078,6 +1159,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Doenças --> */}
@@ -1092,6 +1174,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.have_any_deseases}
                         >
                           <option value="no">Não</option>
                           <option value="asthma">Asma</option>
@@ -1124,6 +1208,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Medicação diária --> */}
@@ -1167,6 +1252,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.smoker}
                         >
                           <option value="never">Nunca fumou</option>
                           <option value="yes">Sim</option>
@@ -1184,6 +1271,8 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
+                          onChange={handleChange}
+                          value={values.alcohool}
                         >
                           <option value="sociel">Social</option>
                           <option value="never">Nunca fez uso</option>
@@ -1220,6 +1309,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Indicação --> */}
@@ -1237,24 +1327,46 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
-                    <br />
-
+                    <Divider />
+                    
                     {/* <!-- Exames --> */}
+                    <CardHeader
+                      title="Exames"
+                    />
                     <Grid container spacing={3}>
                       <Grid item md={3} xs={12}>
-                        <TextField
-                          size="small"
-                          fullWidth
-                          label="Carregar exames"
-                          name="exame_uploads"
-                          onChange={handleChange}
-                          value={values.exame_uploads}
-                          variant="filled"
-                        />
+                        {values.exame_uploads ? (
+                          <>
+                            {values.exame_uploads.map((item) => (
+                              <Link
+                                variant="body2"
+                                href={item.public_url}
+                                target="_blank"
+                                noreferrer
+                              >
+                                {console.log(item)}
+                                Baixar exame Anexado
+                              </Link>
+                            ))}
+                          </>
+                        ) : (
+                          <TextField
+                            size="small"
+                            fullWidth
+                            label="Carregar exames"
+                            name="exame_uploads"
+                            onChange={handleChange}
+                            value={values.exame_uploads}
+                            variant="filled"
+                          />
+                        )}
+
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
+
 
                     {/* <!-- Aceite --> */}
                     <Grid container spacing={3}>
@@ -1279,6 +1391,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Aceite --> */}
@@ -1304,6 +1417,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                     {/* <!-- Aceite --> */}
@@ -1329,6 +1443,7 @@ const Pacient = () => {
                       </Grid>
                     </Grid>
                     <br />
+                    <Divider />
                     <br />
 
                   </CardContent>
