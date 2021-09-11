@@ -41,6 +41,11 @@ const items = [
     title: 'Pacientes'
   },
   {
+    href: '/medical-records',
+    icon: UsersIcon,
+    title: 'Prontuários'
+  },
+  {
     href: '/emails',
     icon: UserIcon,
     title: 'Emails'
