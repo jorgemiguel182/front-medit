@@ -12,7 +12,8 @@ import NotFoundView from './pages/errors/NotFoundView';
 import pacientList from './pages/pacient/List'; 
 import pacientView from './pages/pacient';
 import medicalRecordsList from './pages/medicalRecords/List'; 
-import medicalRecordsView from './pages/medicalRecords'; 
+import evolutionsList from './pages/evolutions/List'; 
+import evolutionsView from './pages/evolutions'; 
 import emailView from './pages/email'; 
 
 export default function Routes() {
@@ -24,7 +25,9 @@ export default function Routes() {
         <DashboardPrivateRoute component={pacientView} path="/pacient/:cpf" exact />
         <DashboardPrivateRoute component={pacientView} path="/pacient/:cpf" exact />
         <DashboardPrivateRoute component={medicalRecordsList} path="/medical-records" exact />
-        <DashboardPrivateRoute component={medicalRecordsView} path="/medical-records/new" exact />
+        <DashboardPrivateRoute component={evolutionsList} path="/evolutions/:cpf" exact />
+        <DashboardPrivateRoute component={evolutionsView} path="/evolutions/:cpf/new" exact />
+        <DashboardPrivateRoute component={evolutionsView} path="/evolutions/:cpf/edit/:id" exact />
         <DashboardPrivateRoute component={emailView} path="/emails" exact />
 
         {/* <MainLayoutPublicRoute component={LoginView} path="/login" exact />

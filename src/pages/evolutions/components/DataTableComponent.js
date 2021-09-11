@@ -47,12 +47,12 @@ const DatatableComponent = ({...rest}) => {
     });
   }
 
-  const handleGoToTask = (row) => {
-    history.push(`/pacient/${row.cpf}`);
+  const handleGoToEvolution = (row) => {
+    history.push(`/evolutions/${row.cpf}/edit/${row.id}`);
   }
 
-  const handleGoToNew = () => {
-    history.push('/medical-records/new');
+  const handleGoToNew = (cpf) => {
+    history.push(`/evolutions/${cpf}/new`);
   }
 
   useEffect(() => {
@@ -66,13 +66,13 @@ const DatatableComponent = ({...rest}) => {
           <DataTable
             columns={columns}
             data={data}
-            title="Lista de prontuários"
+            title="Lista de evoluções"
             pagination
             pointerOnHover
-            onRowClicked={(row) => handleGoToTask(row)}
+            onRowClicked={(row) => handleGoToEvolution(row)}
             actions={
-              <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleGoToNew()}>
-                Novo prontuário
+              <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleGoToNew(1)}>
+                Nova Evolução
               </Button>
             }
           />

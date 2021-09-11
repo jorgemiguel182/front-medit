@@ -49,8 +49,8 @@ const DatatableComponent = ({handleOpen}) => {
     });
   }
 
-  const handleGoToTask = (row) => {
-    history.push(`/pacient/${row.cpf}`);
+  const goToEvolution = (row) => {
+    history.push(`/evolutions/${row.cpf}`);
   }
 
   const handleGoToNew = () => {
@@ -71,7 +71,7 @@ const DatatableComponent = ({handleOpen}) => {
             title="Lista de prontuários"
             pagination
             pointerOnHover
-            onRowClicked={(row) => handleGoToTask(row)}
+            onRowClicked={(row) => goToEvolution(row)}
             actions={
               <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleOpen(true)}>
                 Novo prontuário
