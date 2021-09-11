@@ -1,55 +1,46 @@
+import {
+  Box, Button, Card, CardContent, CardHeader, Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField
+} from '@material-ui/core';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import PacientHook from './indexHook';
 
-import {
-  Box,
-  Container,
-  Grid,
-  Card,
-  CardHeader,
-  CardContent,
-  Divider,
-  Button,
-  TextField,
-  Select,
-  Link
-} from '@material-ui/core';
+import ModalComponent from './components/ModalComponent';
 
-const Pacient = () => {
+const buttons = [
+  {id: 1, date: '0001-01-01'},
+  {id: 2, date: '0001-01-02'},
+  {id: 3, date: '0001-01-03'},
+  {id: 4, date: '0001-01-04'},
+  {id: 5, date: '0001-01-05'},
+  {id: 1, date: '0001-01-01'},
+  {id: 2, date: '0001-01-02'},
+  {id: 3, date: '0001-01-03'},
+  {id: 4, date: '0001-01-04'},
+  {id: 5, date: '0001-01-05'},
+  {id: 1, date: '0001-01-01'},
+  {id: 2, date: '0001-01-02'},
+  {id: 3, date: '0001-01-03'},
+  {id: 4, date: '0001-01-04'},
+  {id: 5, date: '0001-01-05'}
+];
+
+const Evolution = () => {
 
   const {
     values,
-    deficiency,
-    any_desease,
-    symptons_now,
-    test_before_treatment,
-    why_not_tested,
-    medicine_before_treatment,
-    took_it_on_its_own_medicines,
-    have_any_deseases,
-    smoker,
-    alcohool,
-    set_deficiency,
-    set_any_desease,
-    set_symptons_now,
-    set_test_before_treatment,
-    set_why_not_tested,
-    set_medicine_before_treatment,
-    set_took_it_on_its_own_medicines,
-    set_have_any_deseases,
-    set_smoker,
-    set_alcohool,
+    open,
     handleChange,
     handleSubmit,
-    handleChangeMultiple
-
+    handleChangeMultiple,
+    handleClose,
+    handleOpen
   } = PacientHook();
 
   return (
     <>
       <Helmet>
-        <title>Email | Material Kit</title>
+        <title>Prontuário | Material Kit</title>
       </Helmet>
       <Box
         sx={{
@@ -59,22 +50,15 @@ const Pacient = () => {
         }}
       >
         <Container maxWidth="xl">
-          <Grid
-            container
-            spacing={3}
-          >
+          <Grid container spacing={3}>
             <Grid item lg={12} md={12} xs={12}>
-              <form autoComplete="off" onSubmit={(e) => handleSubmit(e)} >
-                <Card>
-                  <CardHeader
-                    title="Dados do paciente"
-                  />
+              <Card>
+                <form autoComplete="off" onSubmit={(e) => handleSubmit(e)} >
+                  <CardHeader title="Prontuário" />
                   <Divider />
                   <CardContent>
-
-                    {/* dados iniciais */}
                     <Grid container spacing={3}>
-                      <Grid item md={4} xs={12}>
+                      <Grid item md={6} xs={12}>
                         <TextField
                           size="small"
                           fullWidth
@@ -89,22 +73,11 @@ const Pacient = () => {
                         <TextField
                           size="small"
                           fullWidth
-                          label="Data de nascimento"
-                          name="born_date"
+                          label="Data de atendimento"
+                          name="date"
                           onChange={handleChange}
                           type="date"
-                          value={values.born_date}
-                          variant="filled"
-                        />
-                      </Grid>
-                      <Grid item md={2} xs={12}>
-                        <TextField
-                          size="small"
-                          fullWidth
-                          label="CPF"
-                          name="cpf"
-                          onChange={handleChange}
-                          value={values.cpf}
+                          value={values.date}
                           variant="filled"
                         />
                       </Grid>
@@ -112,10 +85,168 @@ const Pacient = () => {
                         <TextField
                           size="small"
                           fullWidth
-                          label="Telefone (com ddd)"
+                          label="Telefone"
                           name="tel"
                           onChange={handleChange}
                           value={values.tel}
+                          variant="filled"
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                  <Divider />
+                  <CardContent>
+                    <Grid container spacing={3}>
+                      <Grid item md={9} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          label="Registro"
+                          name="register"
+                          onChange={handleChange}
+                          value={values.register}
+                          variant="filled"
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          label="Data do registro"
+                          name="register_date"
+                          onChange={handleChange}
+                          type="date"
+                          value={values.register_date}
+                          variant="filled"
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                  <Divider />
+                  <CardContent>
+                    <Grid container spacing={3}>
+                      <Grid item md={6} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          label="Email"
+                          name="email"
+                          onChange={handleChange}
+                          value={values.email}
+                          variant="filled"
+                        />
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          label="Celular"
+                          name="celular"
+                          onChange={handleChange}
+                          value={values.mobile}
+                          variant="filled"
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                  <Divider />
+                  <CardContent>
+                    <Grid container spacing={3}>
+                      <Grid item md={3} >
+                        <FormControl component="fieldset">
+                          <FormLabel component="legend">Teste de COVID-19</FormLabel>
+                          <RadioGroup aria-label="test_covid" name="test_covid" value={values.test_covid} onChange={handleChange}>
+                            <FormControlLabel value="yes" control={<Radio color="primary" />} label="Sim" />
+                            <FormControlLabel value="no" control={<Radio color="primary" />} label="Não" />
+                          </RadioGroup>
+                        </FormControl>
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          multiline
+                          rows={5}
+                          label="Resultado"
+                          name="result_test_covid"
+                          onChange={handleChange}
+                          value={values.mobile}
+                          variant="filled"
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                  <Divider />
+                  <CardContent>
+                    <Grid container spacing={3}>
+                      <Grid item md={3} >
+                        <FormControl component="fieldset">
+                          <FormLabel component="legend">Alergias</FormLabel>
+                          <RadioGroup aria-label="allergies" name="allergies" value={values.allergies} onChange={handleChange}>
+                            <FormControlLabel value="yes" control={<Radio color="primary" />} label="Sim" />
+                            <FormControlLabel value="no" control={<Radio color="primary" />} label="Não" />
+                          </RadioGroup>
+                        </FormControl>
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          multiline
+                          rows={5}
+                          label="Medicação"
+                          name="result_test_covid"
+                          onChange={handleChange}
+                          value={values.mobile}
+                          variant="filled"
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                  <Divider />
+                  <CardContent>
+                    <Grid container spacing={3}>
+                      <Grid item md={6} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          label="Problemas de saúde"
+                          name="health_issues"
+                          onChange={handleChange}
+                          value={values.health_issues}
+                          variant="filled"
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected value="none">Não</option>
+                          <option value="1">Sim</option>
+                        </TextField>
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          label="Sintomas"
+                          name="symptoms"
+                          onChange={handleChange}
+                          value={values.symptoms}
+                          variant="filled"
+                          select
+                          SelectProps={{ native: true }}
+                        >
+                          <option selected value="none">Não</option>
+                          <option value="1">Sim</option>
+                        </TextField>
+                      </Grid>
+                      <Grid item md={3} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          label="Data"
+                          name="symptoms_date"
+                          type="date"
+                          onChange={handleChange}
+                          value={values.symptoms_date}
                           variant="filled"
                         />
                       </Grid>
@@ -128,17 +259,29 @@ const Pacient = () => {
                       variant="contained"
                       type="submit"
                     >
-                      Enviar
+                      Salvar prontuário
                     </Button>
                   </Box>
-                </Card>
-              </form>
+                </form>
+                <Divider />
+                <CardHeader title="Lançamentos diários" />
+                <CardContent>
+                  <Button variant="contained" color="primary" onClick={() => handleOpen()}>Novo lançamento de sintomas</Button>
+                </CardContent>
+                <CardContent>
+                  {buttons.map((button) => (
+                    <Button style={{marginRight: '30px', marginBottom: '30px'}} onClick={() => handleOpen()} variant="outlined" key={button.id} color="primary">{button.date}</Button>
+                  ))}
+                </CardContent>
+              </Card>
             </Grid>
           </Grid>
         </Container>
       </Box>
+
+      <ModalComponent handleClose={handleClose} open={open} />
     </>
   )
 };
 
-export default Pacient;
+export default Evolution;

@@ -58,7 +58,7 @@ const Pacient = () => {
           py: 3
         }}
       >
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
           <Grid
             container
             spacing={3}
