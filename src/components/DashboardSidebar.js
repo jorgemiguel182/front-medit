@@ -41,7 +41,7 @@ const items = [
     title: 'Pacientes'
   },
   {
-    href: '/medical-records',
+    href: '/prontuarios',
     icon: UsersIcon,
     title: 'Prontuários'
   },

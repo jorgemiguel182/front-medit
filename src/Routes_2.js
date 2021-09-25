@@ -24,10 +24,10 @@ export default function Routes() {
         <DashboardPrivateRoute component={pacientList} path="/pacients" exact />
         <DashboardPrivateRoute component={pacientView} path="/pacient/:cpf" exact />
         <DashboardPrivateRoute component={pacientView} path="/pacient/:cpf" exact />
-        <DashboardPrivateRoute component={medicalRecordsList} path="/medical-records" exact />
+        <DashboardPrivateRoute component={medicalRecordsList} path="/prontuarios" exact />
         <DashboardPrivateRoute component={evolutionsList} path="/evolutions/:id" exact />
-        <DashboardPrivateRoute component={evolutionsView} path="/evolutions/:cpf/new" exact />
-        <DashboardPrivateRoute component={evolutionsView} path="/evolutions/:cpf/edit/:id" exact />
+        <DashboardPrivateRoute component={evolutionsView} path="/evolutions/:id/new" exact />
+        <DashboardPrivateRoute component={evolutionsView} path="/evolutions/:id/edit/:evolution_id" exact />
         <DashboardPrivateRoute component={emailView} path="/emails" exact />
 
         {/* <MainLayoutPublicRoute component={LoginView} path="/login" exact />

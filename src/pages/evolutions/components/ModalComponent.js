@@ -5,6 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import modalHook from './modalHook';
 
 
 const ModalButtons = styled('div')`
@@ -16,7 +17,7 @@ const ModalButtons = styled('div')`
 const ModalCardContent = styled('div')`
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 600px;
+  max-height: 400px;
 `
 
 const useStyles = makeStyles((theme) => ({
@@ -36,24 +37,31 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0px',
     // maxHeight: '300px',
     overflowY: 'auto',
-    minWidth: '1200px'
+    minWidth: '1200px',
+    maxWidth: '1200px'
   },
 }));
 
 export default function TransitionsModal({ handleClose, open }) {
   const classes = useStyles();
-  const [values, setValues] = useState({});
+  const {values, setValues, handleChange, handleSubmit} = modalHook();
+  // const [values, setValues] = useState({});
 
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
+  // const handleChange = (event) => {
+  //   setValues({
+  //     ...values,
+  //     [event.target.name]: event.target.value
+  //   });
+  // };
 
-  const handleSubmit = () => {
-    console.log(values);
-  }
+  // const handleSubmit = () => {
+
+  //   /**
+  //    * new-symptom-table id do prontuario
+  //    */
+
+  //   console.log(values);
+  // }
 
   return (
     <div>
@@ -350,9 +358,9 @@ export default function TransitionsModal({ handleClose, open }) {
                         size="small"
                         fullWidth
                         label="INAPETÊNCIA"
-                        name="Inapetencia"
+                        name="inapetencia"
                         onChange={handleChange}
-                        value={values.Inapetencia}
+                        value={values.inapetencia}
                         variant="filled"
                       />
                     </Grid>

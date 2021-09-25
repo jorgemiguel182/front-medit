@@ -121,9 +121,14 @@ export default function TransitionsModal({ handleClose, open }) {
                   <Card>
                     <CardContent>
                       <Grid container spacing={3}>
-                        <Grid item md={12} xs={12}>
+                        <Grid item md={9} xs={12}>
                           <Typography>
                             Nome do paciente: <b>{pacientData?.name}</b>
+                          </Typography>
+                        </Grid>
+                        <Grid item md={3} xs={12}>
+                          <Typography>
+                            Data de criação: <b>{pacientData?.date_created}</b>
                           </Typography>
                         </Grid>
                         <Grid item md={4} xs={12}>

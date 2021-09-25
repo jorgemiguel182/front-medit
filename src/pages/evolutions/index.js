@@ -30,6 +30,7 @@ const Evolution = () => {
   const {
     values,
     open,
+    data,
     handleChange,
     handleSubmit,
     handleChangeMultiple,
@@ -40,7 +41,7 @@ const Evolution = () => {
   return (
     <>
       <Helmet>
-        <title>Prontuário | Material Kit</title>
+        <title>Evolução | Material Kit</title>
       </Helmet>
       <Box
         sx={{
@@ -54,7 +55,7 @@ const Evolution = () => {
             <Grid item lg={12} md={12} xs={12}>
               <Card>
                 <form autoComplete="off" onSubmit={(e) => handleSubmit(e)} >
-                  <CardHeader title="Prontuário" />
+                  <CardHeader title="Evolução" />
                   <Divider />
                   <CardContent>
                     <Grid container spacing={3}>
@@ -66,6 +67,7 @@ const Evolution = () => {
                           name="name"
                           onChange={handleChange}
                           value={values.name}
+                          disabled
                           variant="filled"
                         />
                       </Grid>
@@ -143,7 +145,7 @@ const Evolution = () => {
                           label="Celular"
                           name="celular"
                           onChange={handleChange}
-                          value={values.mobile}
+                          value={values.celular}
                           variant="filled"
                         />
                       </Grid>
@@ -170,7 +172,7 @@ const Evolution = () => {
                           label="Resultado"
                           name="result_test_covid"
                           onChange={handleChange}
-                          value={values.mobile}
+                          value={values.result_test_covid}
                           variant="filled"
                         />
                       </Grid>
@@ -195,9 +197,9 @@ const Evolution = () => {
                           multiline
                           rows={5}
                           label="Medicação"
-                          name="result_test_covid"
+                          name="medication"
                           onChange={handleChange}
-                          value={values.mobile}
+                          value={values.medication}
                           variant="filled"
                         />
                       </Grid>
@@ -242,7 +244,7 @@ const Evolution = () => {
                         <TextField
                           size="small"
                           fullWidth
-                          label="Data"
+                          label="Data de início dos sintomas"
                           name="symptoms_date"
                           type="date"
                           onChange={handleChange}
@@ -259,7 +261,7 @@ const Evolution = () => {
                       variant="contained"
                       type="submit"
                     >
-                      Salvar prontuário
+                      Salvar evolução
                     </Button>
                   </Box>
                 </form>

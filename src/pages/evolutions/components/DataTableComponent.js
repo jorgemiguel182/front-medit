@@ -14,28 +14,22 @@ import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import api from '../../../services/api';
 
 const columns = [
+  
   {
-    name: 'Id',
-    selector: row => row.id,
-    sortable: true,
-		reorder: true,
-  },
-  {
-    name: 'Id do paciente',
-    selector: row => row.id_research_client,
+    name: 'Nº de registro',
+    selector: row => row.crm_prof,
     sortable: true,
 		reorder: true,
   },
   {
     name: 'Nome',
-    selector: row => row.name,
+    selector: row => row.username_prof_cognito,
     sortable: true,
 		reorder: true,
   },
   {
     name: 'Data de criação',
-    // selector: row => moment(row.evolutions[0].date_created).format('DD/MM/YYYY'),
-    selector: row => console.log(row),
+    selector: row => moment(row.date_created).format('DD/MM/YYYY'),
     sortable: true,
 		reorder: true,
   },
@@ -52,7 +46,7 @@ const DatatableComponent = ({...rest}) => {
 
   const handleSearch = async () => {
     try{
-      const response = await api.post("/filter-researchs", {id_research_client: id});
+      const response = await api.post("/filter-prontuarios", {id: id});
       if(response.data.status === 'OK'){
         enqueueSnackbar('Evoluções não encontradas.', { variant: 'error' });
       }else{
@@ -64,16 +58,16 @@ const DatatableComponent = ({...rest}) => {
   }
 
   const handleGoToEvolution = (row) => {
-    history.push(`/evolutions/${row.cpf}/edit/${row.id}`);
+    history.push(`/evolutions/${id}/edit/${row.id}`);
   }
 
-  const handleGoToNew = (cpf) => {
-    history.push(`/evolutions/${cpf}/new`);
+  const handleGoToNew = () => {
+    history.push(`/evolutions/${id}/new`);
   }
 
   useEffect(() => {
     handleSearch();
-  }, [])
+  }, []);
 
   return (
     <Card {...rest}>
@@ -81,13 +75,13 @@ const DatatableComponent = ({...rest}) => {
         <Box sx={{ minWidth: 1050 }}>
           <DataTable
             columns={columns}
-            data={data}
+            data={data[0]?.evolutions}
             title="Lista de evoluções"
             pagination
             pointerOnHover
             onRowClicked={(row) => handleGoToEvolution(row)}
             actions={
-              <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleGoToNew(1)}>
+              <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleGoToNew()}>
                 Nova Evolução
               </Button>
             }

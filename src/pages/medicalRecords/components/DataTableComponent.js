@@ -44,11 +44,11 @@ const DatatableComponent = ({handleOpen}) => {
   }
 
   const goToEvolution = (row) => {
-    history.push(`/evolutions/${row.id_research_client}`);
+    history.push(`/evolutions/${row.id}`);
   }
 
   const handleGoToNew = () => {
-    history.push('/medical-records/new');
+    history.push('/prontuarios/new');
   }
 
   useEffect(() => {
