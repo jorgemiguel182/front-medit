@@ -42,7 +42,7 @@ const DatatableComponent = ({handleOpen}) => {
   const [data, setData] = useState([]);
 
   const handleSearch = (filter) => {
-    api.post("/filter-researchs", filter).then((response) => {
+    api.post("/filter-prontuarios", filter).then((response) => {
       setData(response.data);
     }).catch(() => {
       
@@ -50,7 +50,7 @@ const DatatableComponent = ({handleOpen}) => {
   }
 
   const goToEvolution = (row) => {
-    history.push(`/evolutions/${row.id}`);
+    history.push(`/evolutions/${row.id_research_client}`);
   }
 
   const handleGoToNew = () => {
