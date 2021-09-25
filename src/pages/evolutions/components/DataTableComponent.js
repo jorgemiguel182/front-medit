@@ -14,24 +14,24 @@ import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import api from '../../../services/api';
 
 const columns = [
-  {
-    name: 'Id',
-    selector: row => row.id,
-    sortable: true,
-		reorder: true,
-  },
-  {
-    name: 'Id do paciente',
-    selector: row => row.id_research_client,
-    sortable: true,
-		reorder: true,
-  },
-  {
-    name: 'Nome',
-    selector: row => row.name,
-    sortable: true,
-		reorder: true,
-  },
+  // {
+  //   name: 'Id',
+  //   selector: row => row.id,
+  //   sortable: true,
+	// 	reorder: true,
+  // },
+  // {
+  //   name: 'Id do paciente',
+  //   selector: row => row.id_research_client,
+  //   sortable: true,
+	// 	reorder: true,
+  // },
+  // {
+  //   name: 'Nome',
+  //   selector: row => row.name,
+  //   sortable: true,
+	// 	reorder: true,
+  // },
   {
     name: 'Data de criação',
     selector: row => moment(row.evolutions[0].date_created).format('DD/MM/YYYY'),
