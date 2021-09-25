@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Card, Paper, CardContent, CardHeader, Divider, Button, TextField, Typography, CircularProgress } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import { makeStyles } from '@material-ui/core/styles';
+import moment from 'moment';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -14,6 +15,12 @@ const ModalButtons = styled('div')`
   display: flex;
   justify-content: space-between;
   aling-items: center;
+`
+
+const ModalCardContent = styled('div')`
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 400px;
 `
 
 const useStyles = makeStyles((theme) => ({
@@ -31,25 +38,81 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal({ handleClose, open }) {
+const PacientCard = ({ data, handleSelected, pacientData }) => {
+  return (
+    <>
+      <Card>
+        <CardContent>
+          <Grid container spacing={3}>
+            <Grid item container md={10} xs={12}>
+              <Grid item md={12} xs={12}>
+                <Typography>
+                  Nome do paciente: <b>{data.name}</b>
+                </Typography>
+                <br />
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography>
+                  CPF: <b>{data.cpf}</b>
+                </Typography>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography>
+                  Gênero: <b>{data.gender}</b>
+                </Typography>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography>
+                  Etnia: <b>{data.ethnicity}</b>
+                </Typography>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography>
+                  Data de criação: <b> {moment(data.date_created).format('DD/MM/YYYY')}</b>
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item md={2} xs={12}>
+              {pacientData.id === data.id ? (
+                <Button variant="contained" onClick={() => handleSelected(data)}>
+                  Selecionado
+                </Button>
+              ): (
+                <Button variant="outlined" onClick={() => handleSelected(data)}>
+                  Selecionar
+                </Button>
+              )}
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+      <br />
+    </>
+  )
+}
+
+export default function TransitionsModal({ handleClose, open, handleSearch }) {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const [name, setName] = useState('');
   const [pacientData, setPacientData] = useState({});
+  const [pacientList, setPacientList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState('');
 
-  const handleSearch = async () => {
+  const handleSearchByName = async () => {
     setLoading(true)
     const data = {
       name
     }
     try {
       const response = await api.post('/filter-researchs', data);
-      if(response.data.status === 'OK'){
+      if (response.data.status === 'OK') {
         enqueueSnackbar('Não foi possível encontrar o paciente', { variant: 'error' });
         setLoading(false);
-      }else{
-        setPacientData(response.data[0]);
+      } else {
+        setPacientList(response.data);
+        // setPacientData(response.data[0]);
         setLoading(false);
       }
     } catch {
@@ -69,10 +132,15 @@ export default function TransitionsModal({ handleClose, open }) {
       const response = await api.post('/new-prontuario', data);
       enqueueSnackbar(response.data.msg, { variant: 'success' });
       setLoading(false);
+      handleSearch();
     } catch {
       enqueueSnackbar('Este paciente já tem um prontuário vinculado', { variant: 'error' });
       setLoading(false);
     }
+  }
+
+  const handleSelected = (data) => {
+    setPacientData(data);
   }
 
   useEffect(() => {
@@ -98,6 +166,8 @@ export default function TransitionsModal({ handleClose, open }) {
         <Fade in={open}>
           <Paper className={classes.paper}>
             <CardHeader title="Criar novo prontuário" />
+            <Divider />
+            <ModalCardContent>
             <CardContent>
               <Grid container spacing={3}>
                 <Grid item md={9} xs={12}>
@@ -112,48 +182,23 @@ export default function TransitionsModal({ handleClose, open }) {
                   />
                 </Grid>
                 <Grid item md={3} xs={12}>
-                  <Button variant="outlined" onClick={() => handleSearch()}><SearchIcon /> Buscar</Button>
+                  <Button variant="outlined" onClick={() => handleSearchByName()}><SearchIcon /> Buscar</Button>
                 </Grid>
               </Grid>
               <br />
               {!loading ?
                 (
-                  <Card>
-                    <CardContent>
-                      <Grid container spacing={3}>
-                        <Grid item md={9} xs={12}>
-                          <Typography>
-                            Nome do paciente: <b>{pacientData?.name}</b>
-                          </Typography>
-                        </Grid>
-                        <Grid item md={3} xs={12}>
-                          <Typography>
-                            Data de criação: <b>{pacientData?.date_created}</b>
-                          </Typography>
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                          <Typography>
-                            CPF: <b>{pacientData?.cpf}</b>
-                          </Typography>
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                          <Typography>
-                            Gênero: <b>{pacientData?.gender}</b>
-                          </Typography>
-                        </Grid>
-                        <Grid item md={4} xs={12}>
-                          <Typography>
-                            Etnia: <b>{pacientData?.ethnicity}</b>
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                  </Card>
+                  <>
+                    {pacientList?.map((item) => (
+                      <PacientCard data={item} key={item.id} handleSelected={handleSelected} pacientData={pacientData} />
+                    ))}
+                  </>
                 ) :
                 (<CircularProgress />)
               }
 
             </CardContent>
+            </ModalCardContent>
             <Divider />
             <CardContent>
               <ModalButtons>

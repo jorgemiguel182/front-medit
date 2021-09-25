@@ -30,18 +30,9 @@ const columns = [
 ];
 
 
-const DatatableComponent = ({handleOpen}) => {
+const DatatableComponent = ({handleOpen, handleSearch, data}) => {
 
   const history = useHistory();
-  const [data, setData] = useState([]);
-
-  const handleSearch = (filter) => {
-    api.post("/filter-prontuarios", filter).then((response) => {
-      setData(response.data);
-    }).catch(() => {
-      
-    });
-  }
 
   const goToEvolution = (row) => {
     history.push(`/evolutions/${row.id}`);
