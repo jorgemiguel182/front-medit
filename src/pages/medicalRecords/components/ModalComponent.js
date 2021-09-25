@@ -46,7 +46,7 @@ export default function TransitionsModal({ handleClose, open }) {
     try {
       const response = await api.post('/filter-researchs', data);
       if(response.data.status === 'OK'){
-        enqueueSnackbar('Não foi possível encontrar um prontuário', { variant: 'error' });
+        enqueueSnackbar('Não foi possível encontrar o paciente', { variant: 'error' });
         setLoading(false);
       }else{
         setPacientData(response.data[0]);
@@ -59,12 +59,15 @@ export default function TransitionsModal({ handleClose, open }) {
 
   const handleSubmit = async () => {
     setLoading(true);
+
     const data = {
-      id_research_client: pacientData.id
+      id_research_client: pacientData.id,
+      name: pacientData.name
     }
+
     try {
       const response = await api.post('/new-prontuario', data);
-      enqueueSnackbar(response.data.msg, { variant: 'error' });
+      enqueueSnackbar(response.data.msg, { variant: 'success' });
       setLoading(false);
     } catch {
       enqueueSnackbar('Este paciente já tem um prontuário vinculado', { variant: 'error' });
@@ -74,6 +77,7 @@ export default function TransitionsModal({ handleClose, open }) {
 
   useEffect(() => {
     setName('');
+    setLoading(false);
     setPacientData({});
   }, [open])
 

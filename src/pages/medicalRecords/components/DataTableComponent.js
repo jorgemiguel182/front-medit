@@ -22,12 +22,6 @@ const columns = [
 		reorder: true,
   },
   {
-    name: 'Data de nascimento',
-    selector: row => moment(row.born_date).format('DD/MM/YYYY'),
-    sortable: true,
-		reorder: true,
-  },
-  {
     name: 'Data de criação',
     selector: row => moment(row.date_created).format('DD/MM/YYYY'),
     sortable: true,

@@ -14,27 +14,28 @@ import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import api from '../../../services/api';
 
 const columns = [
-  // {
-  //   name: 'Id',
-  //   selector: row => row.id,
-  //   sortable: true,
-	// 	reorder: true,
-  // },
-  // {
-  //   name: 'Id do paciente',
-  //   selector: row => row.id_research_client,
-  //   sortable: true,
-	// 	reorder: true,
-  // },
-  // {
-  //   name: 'Nome',
-  //   selector: row => row.name,
-  //   sortable: true,
-	// 	reorder: true,
-  // },
+  {
+    name: 'Id',
+    selector: row => row.id,
+    sortable: true,
+		reorder: true,
+  },
+  {
+    name: 'Id do paciente',
+    selector: row => row.id_research_client,
+    sortable: true,
+		reorder: true,
+  },
+  {
+    name: 'Nome',
+    selector: row => row.name,
+    sortable: true,
+		reorder: true,
+  },
   {
     name: 'Data de criação',
-    selector: row => moment(row.evolutions[0].date_created).format('DD/MM/YYYY'),
+    // selector: row => moment(row.evolutions[0].date_created).format('DD/MM/YYYY'),
+    selector: row => console.log(row),
     sortable: true,
 		reorder: true,
   },
@@ -51,7 +52,7 @@ const DatatableComponent = ({...rest}) => {
 
   const handleSearch = async () => {
     try{
-      const response = await api.post("/filter-prontuarios", {id_research_client: id});
+      const response = await api.post("/filter-researchs", {id_research_client: id});
       if(response.data.status === 'OK'){
         enqueueSnackbar('Evoluções não encontradas.', { variant: 'error' });
       }else{
