@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
-import { Grid, Card, Paper, CardContent, CardHeader, Divider, Button, Autocomplete, TextField } from '@material-ui/core'
+import React, { useEffect, useState } from 'react';
+import { Grid, Card, Paper, CardContent, CardHeader, Divider, Button, TextField, Typography, CircularProgress } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-
+import SearchIcon from '@material-ui/icons/Search';
 import styled from 'styled-components';
+
+import api from '../../../services/api';
 
 const ModalButtons = styled('div')`
   display: flex;
@@ -23,125 +26,56 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     // border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    maxHeight: '300px',
+    // maxHeight: '300px',
     minWidth: '600px'
   },
 }));
 
-const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: 'Pulp Fiction', year: 1994 },
-  { title: 'The Lord of the Rings: The Return of the King', year: 2003 },
-  { title: 'The Good, the Bad and the Ugly', year: 1966 },
-  { title: 'Fight Club', year: 1999 },
-  { title: 'The Lord of the Rings: The Fellowship of the Ring', year: 2001 },
-  { title: 'Star Wars: Episode V - The Empire Strikes Back', year: 1980 },
-  { title: 'Forrest Gump', year: 1994 },
-  { title: 'Inception', year: 2010 },
-  { title: 'The Lord of the Rings: The Two Towers', year: 2002 },
-  { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
-  { title: 'Goodfellas', year: 1990 },
-  { title: 'The Matrix', year: 1999 },
-  { title: 'Seven Samurai', year: 1954 },
-  { title: 'Star Wars: Episode IV - A New Hope', year: 1977 },
-  { title: 'City of God', year: 2002 },
-  { title: 'Se7en', year: 1995 },
-  { title: 'The Silence of the Lambs', year: 1991 },
-  { title: "It's a Wonderful Life", year: 1946 },
-  { title: 'Life Is Beautiful', year: 1997 },
-  { title: 'The Usual Suspects', year: 1995 },
-  { title: 'Léon: The Professional', year: 1994 },
-  { title: 'Spirited Away', year: 2001 },
-  { title: 'Saving Private Ryan', year: 1998 },
-  { title: 'Once Upon a Time in the West', year: 1968 },
-  { title: 'American History X', year: 1998 },
-  { title: 'Interstellar', year: 2014 },
-  { title: 'Casablanca', year: 1942 },
-  { title: 'City Lights', year: 1931 },
-  { title: 'Psycho', year: 1960 },
-  { title: 'The Green Mile', year: 1999 },
-  { title: 'The Intouchables', year: 2011 },
-  { title: 'Modern Times', year: 1936 },
-  { title: 'Raiders of the Lost Ark', year: 1981 },
-  { title: 'Rear Window', year: 1954 },
-  { title: 'The Pianist', year: 2002 },
-  { title: 'The Departed', year: 2006 },
-  { title: 'Terminator 2: Judgment Day', year: 1991 },
-  { title: 'Back to the Future', year: 1985 },
-  { title: 'Whiplash', year: 2014 },
-  { title: 'Gladiator', year: 2000 },
-  { title: 'Memento', year: 2000 },
-  { title: 'The Prestige', year: 2006 },
-  { title: 'The Lion King', year: 1994 },
-  { title: 'Apocalypse Now', year: 1979 },
-  { title: 'Alien', year: 1979 },
-  { title: 'Sunset Boulevard', year: 1950 },
-  { title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb', year: 1964 },
-  { title: 'The Great Dictator', year: 1940 },
-  { title: 'Cinema Paradiso', year: 1988 },
-  { title: 'The Lives of Others', year: 2006 },
-  { title: 'Grave of the Fireflies', year: 1988 },
-  { title: 'Paths of Glory', year: 1957 },
-  { title: 'Django Unchained', year: 2012 },
-  { title: 'The Shining', year: 1980 },
-  { title: 'WALL·E', year: 2008 },
-  { title: 'American Beauty', year: 1999 },
-  { title: 'The Dark Knight Rises', year: 2012 },
-  { title: 'Princess Mononoke', year: 1997 },
-  { title: 'Aliens', year: 1986 },
-  { title: 'Oldboy', year: 2003 },
-  { title: 'Once Upon a Time in America', year: 1984 },
-  { title: 'Witness for the Prosecution', year: 1957 },
-  { title: 'Das Boot', year: 1981 },
-  { title: 'Citizen Kane', year: 1941 },
-  { title: 'North by Northwest', year: 1959 },
-  { title: 'Vertigo', year: 1958 },
-  { title: 'Star Wars: Episode VI - Return of the Jedi', year: 1983 },
-  { title: 'Reservoir Dogs', year: 1992 },
-  { title: 'Braveheart', year: 1995 },
-  { title: 'M', year: 1931 },
-  { title: 'Requiem for a Dream', year: 2000 },
-  { title: 'Amélie', year: 2001 },
-  { title: 'A Clockwork Orange', year: 1971 },
-  { title: 'Like Stars on Earth', year: 2007 },
-  { title: 'Taxi Driver', year: 1976 },
-  { title: 'Lawrence of Arabia', year: 1962 },
-  { title: 'Double Indemnity', year: 1944 },
-  { title: 'Eternal Sunshine of the Spotless Mind', year: 2004 },
-  { title: 'Amadeus', year: 1984 },
-  { title: 'To Kill a Mockingbird', year: 1962 },
-  { title: 'Toy Story 3', year: 2010 },
-  { title: 'Logan', year: 2017 },
-  { title: 'Full Metal Jacket', year: 1987 },
-  { title: 'Dangal', year: 2016 },
-  { title: 'The Sting', year: 1973 },
-  { title: '2001: A Space Odyssey', year: 1968 },
-  { title: "Singin' in the Rain", year: 1952 },
-  { title: 'Toy Story', year: 1995 },
-  { title: 'Bicycle Thieves', year: 1948 },
-  { title: 'The Kid', year: 1921 },
-  { title: 'Inglourious Basterds', year: 2009 },
-  { title: 'Snatch', year: 2000 },
-  { title: '3 Idiots', year: 2009 },
-  { title: 'Monty Python and the Holy Grail', year: 1975 },
-];
-
 export default function TransitionsModal({ handleClose, open }) {
   const classes = useStyles();
-  const [value, setValue] = useState();
+  const { enqueueSnackbar } = useSnackbar();
+  const [name, setName] = useState('');
+  const [pacientData, setPacientData] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch = (value) => {
-    console.log(value);
+  const handleSearch = async () => {
+    setLoading(true)
+    const data = {
+      name
+    }
+    try {
+      const response = await api.post('/filter-researchs', data);
+      if(response.data.status === 'OK'){
+        enqueueSnackbar('Não foi possível encontrar um prontuário', { variant: 'error' });
+        setLoading(false);
+      }else{
+        setPacientData(response.data[0]);
+        setLoading(false);
+      }
+    } catch {
+      console.log('error');
+    }
   }
 
-  const handleSubmit = () => {
-    console.log(value);
+  const handleSubmit = async () => {
+    setLoading(true);
+    const data = {
+      id_research_client: pacientData.id
+    }
+    try {
+      const response = await api.post('/new-prontuario', data);
+      enqueueSnackbar(response.data.msg, { variant: 'error' });
+      setLoading(false);
+    } catch {
+      enqueueSnackbar('Este paciente já tem um prontuário vinculado', { variant: 'error' });
+      setLoading(false);
+    }
   }
+
+  useEffect(() => {
+    setName('');
+    setPacientData({});
+  }, [open])
 
   return (
     <div>
@@ -161,23 +95,61 @@ export default function TransitionsModal({ handleClose, open }) {
           <Paper className={classes.paper}>
             <CardHeader title="Criar novo prontuário" />
             <CardContent>
-              <Autocomplete
-                id="combo-box-demo"
-                options={top100Films}
-                getOptionLabel={(option) => option.title}
-                style={{ width: '100%' }}
-                value={value}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} onChange={(element) => handleSearch(element.target.value)} label="Buscar paciente" variant="outlined" />}
-              />
+              <Grid container spacing={3}>
+                <Grid item md={9} xs={12}>
+                  <TextField
+                    size="small"
+                    fullWidth
+                    label="Nome completo do paciente"
+                    name="name"
+                    onChange={(element) => setName(element.target.value)}
+                    value={name}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item md={3} xs={12}>
+                  <Button variant="outlined" onClick={() => handleSearch()}><SearchIcon /> Buscar</Button>
+                </Grid>
+              </Grid>
+              <br />
+              {!loading ?
+                (
+                  <Card>
+                    <CardContent>
+                      <Grid container spacing={3}>
+                        <Grid item md={12} xs={12}>
+                          <Typography>
+                            Nome do paciente: <b>{pacientData?.name}</b>
+                          </Typography>
+                        </Grid>
+                        <Grid item md={4} xs={12}>
+                          <Typography>
+                            CPF: <b>{pacientData?.cpf}</b>
+                          </Typography>
+                        </Grid>
+                        <Grid item md={4} xs={12}>
+                          <Typography>
+                            Gênero: <b>{pacientData?.gender}</b>
+                          </Typography>
+                        </Grid>
+                        <Grid item md={4} xs={12}>
+                          <Typography>
+                            Etnia: <b>{pacientData?.ethnicity}</b>
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </CardContent>
+                  </Card>
+                ) :
+                (<CircularProgress />)
+              }
+
             </CardContent>
             <Divider />
             <CardContent>
               <ModalButtons>
                 <Button variant="outlined" onClick={() => handleClose()}>Cancelar</Button>
-                <Button variant="contained" onClick={() => handleSubmit()} >Salvar</Button>
+                <Button variant="contained" onClick={() => handleSubmit()} >Criar prontuário</Button>
               </ModalButtons>
             </CardContent>
           </Paper>

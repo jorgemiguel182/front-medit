@@ -53,10 +53,10 @@ const HttpInterceptor = ({ children }) => {
       const { data } = response;
       if (!!data && !!data.message) {
         const message = translateWithParams(data);
-        enqueueSnackbar("Token atualizado", {
-          variant: 'success',
-          preventDuplicate: true
-        });
+        // enqueueSnackbar("Token atualizado", {
+        //   variant: 'success',
+        //   preventDuplicate: true
+        // });
       }
 
       return response;

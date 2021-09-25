@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import moment from 'moment';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
+import {useSnackbar} from 'notistack'
 import {
   Box, Card,
   Button,
@@ -14,20 +15,26 @@ import api from '../../../services/api';
 
 const columns = [
   {
+    name: 'Id',
+    selector: row => row.id,
+    sortable: true,
+		reorder: true,
+  },
+  {
+    name: 'Id do paciente',
+    selector: row => row.id_research_client,
+    sortable: true,
+		reorder: true,
+  },
+  {
     name: 'Nome',
     selector: row => row.name,
     sortable: true,
 		reorder: true,
   },
   {
-    name: 'Data de nascimento',
-    selector: row => moment(row.born_date).format('DD/MM/YYYY'),
-    sortable: true,
-		reorder: true,
-  },
-  {
     name: 'Data de criação',
-    selector: row => moment(row.date_created).format('DD/MM/YYYY'),
+    selector: row => moment(row.evolutions[0].date_created).format('DD/MM/YYYY'),
     sortable: true,
 		reorder: true,
   },
@@ -37,14 +44,22 @@ const columns = [
 const DatatableComponent = ({...rest}) => {
 
   const history = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
+  const { id } = useParams();
+
   const [data, setData] = useState([]);
 
-  const handleSearch = (filter) => {
-    api.post("/filter-researchs", filter).then((response) => {
-      setData(response.data);
-    }).catch(() => {
-      
-    });
+  const handleSearch = async () => {
+    try{
+      const response = await api.post("/filter-prontuarios", {id_research_client: id});
+      if(response.data.status === 'OK'){
+        enqueueSnackbar('Evoluções não encontradas.', { variant: 'error' });
+      }else{
+        setData(response.data);
+      }
+    }catch{
+      enqueueSnackbar('Evoluções não encontradas.', {variant: 'error'});
+    }
   }
 
   const handleGoToEvolution = (row) => {

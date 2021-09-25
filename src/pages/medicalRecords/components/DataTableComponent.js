@@ -50,7 +50,7 @@ const DatatableComponent = ({handleOpen}) => {
   }
 
   const goToEvolution = (row) => {
-    history.push(`/evolutions/${row.cpf}`);
+    history.push(`/evolutions/${row.id}`);
   }
 
   const handleGoToNew = () => {

@@ -6,7 +6,13 @@ import App from './App';
 
 ReactDOM.render((
   <BrowserRouter>
-    <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+    }}
+    >
       <App />
     </SnackbarProvider>
   </BrowserRouter>
