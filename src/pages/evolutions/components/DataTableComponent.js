@@ -58,7 +58,7 @@ const DatatableComponent = ({...rest}) => {
   }
 
   const handleGoToEvolution = (row) => {
-    history.push(`/evolutions/${id}/edit/${row.id}`);
+    history.push(`/evolutions/${id}/edit/${row.evolution_id}`);
   }
 
   const handleGoToNew = () => {

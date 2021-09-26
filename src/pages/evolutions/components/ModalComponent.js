@@ -76,7 +76,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         name="date_created"
                         type="date"
                         onChange={handleChange}
-                        value={values.date_created}
+                        value={values?.date_created}
                         variant="filled"
                       />
                     </Grid>
@@ -93,7 +93,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="AGEUSA - Perda de paladar"
                         name="ageusa"
                         onChange={handleChange}
-                        value={values.ageusa}
+                        value={values?.ageusa}
                         variant="filled"
                       />
                     </Grid>
@@ -104,7 +104,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="ANOSMIA - Perda de olfato"
                         name="anosmia"
                         onChange={handleChange}
-                        value={values.anosmia}
+                        value={values?.anosmia}
                         variant="filled"
                       />
                     </Grid>
@@ -115,7 +115,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="ASTRALGIA - Dores Articulares"
                         name="astralgia"
                         onChange={handleChange}
-                        value={values.astralgia}
+                        value={values?.astralgia}
                         variant="filled"
                       />
                     </Grid>
@@ -126,7 +126,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="CÃIMBRAS"
                         name="caimbras"
                         onChange={handleChange}
-                        value={values.caimbras}
+                        value={values?.caimbras}
                         variant="filled"
                       />
                     </Grid>
@@ -143,7 +143,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="CEFALÉIA - LEVE/MÉDIA - Dor Cabeça"
                         name="cefaleia_leve"
                         onChange={handleChange}
-                        value={values.cefaleia_leve}
+                        value={values?.cefaleia_leve}
                         variant="filled"
                       />
                     </Grid>
@@ -154,7 +154,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="CEFALÉIA - FORTE - Dor Cabeça"
                         name="cefaleia_forte"
                         onChange={handleChange}
-                        value={values.cefaleia_forte}
+                        value={values?.cefaleia_forte}
                         variant="filled"
                       />
                     </Grid>
@@ -165,7 +165,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="CONGESTÃO NASAL - Narina 'Fechada'"
                         name="congestao_nasal"
                         onChange={handleChange}
-                        value={values.congestao_nasal}
+                        value={values?.congestao_nasal}
                         variant="filled"
                       />
                     </Grid>
@@ -176,7 +176,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="CORIZA"
                         name="coriza"
                         onChange={handleChange}
-                        value={values.coriza}
+                        value={values?.coriza}
                         variant="filled"
                       />
                     </Grid>
@@ -193,7 +193,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="DIARRÉIA"
                         name="diarreia"
                         onChange={handleChange}
-                        value={values.diarreia}
+                        value={values?.diarreia}
                         variant="filled"
                       />
                     </Grid>
@@ -204,7 +204,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="DOR ABDOMINAL"
                         name="dor_abdominal"
                         onChange={handleChange}
-                        value={values.dor_abdominal}
+                        value={values?.dor_abdominal}
                         variant="filled"
                       />
                     </Grid>
@@ -215,7 +215,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="DOR COSTAS"
                         name="dor_costas"
                         onChange={handleChange}
-                        value={values.dor_costas}
+                        value={values?.dor_costas}
                         variant="filled"
                       />
                     </Grid>
@@ -226,7 +226,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="DOR OLHOS"
                         name="dor_olhos"
                         onChange={handleChange}
-                        value={values.dor_olhos}
+                        value={values?.dor_olhos}
                         variant="filled"
                       />
                     </Grid>
@@ -243,7 +243,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="DOR TÓRAX = DOR PEITO"
                         name="dor_torax_peito"
                         onChange={handleChange}
-                        value={values.dor_torax_peito}
+                        value={values?.dor_torax_peito}
                         variant="filled"
                       />
                     </Grid>
@@ -254,7 +254,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="EDEMA OLHOS/FACE"
                         name="edema"
                         onChange={handleChange}
-                        value={values.edema}
+                        value={values?.edema}
                         variant="filled"
                       />
                     </Grid>
@@ -265,7 +265,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="FALTA AR LEVE - DISPNÉIA"
                         name="falta_ar_leve"
                         onChange={handleChange}
-                        value={values.falta_ar_leve}
+                        value={values?.falta_ar_leve}
                         variant="filled"
                       />
                     </Grid>
@@ -276,7 +276,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="FALTA AR MÉDIA/FORTE - DISPNÉIA"
                         name="falta_ar_media"
                         onChange={handleChange}
-                        value={values.falta_ar_media}
+                        value={values?.falta_ar_media}
                         variant="filled"
                       />
                     </Grid>
@@ -293,7 +293,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="FORMIGAMENTO"
                         name="formigamento"
                         onChange={handleChange}
-                        value={values.formigamento}
+                        value={values?.formigamento}
                         variant="filled"
                       />
                     </Grid>
@@ -304,7 +304,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="FRAQUEZA ASTEMIA/ADINAMIA"
                         name="fraqueza_astemia"
                         onChange={handleChange}
-                        value={values.fraqueza_astemia}
+                        value={values?.fraqueza_astemia}
                         variant="filled"
                       />
                     </Grid>
@@ -315,7 +315,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="GARGANTA APERTO/INCHADA"
                         name="garganta"
                         onChange={handleChange}
-                        value={values.garganta}
+                        value={values?.garganta}
                         variant="filled"
                       />
                     </Grid>
@@ -326,7 +326,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="GARGANTA IRRITADA - Sem Dor"
                         name="garganta_irritada"
                         onChange={handleChange}
-                        value={values.garganta_irritada}
+                        value={values?.garganta_irritada}
                         variant="filled"
                       />
                     </Grid>
@@ -343,7 +343,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="INAPETÊNCIA"
                         name="inapetencia"
                         onChange={handleChange}
-                        value={values.inapetencia}
+                        value={values?.inapetencia}
                         variant="filled"
                       />
                     </Grid>
@@ -354,7 +354,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="MIALGIA - Dores Musculares"
                         name="mialgia"
                         onChange={handleChange}
-                        value={values.mialgia}
+                        value={values?.mialgia}
                         variant="filled"
                       />
                     </Grid>
@@ -365,7 +365,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="NÁUSEAS"
                         name="nauseas"
                         onChange={handleChange}
-                        value={values.nauseas}
+                        value={values?.nauseas}
                         variant="filled"
                       />
                     </Grid>
@@ -376,7 +376,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="ODINOFAGIA - Dor ao Comer"
                         name="odinofagia"
                         onChange={handleChange}
-                        value={values.odinofagia}
+                        value={values?.odinofagia}
                         variant="filled"
                       />
                     </Grid>
@@ -393,7 +393,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="OTALGIA - Dor de ouvido"
                         name="otalgia"
                         onChange={handleChange}
-                        value={values.otalgia}
+                        value={values?.otalgia}
                         variant="filled"
                       />
                     </Grid>
@@ -404,7 +404,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="PRESSÃO OLHOS"
                         name="pressao_olhos"
                         onChange={handleChange}
-                        value={values.pressao_olhos}
+                        value={values?.pressao_olhos}
                         variant="filled"
                       />
                     </Grid>
@@ -415,7 +415,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="PRURIDO/COCEIRA"
                         name="prurido"
                         onChange={handleChange}
-                        value={values.prurido}
+                        value={values?.prurido}
                         variant="filled"
                       />
                     </Grid>
@@ -426,7 +426,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="SINUSITE - SENSAÇÃO"
                         name="sinusite"
                         onChange={handleChange}
-                        value={values.sinusite}
+                        value={values?.sinusite}
                         variant="filled"
                       />
                     </Grid>
@@ -443,7 +443,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="SUDORESE"
                         name="sudorese"
                         onChange={handleChange}
-                        value={values.sudorese}
+                        value={values?.sudorese}
                         variant="filled"
                       />
                     </Grid>
@@ -454,7 +454,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="TONTURA"
                         name="tontura"
                         onChange={handleChange}
-                        value={values.tontura}
+                        value={values?.tontura}
                         variant="filled"
                       />
                     </Grid>
@@ -465,7 +465,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="VÔMITOS"
                         name="vomitos"
                         onChange={handleChange}
-                        value={values.vomitos}
+                        value={values?.vomitos}
                         variant="filled"
                       />
                     </Grid>
@@ -485,7 +485,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="M"
                         name="sat_oxigenio_m"
                         onChange={handleChange}
-                        value={values.sat_oxigenio_m}
+                        value={values?.sat_oxigenio_m}
                         variant="filled"
                       />
                     </Grid>
@@ -496,7 +496,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="T"
                         name="sat_oxigenio_t"
                         onChange={handleChange}
-                        value={values.sat_oxigenio_t}
+                        value={values?.sat_oxigenio_t}
                         variant="filled"
                       />
                     </Grid>
@@ -507,7 +507,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="N"
                         name="sat_oxigenio_n"
                         onChange={handleChange}
-                        value={values.sat_oxigenio_n}
+                        value={values?.sat_oxigenio_n}
                         variant="filled"
                       />
                     </Grid>
@@ -527,7 +527,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="M"
                         name="sat_oxigenio_moderado_m"
                         onChange={handleChange}
-                        value={values.sat_oxigenio_moderado_m}
+                        value={values?.sat_oxigenio_moderado_m}
                         variant="filled"
                       />
                     </Grid>
@@ -538,7 +538,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="T"
                         name="sat_oxigenio_moderado_t"
                         onChange={handleChange}
-                        value={values.sat_oxigenio_moderado_t}
+                        value={values?.sat_oxigenio_moderado_t}
                         variant="filled"
                       />
                     </Grid>
@@ -549,7 +549,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="N"
                         name="sat_oxigenio_moderado_n"
                         onChange={handleChange}
-                        value={values.sat_oxigenio_moderado_n}
+                        value={values?.sat_oxigenio_moderado_n}
                         variant="filled"
                       />
                     </Grid>
@@ -569,7 +569,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="M"
                         name="temperatura_m"
                         onChange={handleChange}
-                        value={values.temperatura_m}
+                        value={values?.temperatura_m}
                         variant="filled"
                       />
                     </Grid>
@@ -580,7 +580,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="T"
                         name="temperatura_t"
                         onChange={handleChange}
-                        value={values.temperatura_t}
+                        value={values?.temperatura_t}
                         variant="filled"
                       />
                     </Grid>
@@ -591,7 +591,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="N"
                         name="temperatura_n"
                         onChange={handleChange}
-                        value={values.temperatura_n}
+                        value={values?.temperatura_n}
                         variant="filled"
                       />
                     </Grid>
@@ -611,7 +611,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="M"
                         name="temperatura_normal_m"
                         onChange={handleChange}
-                        value={values.temperatura_normal_m}
+                        value={values?.temperatura_normal_m}
                         variant="filled"
                       />
                     </Grid>
@@ -622,7 +622,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="T"
                         name="temperatura_normal_t"
                         onChange={handleChange}
-                        value={values.temperatura_normal_t}
+                        value={values?.temperatura_normal_t}
                         variant="filled"
                       />
                     </Grid>
@@ -633,7 +633,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="N"
                         name="temperatura_normal_n"
                         onChange={handleChange}
-                        value={values.temperatura_normal_n}
+                        value={values?.temperatura_normal_n}
                         variant="filled"
                       />
                     </Grid>
@@ -653,7 +653,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="M"
                         name="temperatura_febre_m"
                         onChange={handleChange}
-                        value={values.temperatura_febre_m}
+                        value={values?.temperatura_febre_m}
                         variant="filled"
                       />
                     </Grid>
@@ -664,7 +664,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="T"
                         name="temperatura_febre_t"
                         onChange={handleChange}
-                        value={values.temperatura_febre_t}
+                        value={values?.temperatura_febre_t}
                         variant="filled"
                       />
                     </Grid>
@@ -675,7 +675,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="N"
                         name="temperatura_febre_n"
                         onChange={handleChange}
-                        value={values.temperatura_febre_n}
+                        value={values?.temperatura_febre_n}
                         variant="filled"
                       />
                     </Grid>
@@ -695,7 +695,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="M"
                         name="temperatura_febre_alta_m"
                         onChange={handleChange}
-                        value={values.temperatura_febre_alta_m}
+                        value={values?.temperatura_febre_alta_m}
                         variant="filled"
                       />
                     </Grid>
@@ -706,7 +706,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="T"
                         name="temperatura_febre_alta_t"
                         onChange={handleChange}
-                        value={values.temperatura_febre_alta_t}
+                        value={values?.temperatura_febre_alta_t}
                         variant="filled"
                       />
                     </Grid>
@@ -717,7 +717,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="N"
                         name="temperatura_febre_alta_n"
                         onChange={handleChange}
-                        value={values.temperatura_febre_alta_n}
+                        value={values?.temperatura_febre_alta_n}
                         variant="filled"
                       />
                     </Grid>
@@ -737,7 +737,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="M"
                         name="temperatura_hipertermia_m"
                         onChange={handleChange}
-                        value={values.temperatura_hipertermia_m}
+                        value={values?.temperatura_hipertermia_m}
                         variant="filled"
                       />
                     </Grid>
@@ -748,7 +748,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="T"
                         name="temperatura_hipertermia_t"
                         onChange={handleChange}
-                        value={values.temperatura_hipertermia_t}
+                        value={values?.temperatura_hipertermia_t}
                         variant="filled"
                       />
                     </Grid>
@@ -759,7 +759,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="N"
                         name="temperatura_hipertermia_n"
                         onChange={handleChange}
-                        value={values.temperatura_hipertermia_n}
+                        value={values?.temperatura_hipertermia_n}
                         variant="filled"
                       />
                     </Grid>
@@ -777,7 +777,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="TEMPERATURA NO FRIO/CALAFRIO OU SUDORESE"
                         name="temperatura_frio_calor_sudorese"
                         onChange={handleChange}
-                        value={values.temperatura_frio_calor_sudorese}
+                        value={values?.temperatura_frio_calor_sudorese}
                         variant="filled"
                       />
                     </Grid>
@@ -797,7 +797,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="M"
                         name="fisiologia_respiratoria_m"
                         onChange={handleChange}
-                        value={values.fisiologia_respiratoria_m}
+                        value={values?.fisiologia_respiratoria_m}
                         variant="filled"
                       />
                     </Grid>
@@ -808,7 +808,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="T"
                         name="fisiologia_respiratoria_t"
                         onChange={handleChange}
-                        value={values.fisiologia_respiratoria_t}
+                        value={values?.fisiologia_respiratoria_t}
                         variant="filled"
                       />
                     </Grid>
@@ -828,7 +828,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="M"
                         name="pronar_m"
                         onChange={handleChange}
-                        value={values.pronar_m}
+                        value={values?.pronar_m}
                         variant="filled"
                       />
                     </Grid>
@@ -839,7 +839,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="T"
                         name="pronar_t"
                         onChange={handleChange}
-                        value={values.pronar_t}
+                        value={values?.pronar_t}
                         variant="filled"
                       />
                     </Grid>
@@ -850,7 +850,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="N"
                         name="pronar_n"
                         onChange={handleChange}
-                        value={values.pronar_n}
+                        value={values?.pronar_n}
                         variant="filled"
                       />
                     </Grid>
@@ -870,7 +870,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="IVERMECTINA"
                         name="ivermectina"
                         onChange={handleChange}
-                        value={values.ivermectina}
+                        value={values?.ivermectina}
                         variant="filled"
                       />
                     </Grid>
@@ -881,7 +881,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="AZITROMICINA"
                         name="azitromicina"
                         onChange={handleChange}
-                        value={values.azitromicina}
+                        value={values?.azitromicina}
                         variant="filled"
                       />
                     </Grid>
@@ -892,7 +892,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="VITAMINA D"
                         name="vitamina_d"
                         onChange={handleChange}
-                        value={values.vitamina_d}
+                        value={values?.vitamina_d}
                         variant="filled"
                       />
                     </Grid>
@@ -903,7 +903,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="VITAMINA C"
                         name="vitamina_c"
                         onChange={handleChange}
-                        value={values.vitamina_c}
+                        value={values?.vitamina_c}
                         variant="filled"
                       />
                     </Grid>
@@ -914,7 +914,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="ZINCO"
                         name="zinco"
                         onChange={handleChange}
-                        value={values.zinco}
+                        value={values?.zinco}
                         variant="filled"
                       />
                     </Grid>
@@ -925,7 +925,7 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                         label="CÚRCUMA"
                         name="curcuma"
                         onChange={handleChange}
-                        value={values.curcuma}
+                        value={values?.curcuma}
                         variant="filled"
                       />
                     </Grid>

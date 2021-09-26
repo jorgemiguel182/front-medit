@@ -63,8 +63,13 @@ const PacientHook = () => {
       if(response.data.status === 'OK'){
         enqueueSnackbar('Evoluções não encontradas.', { variant: 'error' });
       }else{
+        console.log(response.data);
+
+        const evolution = response.data[0].evolutions.filter((item) => {
+          return item.evolution_id === evolution_id
+        });
         setData(response.data);
-        setValues ({...values, ...{name:response.data[0].name}})
+        setValues ({...values, ...{name:response.data[0].name}, ...evolution[0]})
       }
     }catch{
       enqueueSnackbar('Evoluções não encontradas.', {variant: 'error'});

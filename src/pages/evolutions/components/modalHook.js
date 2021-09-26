@@ -97,7 +97,9 @@ const modalHook = ({symptomTable}) => {
   }
 
   useEffect(() => {
-    setValues(symptomTable);
+    if(symptomTable){
+      setValues(symptomTable);
+    }
   }, [symptomTable])
 
   return {
