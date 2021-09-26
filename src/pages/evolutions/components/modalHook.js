@@ -4,12 +4,12 @@ import {useSnackbar} from 'notistack';
 
 import api from '../../../services/api';
 
-const modalHook = () => {
+const modalHook = ({symptomTable}) => {
 
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
   const [values, setValues] = useState({
-    date: '1111-11-11',
+    date_created: '1111-11-11',
     ageusa:'',
     anosmia:'',
     astralgia:'',
@@ -94,8 +94,11 @@ const modalHook = () => {
     }catch{
       enqueueSnackbar('Não foi possível salvar', {variant: 'error'});
     }
-    
   }
+
+  useEffect(() => {
+    setValues(symptomTable);
+  }, [symptomTable])
 
   return {
     values,

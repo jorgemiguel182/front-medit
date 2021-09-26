@@ -3,7 +3,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import modalHook from './modalHook';
 
@@ -42,27 +42,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal({ handleClose, open }) {
+export default function TransitionsModal({ handleClose, open, symptomTable }) {
   const classes = useStyles();
-  const {values, setValues, handleChange, handleSubmit} = modalHook();
-  // const [values, setValues] = useState({});
-
-  // const handleChange = (event) => {
-  //   setValues({
-  //     ...values,
-  //     [event.target.name]: event.target.value
-  //   });
-  // };
-
-  // const handleSubmit = () => {
-
-  //   /**
-  //    * new-symptom-table id do prontuario
-  //    */
-
-  //   console.log(values);
-  // }
-
+  const {values, setValues, handleChange, handleSubmit} = modalHook({symptomTable});
+  
   return (
     <div>
       <Modal
@@ -90,10 +73,10 @@ export default function TransitionsModal({ handleClose, open }) {
                         size="small"
                         fullWidth
                         label="Data/Sintoma"
-                        name="date"
+                        name="date_created"
                         type="date"
                         onChange={handleChange}
-                        value={values.date}
+                        value={values.date_created}
                         variant="filled"
                       />
                     </Grid>

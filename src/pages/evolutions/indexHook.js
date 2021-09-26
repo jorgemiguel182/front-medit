@@ -11,6 +11,8 @@ const PacientHook = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState('');
   const [data, setData] = useState([]);
+  const [symptomTable, setSymptomTable] = useState({});
+  const [block, setBlock] = useState(false);
   const [values, setValues] = useState({
     name: '',
     date: moment().format('YYYY-MM-DD'),
@@ -28,7 +30,8 @@ const PacientHook = () => {
     symptoms_date: moment().format('YYYY-MM-DD'),
   });
   
-  const handleOpen = () => {
+  const handleOpen = (data) => {
+    setSymptomTable(data);
     setOpen(true);
   };
 
@@ -77,7 +80,8 @@ const PacientHook = () => {
     }
     try{
       const response = await api.post('/new-medical-evolution', data);
-      enqueueSnackbar('Evolução salva com sucesso', {variant: 'success'})
+      enqueueSnackbar('Evolução salva com sucesso', {variant: 'success'});
+      setBlock(true);
     }catch{
       enqueueSnackbar('Não foi possível salvar a evolução', {variant: 'error'})
     }
@@ -91,6 +95,8 @@ const PacientHook = () => {
     values,
     open,
     data,
+    symptomTable,
+    block,
     handleChange,
     handleSubmit,
     handleChangeMultiple,

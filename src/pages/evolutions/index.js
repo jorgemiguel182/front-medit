@@ -4,26 +4,9 @@ import {
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import PacientHook from './indexHook';
+import moment from 'moment';
 
 import ModalComponent from './components/ModalComponent';
-
-const buttons = [
-  {id: 1, date: '0001-01-01'},
-  {id: 2, date: '0001-01-02'},
-  {id: 3, date: '0001-01-03'},
-  {id: 4, date: '0001-01-04'},
-  {id: 5, date: '0001-01-05'},
-  {id: 1, date: '0001-01-01'},
-  {id: 2, date: '0001-01-02'},
-  {id: 3, date: '0001-01-03'},
-  {id: 4, date: '0001-01-04'},
-  {id: 5, date: '0001-01-05'},
-  {id: 1, date: '0001-01-01'},
-  {id: 2, date: '0001-01-02'},
-  {id: 3, date: '0001-01-03'},
-  {id: 4, date: '0001-01-04'},
-  {id: 5, date: '0001-01-05'}
-];
 
 const Evolution = () => {
 
@@ -31,6 +14,8 @@ const Evolution = () => {
     values,
     open,
     data,
+    symptomTable,
+    block,
     handleChange,
     handleSubmit,
     handleChangeMultiple,
@@ -74,6 +59,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           label="Data de atendimento"
                           name="date"
@@ -86,6 +72,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           label="Telefone"
                           name="tel"
@@ -102,6 +89,7 @@ const Evolution = () => {
                       <Grid item md={9} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           label="Registro"
                           name="register"
@@ -113,6 +101,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           label="Data do registro"
                           name="register_date"
@@ -130,6 +119,7 @@ const Evolution = () => {
                       <Grid item md={6} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           label="Email"
                           name="email"
@@ -141,6 +131,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           label="Celular"
                           name="celular"
@@ -166,6 +157,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           multiline
                           rows={5}
@@ -193,6 +185,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           multiline
                           rows={5}
@@ -211,6 +204,7 @@ const Evolution = () => {
                       <Grid item md={6} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           label="Problemas de saúde"
                           name="health_issues"
@@ -219,6 +213,7 @@ const Evolution = () => {
                           variant="filled"
                           select
                           SelectProps={{ native: true }}
+                          defaultValue="none"
                         >
                           <option selected value="none">Não</option>
                           <option value="1">Sim</option>
@@ -227,6 +222,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           label="Sintomas"
                           name="symptoms"
@@ -235,6 +231,7 @@ const Evolution = () => {
                           variant="filled"
                           select
                           SelectProps={{ native: true }}
+                          defaultValue="none"
                         >
                           <option selected value="none">Não</option>
                           <option value="1">Sim</option>
@@ -243,6 +240,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
+                          disabled={block}
                           fullWidth
                           label="Data de início dos sintomas"
                           name="symptoms_date"
@@ -271,8 +269,8 @@ const Evolution = () => {
                   <Button variant="contained" color="primary" onClick={() => handleOpen()}>Novo lançamento de sintomas</Button>
                 </CardContent>
                 <CardContent>
-                  {buttons.map((button) => (
-                    <Button style={{marginRight: '30px', marginBottom: '30px'}} onClick={() => handleOpen()} variant="outlined" key={button.id} color="primary">{button.date}</Button>
+                  {data[0]?.symptom_table?.map((item) => (
+                    <Button style={{marginRight: '30px', marginBottom: '30px'}} onClick={() => handleOpen(item)} variant="outlined" key={item.id} color="primary">{moment(item.date_created).format('DD/MM/YYYY')}</Button>
                   ))}
                 </CardContent>
               </Card>
@@ -281,7 +279,7 @@ const Evolution = () => {
         </Container>
       </Box>
 
-      <ModalComponent handleClose={handleClose} open={open} />
+      <ModalComponent handleClose={handleClose} open={open} symptomTable={symptomTable} />
     </>
   )
 };
