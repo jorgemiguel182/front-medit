@@ -258,6 +258,7 @@ const Evolution = () => {
                       color="primary"
                       variant="contained"
                       type="submit"
+                      disabled={block}
                     >
                       Salvar evolução
                     </Button>
