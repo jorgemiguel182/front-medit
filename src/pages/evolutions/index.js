@@ -26,7 +26,7 @@ const Evolution = () => {
   return (
     <>
       <Helmet>
-        <title>Evolução | Material Kit</title>
+        <title>Evolução</title>
       </Helmet>
       <Box
         sx={{

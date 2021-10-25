@@ -16,7 +16,7 @@ import api from '../../../services/api';
 
 const columns = [
   {
-    name: 'Nome',
+    name: 'Paciente',
     selector: row => row.name,
     sortable: true,
 		reorder: true,

@@ -16,14 +16,14 @@ import api from '../../../services/api';
 const columns = [
   
   {
-    name: 'Nº de registro',
-    selector: row => row.crm_prof,
+    name: 'Nome',
+    selector: row => row.username_prof_cognito,
     sortable: true,
 		reorder: true,
   },
   {
-    name: 'Nome',
-    selector: row => row.username_prof_cognito,
+    name: 'CRM',
+    selector: row => row.crm_prof,
     sortable: true,
 		reorder: true,
   },

@@ -30,7 +30,7 @@ const ProductList = () => {
   return (
     <>
       <Helmet>
-        <title>Prontuários | Material Kit</title>
+        <title>Prontuários</title>
       </Helmet>
       <Box
         sx={{

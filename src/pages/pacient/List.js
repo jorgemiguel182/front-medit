@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 const ProductList = () => (
   <>
     <Helmet>
-      <title>Pacientes | Material Kit</title>
+      <title>Pacientes</title>
     </Helmet>
     <Box
       sx={{

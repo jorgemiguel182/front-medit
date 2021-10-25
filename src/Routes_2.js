@@ -8,6 +8,8 @@ import MainLayoutPublicRoute from './utils/routes/mainLayoutPublicRoute';
 import DashboardPrivateRoute from './utils/routes/dashboardPrivateRoute';
 
 import Login from 'src/pages/auth/Login';
+import ForgotPassword from 'src/pages/auth/ForgotPassword';
+import ConfirmForgotPassword from 'src/pages/auth/ConfirmForgotPassword';
 import NotFoundView from './pages/errors/NotFoundView';
 import pacientList from './pages/pacient/List'; 
 import pacientView from './pages/pacient';
@@ -21,8 +23,9 @@ export default function Routes() {
     <LastLocationProvider>
       <Switch>
         <MainLayoutPublicRoute component={Login} path="/" exact />
+        <MainLayoutPublicRoute component={ForgotPassword} path="/forgot-pass" exact />
+        <MainLayoutPublicRoute component={ConfirmForgotPassword} path="/confirm-forgot-pass" exact />
         <DashboardPrivateRoute component={pacientList} path="/pacients" exact />
-        <DashboardPrivateRoute component={pacientView} path="/pacient/:cpf" exact />
         <DashboardPrivateRoute component={pacientView} path="/pacient/:cpf" exact />
         <DashboardPrivateRoute component={medicalRecordsList} path="/prontuarios" exact />
         <DashboardPrivateRoute component={evolutionsList} path="/evolutions/:id" exact />

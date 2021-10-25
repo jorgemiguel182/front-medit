@@ -38,7 +38,7 @@ const items = [
   {
     href: '/pacients',
     icon: UsersIcon,
-    title: 'Pacientes'
+    title: 'Pesquisas de Pacientes'
   },
   {
     href: '/prontuarios',
@@ -48,7 +48,7 @@ const items = [
   {
     href: '/emails',
     icon: UserIcon,
-    title: 'Emails'
+    title: 'Envio de Pesquisa COVID'
   },
   // {
   //   href: '/app/products',

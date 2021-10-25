@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import {useSnackbar} from 'notistack';
+import api from '../../services/api';
 
 import {
   Box,
@@ -15,8 +17,25 @@ import {
 
 const Email = () => {
 
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("AFFFSSS")
+    const data = {
+      ...values
+    }
+    try{
+      const response = await api.post('/send-research', data);
+      enqueueSnackbar('Email enviado com sucesso', {variant: 'success'});
+      setValues({email:""})
+    }catch{
+      enqueueSnackbar('Não foi possível enviar o email', {variant: 'error'})
+    }
+  }
+
   const [values, setValues] = useState({
-    email: 'demo@devias.io',
+    email: '',
   });
 
   const handleChange = (event) => {
@@ -28,7 +47,7 @@ const Email = () => {
   return (
     <>
       <Helmet>
-        <title>Email | Material Kit</title>
+        <title>Enviar pesquisa</title>
       </Helmet>
       <Box
         sx={{
@@ -51,11 +70,12 @@ const Email = () => {
               <form
                 autoComplete="off"
                 noValidate
+                onSubmit={(e) => handleSubmit(e)}
               >
                 <Card>
                   <CardHeader
                     // subheader="The information can be edited"
-                    title="Email"
+                    title="Enviar pesquisa no e-mail do paciente"
                   />
                   <Divider />
                   <CardContent>
@@ -91,6 +111,7 @@ const Email = () => {
                     <Button
                       color="primary"
                       variant="contained"
+                      type="submit"
                     >
                       Enviar
                     </Button>
