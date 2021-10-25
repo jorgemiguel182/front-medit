@@ -133,7 +133,7 @@ const PacientHook = () => {
       set_have_any_deseases(response.data[0].have_any_deseases);
       set_smoker(response.data[0].smoker);
       set_alcohool(response.data[0].alcohool);
-      console.log("RETURNNNNNNNNNN >>>> ", response)
+      // console.log("RETURNNNNNNNNNN >>>> ", response)
 
     })
   }, [])
