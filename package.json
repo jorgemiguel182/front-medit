@@ -53,6 +53,7 @@
     "react-feather": "^2.0.8",
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.11.4",
+    "react-input-mask": "^2.0.4",
     "react-perfect-scrollbar": "^1.5.8",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
