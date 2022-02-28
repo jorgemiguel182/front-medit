@@ -1,6 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { useHistory } from 'react-router-dom';
 import PacientHook from './indexHook';
+import moment from 'moment';
 
 import {
   Box,
@@ -13,10 +15,11 @@ import {
   Button,
   TextField,
   Select,
-  Link
+  Link,
 } from '@material-ui/core';
 
 const Pacient = () => {
+  const history = useHistory();
 
   const {
     values,
@@ -49,7 +52,7 @@ const Pacient = () => {
   return (
     <>
       <Helmet>
-        <title>Email | Material Kit</title>
+        <title>Pesquisa | Material Kit</title>
       </Helmet>
       <Box
         sx={{
@@ -80,7 +83,7 @@ const Pacient = () => {
                           fullWidth
                           label="Nome"
                           name="name"
-                          onChange={handleChange}
+                          disabled
                           value={values.name}
                           variant="filled"
                         />
@@ -91,9 +94,8 @@ const Pacient = () => {
                           fullWidth
                           label="Data de nascimento"
                           name="born_date"
-                          onChange={handleChange}
-                          type="date"
-                          value={values.born_date}
+                          disabled
+                          value={values.born_date ? moment(values.born_date).format('DD/MM/YYYY') : ''}
                           variant="filled"
                         />
                       </Grid>
@@ -103,7 +105,7 @@ const Pacient = () => {
                           fullWidth
                           label="CPF"
                           name="cpf"
-                          onChange={handleChange}
+                          disabled
                           value={values.cpf}
                           variant="filled"
                         />
@@ -114,7 +116,7 @@ const Pacient = () => {
                           fullWidth
                           label="Telefone (com ddd)"
                           name="tel"
-                          onChange={handleChange}
+                          disabled
                           value={values.tel}
                           variant="filled"
                         />
@@ -132,7 +134,7 @@ const Pacient = () => {
                           fullWidth
                           label="Estado onde nasceu"
                           name="born_state"
-                          onChange={handleChange}
+                          disabled
                           value={values.born_state}
                           variant="filled"
                         />
@@ -143,7 +145,7 @@ const Pacient = () => {
                           fullWidth
                           label="Cidade onde nasceu"
                           name="born_city"
-                          onChange={handleChange}
+                          disabled
                           value={values.born_city}
                           variant="filled"
                         />
@@ -154,7 +156,7 @@ const Pacient = () => {
                           fullWidth
                           label="Gênero"
                           name="gender"
-                          onChange={handleChange}
+                          disabled
                           value={values.gender}
                           variant="filled"
                           select
@@ -171,7 +173,7 @@ const Pacient = () => {
                           fullWidth
                           label="Etnia"
                           name="ethnicity"
-                          onChange={handleChange}
+                          disabled
                           value={values.ethnicity}
                           variant="filled"
                           select
@@ -191,7 +193,7 @@ const Pacient = () => {
                           fullWidth
                           label="Altura"
                           name="height"
-                          onChange={handleChange}
+                          disabled
                           value={values.height}
                           variant="filled"
                         />
@@ -202,7 +204,7 @@ const Pacient = () => {
                           fullWidth
                           label="Peso"
                           name="weight"
-                          onChange={handleChange}
+                          disabled
                           value={values.weight}
                           variant="filled"
                         />
@@ -220,7 +222,7 @@ const Pacient = () => {
                           fullWidth
                           label="Tipo sanguíneo"
                           name="blood_type"
-                          onChange={handleChange}
+                          disabled
                           value={values.blood_type}
                           variant="filled"
                           select
@@ -243,7 +245,7 @@ const Pacient = () => {
                           fullWidth
                           label="Nome do responsável (se for menor de idade)"
                           name="responsible_name"
-                          onChange={handleChange}
+                          disabled
                           value={values.responsible_name}
                           variant="filled"
                         />
@@ -254,7 +256,7 @@ const Pacient = () => {
                           fullWidth
                           label="Nome da mãe"
                           name="mother_name"
-                          onChange={handleChange}
+                          disabled
                           value={values.mother_name}
                           variant="filled"
                         />
@@ -277,7 +279,7 @@ const Pacient = () => {
                           fullWidth
                           label="CEP"
                           name="postal_code"
-                          onChange={handleChange}
+                          disabled
                           value={values.postal_code}
                           variant="filled"
                         />
@@ -293,7 +295,7 @@ const Pacient = () => {
                           fullWidth
                           label="Endereço"
                           name="atual_address_street"
-                          onChange={handleChange}
+                          disabled
                           value={values.atual_address_street}
                           variant="filled"
                         />
@@ -304,7 +306,7 @@ const Pacient = () => {
                           fullWidth
                           label="Número"
                           name="atual_address_number"
-                          onChange={handleChange}
+                          disabled
                           value={values.atual_address_number}
                           variant="filled"
                         />
@@ -315,7 +317,7 @@ const Pacient = () => {
                           fullWidth
                           label="Complemento"
                           name="atual_address_complement"
-                          onChange={handleChange}
+                          disabled
                           value={values.atual_address_complement}
                           variant="filled"
                         />
@@ -326,7 +328,7 @@ const Pacient = () => {
                           fullWidth
                           label="Bairro"
                           name="atual_address_district"
-                          onChange={handleChange}
+                          disabled
                           value={values.atual_address_district}
                           variant="filled"
                         />
@@ -342,7 +344,7 @@ const Pacient = () => {
                           fullWidth
                           label="Estado"
                           name="atual_address_state"
-                          onChange={handleChange}
+                          disabled
                           value={values.atual_address_state}
                           variant="filled"
                         />
@@ -353,7 +355,7 @@ const Pacient = () => {
                           fullWidth
                           label="Cidade"
                           name="atual_address_city"
-                          onChange={handleChange}
+                          disabled
                           value={values.atual_address_city}
                           variant="filled"
                         />
@@ -376,7 +378,7 @@ const Pacient = () => {
                           fullWidth
                           label="Tratamento"
                           name="treatment"
-                          onChange={handleChange}
+                          disabled
                           value={values.treatment}
                           variant="filled"
                           select
@@ -393,9 +395,8 @@ const Pacient = () => {
                           fullWidth
                           label="Data do primeiro sintoma"
                           name="first_symptom_date_covid"
-                          type="date"
-                          onChange={handleChange}
-                          value={values.first_symptom_date_covid}
+                          disabled
+                          value={values.first_symptom_date_covid ? moment(values.first_symptom_date_covid).format('DD/MM/YYYY') : ''}
                           variant="filled"
                         />
                       </Grid>
@@ -412,7 +413,7 @@ const Pacient = () => {
                           fullWidth
                           label="Alergia à medicamento?"
                           name="alergy_medication"
-                          onChange={handleChange}
+                          disabled
                           value={values.alergy_medication}
                           variant="filled"
                           select
@@ -428,7 +429,7 @@ const Pacient = () => {
                           fullWidth
                           label="Qual medicamento?"
                           name="alergy_medication_other"
-                          onChange={handleChange}
+                          disabled
                           value={values.alergy_medication_other}
                           variant="filled"
                         />
@@ -443,7 +444,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_any_desease)}
+                          disabled
                           value={any_desease}
                         >
                           <option selected="" value="none">Não tive nenhuma das doenças acima</option>
@@ -471,7 +472,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_deficiency)}
+                          disabled
                           value={deficiency}
                         >
                           <option value="none">Não tenho</option>
@@ -488,7 +489,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se marcou Outros, diga-nos qual."
                           name="deficiency_other"
-                          onChange={handleChange}
+                          disabled
                           value={values.deficiency_other}
                           variant="filled"
                         />
@@ -499,7 +500,7 @@ const Pacient = () => {
                           fullWidth
                           label="Você tem calvide [careca] ?"
                           name="bald"
-                          onChange={handleChange}
+                          disabled
                           value={values.bald}
                           variant="filled"
                           select
@@ -522,7 +523,7 @@ const Pacient = () => {
                           fullWidth
                           label="Você esta grávida, ou existe a possibilidade?"
                           name="pregnant"
-                          onChange={handleChange}
+                          disabled
                           value={values.pregnant}
                           variant="filled"
                           select
@@ -539,7 +540,7 @@ const Pacient = () => {
                           fullWidth
                           label="Você esta amamentando?"
                           name="breastfeeding"
-                          onChange={handleChange}
+                          disabled
                           value={values.breastfeeding}
                           variant="filled"
                           select
@@ -555,7 +556,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se SIM, qual a idade do bebê?"
                           name="baby_age"
-                          onChange={handleChange}
+                          disabled
                           value={values.baby_age}
                           variant="filled"
                         />
@@ -566,7 +567,7 @@ const Pacient = () => {
                           fullWidth
                           label="Você tem ovários policisticos?"
                           name="polycystic_ovary"
-                          onChange={handleChange}
+                          disabled
                           value={values.polycystic_ovary}
                           variant="filled"
                           select
@@ -590,7 +591,7 @@ const Pacient = () => {
                           fullWidth
                           label="Você ja teve a COVID-19?"
                           name="any_covid"
-                          onChange={handleChange}
+                          disabled
                           value={values.any_covid}
                           variant="filled"
                           select
@@ -610,7 +611,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se vacinou contra a COVID-19?"
                           name="got_vaccinated_covid"
-                          onChange={handleChange}
+                          disabled
                           value={values.got_vaccinated_covid}
                           variant="filled"
                           select
@@ -629,9 +630,8 @@ const Pacient = () => {
                           fullWidth
                           label="Qual a data da primeira dose tomada?"
                           name="vaccine_first_date"
-                          onChange={handleChange}
-                          type="date"
-                          value={values.vaccine_first_date}
+                          disabled
+                          value={values.vaccine_first_date ? moment(values.vaccine_first_date).format('DD/MM/YYYY') : ''}
                           variant="filled"
                         />
                       </Grid>
@@ -641,9 +641,8 @@ const Pacient = () => {
                           fullWidth
                           label="Se tomou a segunda dose, qual a data?"
                           name="vaccine_second_date"
-                          onChange={handleChange}
-                          type="date"
-                          value={values.vaccine_second_date}
+                          disabled
+                          value={values.vaccine_second_date ? moment(values.vaccine_second_date).format('DD/MM/YYYY') : ''}
                           variant="filled"
                         />
                       </Grid>
@@ -660,7 +659,7 @@ const Pacient = () => {
                           fullWidth
                           label="Você esta com sintomas agora?"
                           name="symptom_covid_now"
-                          onChange={handleChange}
+                          disabled
                           value={values.symptom_covid_now}
                           variant="filled"
                           select
@@ -676,9 +675,8 @@ const Pacient = () => {
                           fullWidth
                           label="Data de início dos sintomas?"
                           name="start_date_symptoms"
-                          onChange={handleChange}
-                          type="date"
-                          value={values.start_date_symptoms}
+                          disabled
+                          value={values.start_date_symptoms ? moment(values.start_date_symptoms).format('DD/MM/YYYY') : ''}
                           variant="filled"
                         />
                       </Grid>
@@ -688,7 +686,7 @@ const Pacient = () => {
                           fullWidth
                           label="Há quantos dias você esta com sintomas?"
                           name="many_days_symptons"
-                          onChange={handleChange}
+                          disabled
                           value={values.many_days_symptons}
                           variant="filled"
                         />
@@ -700,16 +698,16 @@ const Pacient = () => {
 
                     {/* <!-- Saturação --> */}
                     <Grid container spacing={3}>
-                      <Grid item md={3} xs={12}>
-                        <TextField
-                          size="small"
-                          fullWidth
-                          label="Se está com sintomas, teve contato com quantas pessoas?"
-                          name="have_contact_with_others"
-                          onChange={handleChange}
-                          value={values.have_contact_with_others}
-                          variant="filled"
-                        />
+                      <Grid item md={4} xs={12}>
+                            <TextField
+                              size="small"
+                              fullWidth
+                              label="Se está com sintomas, teve contato com quantas pessoas?"
+                              name="have_contact_with_others"
+                              disabled
+                              value={values.have_contact_with_others}
+                              variant="filled"
+                            />
                       </Grid>
                       <Grid item md={4} xs={12}>
                         <p>Quais os seus sinais/sintomas agora?</p>
@@ -721,7 +719,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_symptons_now)}
+                          disabled
                           value={symptons_now}
                         >
                           <option value="none">Nenhum sintoma</option>
@@ -770,7 +768,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se vocês estiver com febre, qual a média da temperatura?"
                           name="average_temp_if_have_fever"
-                          onChange={handleChange}
+                          disabled
                           value={values.average_temp_if_have_fever}
                           variant="filled"
                           select
@@ -797,7 +795,7 @@ const Pacient = () => {
                           fullWidth
                           label="Você mediu sua saturação oxigênio?"
                           name="oxygen_saturation"
-                          onChange={handleChange}
+                          disabled
                           value={values.oxygen_saturation}
                           variant="filled"
                           select
@@ -817,7 +815,7 @@ const Pacient = () => {
                           fullWidth
                           label="Antes de iniciar este tratamento procurou algum serviço hospitalar de pronto socorro ou lagum outro médico para tratar a COVID-19 ?"
                           name="pre_treatment"
-                          onChange={handleChange}
+                          disabled
                           value={values.pre_treatment}
                           variant="filled"
                           select
@@ -833,7 +831,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se sim, qual?"
                           name="pre_treatment_yes"
-                          onChange={handleChange}
+                          disabled
                           value={values.pre_treatment_yes}
                           variant="filled"
                           select
@@ -857,7 +855,7 @@ const Pacient = () => {
                           size="small"
                           fullWidth
                           name="pre_treatment_hospitalized"
-                          onChange={handleChange}
+                          disabled
                           value={values.pre_treatment_hospitalized}
                           variant="filled"
                           select
@@ -873,7 +871,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se sim, qual?"
                           name="pre_treatment_yes_hospitalized"
-                          onChange={handleChange}
+                          disabled
                           value={values.pre_treatment_yes_hospitalized}
                           variant="filled"
                           select
@@ -890,7 +888,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se sim, quanto tempo ficou internado?"
                           name="days_hospitalized"
-                          onChange={handleChange}
+                          disabled
                           value={values.days_hospitalized}
                           variant="filled"
                           select
@@ -920,7 +918,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_test_before_treatment)}
+                          disabled
                           value={test_before_treatment}
                         >
                           <option value="none">Não fiz teste</option>
@@ -937,7 +935,7 @@ const Pacient = () => {
                           fullWidth
                           label="Qual resultado"
                           name="test_before_treatment_result"
-                          onChange={handleChange}
+                          disabled
                           value={values.test_before_treatment_result}
                           variant="filled"
                           select
@@ -957,7 +955,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_why_not_tested)}
+                          disabled
                           value={why_not_tested}
                         >
                           <option value="not_symptoms">Não achou necessário / Não teve sintomas</option>
@@ -984,7 +982,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_medicine_before_treatment)}
+                          disabled
                           value={medicine_before_treatment}
                         >
                           <option value="did_not_pass">Não passou</option>
@@ -1010,7 +1008,7 @@ const Pacient = () => {
                           size="small"
                           fullWidth
                           name="study_for_prophylaxis"
-                          onChange={handleChange}
+                          disabled
                           value={values.study_for_prophylaxis}
                           variant="filled"
                           select
@@ -1026,7 +1024,7 @@ const Pacient = () => {
                           fullWidth
                           label="Está tomando há quantos dias?"
                           name="many_days_medicines"
-                          onChange={handleChange}
+                          disabled
                           value={values.many_days_medicines}
                           variant="filled"
                         />
@@ -1044,7 +1042,7 @@ const Pacient = () => {
                           fullWidth
                           label="Ou você ja tomou por conta própria?"
                           name="took_it_on_its_own"
-                          onChange={handleChange}
+                          disabled
                           value={values.took_it_on_its_own}
                           variant="filled"
                           select
@@ -1060,7 +1058,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se sim, está tomando ha quantos dias?"
                           name="took_it_on_its_own_days"
-                          onChange={handleChange}
+                          disabled
                           value={values.took_it_on_its_own_days}
                           variant="filled"
                         />
@@ -1075,7 +1073,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_took_it_on_its_own_medicines)}
+                          disabled
                           value={took_it_on_its_own_medicines}
                         >
                           <option value="hydroxychloroquine">Hidroxicloroquina</option>
@@ -1097,7 +1095,7 @@ const Pacient = () => {
                           fullWidth
                           label="Outra"
                           name="took_it_on_its_own_medicines_other"
-                          onChange={handleChange}
+                          disabled
                           value={values.took_it_on_its_own_medicines_other}
                           variant="filled"
                         />
@@ -1119,7 +1117,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_have_any_deseases)}
+                          disabled
                           value={have_any_deseases}
                         >
                           <option value="no">Não</option>
@@ -1145,7 +1143,7 @@ const Pacient = () => {
                           fullWidth
                           label="Outros"
                           name="have_any_deseases_others"
-                          onChange={handleChange}
+                          disabled
                           value={values.have_any_deseases_others}
                           variant="filled"
                         />
@@ -1163,7 +1161,7 @@ const Pacient = () => {
                           fullWidth
                           label="Você toma alguma medicação diariamente?"
                           name="daily_medication"
-                          onChange={handleChange}
+                          disabled
                           value={values.daily_medication}
                           variant="filled"
                           select
@@ -1179,7 +1177,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se sim, qual?"
                           name="daily_medication_yes"
-                          onChange={handleChange}
+                          disabled
                           value={values.daily_medication_yes}
                           variant="filled"
                         />
@@ -1194,7 +1192,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_smoker)}
+                          disabled
                           value={smoker}
                         >
                           <option value="never">Nunca fumou</option>
@@ -1213,7 +1211,7 @@ const Pacient = () => {
                             id: 'select-multiple-native',
                           }}
                           fullWidth
-                          onChange={(e) => handleChangeMultiple(e, set_alcohool)}
+                          disabled
                           value={alcohool}
                         >
                           <option value="sociel">Social</option>
@@ -1227,7 +1225,7 @@ const Pacient = () => {
                           fullWidth
                           label="Já usou drogas ilícitas?"
                           name="drugs"
-                          onChange={handleChange}
+                          disabled
                           value={values.drugs}
                           variant="filled"
                           select
@@ -1243,7 +1241,7 @@ const Pacient = () => {
                           fullWidth
                           label="Se sim, qual?"
                           name="drugs_yes"
-                          onChange={handleChange}
+                          disabled
                           value={values.drugs_yes}
                           variant="filled"
                         />
@@ -1261,7 +1259,7 @@ const Pacient = () => {
                           fullWidth
                           label="Pessoa que indicou o tratamento"
                           name="indication_person"
-                          onChange={handleChange}
+                          disabled
                           value={values.indication_person}
                           variant="filled"
                         />
@@ -1294,7 +1292,7 @@ const Pacient = () => {
                             fullWidth
                             label="Carregar exames"
                             name="exame_uploads"
-                            onChange={handleChange}
+                            disabled
                             value={values.exame_uploads}
                             variant="filled"
                           />
@@ -1317,7 +1315,7 @@ const Pacient = () => {
                           size="small"
                           fullWidth
                           name="term_accept_1"
-                          onChange={handleChange}
+                          disabled
                           value={values.term_accept_1}
                           variant="filled"
                           select
@@ -1342,7 +1340,7 @@ const Pacient = () => {
                           size="small"
                           fullWidth
                           name="term_accept_2"
-                          onChange={handleChange}
+                          disabled
                           value={values.term_accept_2}
                           variant="filled"
                           select
@@ -1367,7 +1365,7 @@ const Pacient = () => {
                           size="small"
                           fullWidth
                           name="term_accept_3"
-                          onChange={handleChange}
+                          disabled
                           value={values.term_accept_3}
                           variant="filled"
                           select
@@ -1384,13 +1382,20 @@ const Pacient = () => {
 
                   </CardContent>
                   <Divider />
-                  <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+                  <Box sx={{ display: 'flex', justifyContent: "space-between", p: 2 }}>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      onClick={()=>history.push('/pacients')}
+                    >
+                      Voltar
+                    </Button>
                     <Button
                       color="primary"
                       variant="contained"
                       type="submit"
                     >
-                      Enviar
+                      Criar Prontuário
                     </Button>
                   </Box>
                 </Card>

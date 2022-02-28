@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useSnackbar } from 'notistack';
 import { useParams } from 'react-router-dom';
 
 import api from '../../services/api';
 
 const PacientHook = () => {
-
+  const { enqueueSnackbar } = useSnackbar();
   const { cpf } = useParams();
   const [values, setValues] = useState({
     name: "",
@@ -97,21 +98,19 @@ const PacientHook = () => {
     set(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    values.deficiency = deficiency;
-    values.any_desease = any_desease;
-    values.symptons_now = symptons_now;
-    values.test_before_treatment = test_before_treatment;
-    values.why_not_tested = why_not_tested;
-    values.medicine_before_treatment = medicine_before_treatment;
-    values.took_it_on_its_own_medicines = took_it_on_its_own_medicines;
-    values.have_any_deseases = have_any_deseases;
-    values.smoker = smoker;
-    values.alcohool = alcohool;
+    const data = {
+      id_research_client: values.id,
+      name: values.name
+    }
 
-    console.log(values)
+    try {
+      const response = await api.post('/new-prontuario', data);
+      enqueueSnackbar(response.data.msg, { variant: 'success' });
+    } catch {
+      enqueueSnackbar('Este paciente já tem um prontuário vinculado', { variant: 'error' });
+    }
   }
 
   useEffect(() => {
