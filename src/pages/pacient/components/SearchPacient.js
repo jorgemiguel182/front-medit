@@ -7,14 +7,38 @@ import {
   Grid,
   CardContent,
   Select,
-  option
+  option,
+  FormControl,
+  makeStyles
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  selectInput: {
-    fontSize: 'smaller'
-  }
+const useStyles = makeStyles(()=> ({
+  filterCard: {
+    marginBlock: '10px',
+    borderRadius: '20px',
+    height: '60px'
+  },
+  filterSelect: {
+    height: '28px',
+    backgroundColor: 'white',
+    fontSize: 'small'
+  },
+  filterButton: {
+    height: '28px'
+  },
+  filterTextInput: {
+    '& .MuiInputLabel-root': {
+       fontSize: 'small',
+       marginBlockStart: '-4px'
+     },
+     height: '25px',
+     backgroundColor: 'white',
+     width: '250px',
+     '& input': {
+       height: '10px',
+       fontSize: 'smaller',
+     }
+   },
 }));
 
 const SearchPacient = ({setFilter}) => {
@@ -23,51 +47,55 @@ const SearchPacient = ({setFilter}) => {
   const [status, setStatus] = useState('');
 
   return (
-    <Card
-    style={{background: '#F3F6F4', marginBlock: '10px', borderRadius: '20px'}}
-    >
-      <CardContent>
-        <Grid container spacing={3}>
-          <Grid item lg={6}>
-            <TextField
-              size="small"
-              fullWidth
-              label='Nome'
-              onChange={event => setName(event.target.value)}
-              value={name}
-              variant="outlined"
-            />
+      <Card className={classes.filterCard} style={{backgroundColor: '#F3F6F4', width: '515px', display: 'flex'}}>
+        <CardContent>
+          <Grid container spacing={3}>
+            <Grid item lg={5}>
+              <TextField
+                className={classes.filterTextInput}
+                size="small"
+                fullWidth
+                label='Qualquer parte do nome'
+                onChange={event => setName(event.target.value)}
+                value={name}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item lg={5}>
+                <FormControl>
+                  <Select
+                    className={classes.filterSelect}
+                    style={{fontSize: 'small'}}
+                    native
+                    size="small"
+                    variant='outlined'
+                    name="medicine_before_treatment"
+                    onChange={event => setStatus(event.target.value)}
+                    value={status}
+                  >
+                    <option value="">Todos Status</option>
+                    <option value="paid">Pendente prontuário</option>
+                    <option value="answered">Pendente pagamento</option>
+                    <option value="done">Prontuário cadastrado</option>
+                  </Select>
+              </FormControl>
+            </Grid>
+            <Grid item lg={1} style={{marginInlinStart: '65px'}}>
+              <Button 
+                className={classes.filterButton}
+                size="small"
+                variant="outlined" 
+                color="primary"
+                onClick={()=>setFilter({
+                  name,
+                  status
+                })}
+                >
+                  Filtrar</Button>
+            </Grid>
           </Grid>
-          <Grid item lg={4}>
-            <Select
-              className={classes.selectInput}
-              native
-              size="small"
-              variant='outlined'
-              name="medicine_before_treatment"
-              onChange={event => setStatus(event.target.value)}
-              value={status}
-            >
-              <option value="">Selecione o status</option>
-              <option value="paid">Pendente prontuário</option>
-              <option value="answered">Pendente pagamento</option>
-              <option value="done">Prontuário cadastrado</option>
-            </Select>
-          </Grid>
-          <Grid item lg={2}>
-            <Button 
-              variant="contained" 
-              color="primary"
-              onClick={()=>setFilter({
-                name,
-                status
-              })}
-              >
-                Filtrar</Button>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
   );
 }
 
