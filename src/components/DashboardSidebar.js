@@ -21,6 +21,10 @@ import {
   UserPlus as UserPlusIcon,
   Users as UsersIcon
 } from 'react-feather';
+
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import NavItem from './NavItem';
 
 const user = {
@@ -37,17 +41,17 @@ const items = [
   // },
   {
     href: '/pacients',
-    icon: UsersIcon,
+    icon: ListAltIcon,
     title: 'Pesquisas de Pacientes'
   },
   {
     href: '/prontuarios',
-    icon: UsersIcon,
+    icon: AssignmentTurnedInIcon,
     title: 'Prontuários'
   },
   {
     href: '/emails',
-    icon: UserIcon,
+    icon: MailOutlineIcon,
     title: 'Envio de Pesquisa COVID'
   },
   // {

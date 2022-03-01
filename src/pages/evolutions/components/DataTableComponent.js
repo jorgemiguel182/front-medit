@@ -16,7 +16,7 @@ import api from '../../../services/api';
 const columns = [
   
   {
-    name: 'Nome',
+    name: 'Médico',
     selector: row => row.username_prof_cognito,
     sortable: true,
 		reorder: true,
