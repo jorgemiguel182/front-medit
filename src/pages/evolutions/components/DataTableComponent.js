@@ -1,20 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import moment from 'moment';
-import { useHistory, useParams } from 'react-router';
-import {useSnackbar} from 'notistack'
+import { useHistory } from 'react-router';
 import {
-  Box, Card,
+  Box, 
+  Card,
   Button,
-  TextField
 } from '@material-ui/core';
 import DataTable from 'react-data-table-component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 
-import api from '../../../services/api';
-
 const columns = [
-  
   {
     name: 'Médico',
     selector: row => row.username_prof_cognito,
@@ -35,27 +31,8 @@ const columns = [
   },
 ];
 
-
-const DatatableComponent = ({...rest}) => {
-
+const DatatableComponent = ({data, id}) => {
   const history = useHistory();
-  const { enqueueSnackbar } = useSnackbar();
-  const { id } = useParams();
-
-  const [data, setData] = useState([]);
-
-  const handleSearch = async () => {
-    try{
-      const response = await api.post("/filter-prontuarios", {id: id});
-      if(response.data.status === 'OK'){
-        enqueueSnackbar('Evoluções não encontradas.', { variant: 'error' });
-      }else{
-        setData(response.data);
-      }
-    }catch{
-      enqueueSnackbar('Evoluções não encontradas.', {variant: 'error'});
-    }
-  }
 
   const handleGoToEvolution = (row) => {
     history.push(`/evolutions/${id}/edit/${row.evolution_id}`);
@@ -65,12 +42,8 @@ const DatatableComponent = ({...rest}) => {
     history.push(`/evolutions/${id}/new`);
   }
 
-  useEffect(() => {
-    handleSearch();
-  }, []);
-
   return (
-    <Card {...rest}>
+    <Card >
       <PerfectScrollbar>
         <Box sx={{ minWidth: 1050 }}>
           <DataTable

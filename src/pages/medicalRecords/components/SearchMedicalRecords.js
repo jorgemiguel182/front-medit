@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 import {
   Card,
@@ -6,9 +6,6 @@ import {
   TextField,
   Grid,
   CardContent,
-  Select,
-  option,
-  FormControl,
   makeStyles
 } from '@material-ui/core';
 
@@ -31,11 +28,11 @@ const useStyles = makeStyles(()=> ({
        fontSize: 'small',
        marginBlockStart: '-4px'
      },
-     height: '25px',
+     height: '26px',
      backgroundColor: 'white',
      width: '350px',
      '& input': {
-       height: '10px',
+       height: '11px',
        fontSize: 'smaller',
      }
    },

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PacientCard = ({ data, handleSelected, pacientData }) => {
+const PacientCard = ({ data, handleSelected }) => {
   return (
     <>
       <Card>
@@ -218,7 +218,7 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
                 (
                   <>
                     {pacientList?.map((item) => (
-                      <PacientCard data={item} key={item.id} handleSelected={handleSelected} pacientData={pacientData} />
+                      <PacientCard data={item} key={item.id} handleSelected={handleSelected} />
                     ))}
                   </>
                 ) :

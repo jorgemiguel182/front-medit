@@ -1,0 +1,79 @@
+import React, {useState} from 'react';
+
+import {
+  Card,
+  Button,
+  TextField,
+  Grid,
+  CardContent,
+  makeStyles,
+  Typography
+} from '@material-ui/core';
+
+const useStyles = makeStyles(()=> ({
+  filterCard: {
+    marginBlock: '10px',
+    borderRadius: '20px',
+    height: '60px'
+  },
+  content: {
+    color: '#001537',
+    fontSize: '1.2em !important',
+    fontWeight: 'bold !important'
+  },
+  title: {
+    fontSize: '1.2em !important'
+  }
+}));
+
+const HeaderPacient = ({data}) => {
+  const classes = useStyles();
+  const [name, setName] = useState('');
+
+  return (
+      <Card className={classes.filterCard} style={{backgroundColor: '#F3F6F4', width: '100%', display: 'flex'}}>
+        <CardContent style={{width: '100%'}}>
+          <Grid container spacing={2}>
+            <Grid item container justifyContent="flex-start" alignItems="center" lg={6}>
+              <Grid item lg={2}>
+                <Typography className={classes.title} >
+                  Paciente:
+                </Typography>
+              </Grid>
+              <Grid item lg={9}>
+                <Typography align='left' className={classes.content} >
+                  {data[0]?.name}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item container justifyContent="flex-start" alignItems="center" lg={3} spacing={3}>
+              <Grid item lg={2}>
+                <Typography className={classes.title} >
+                  CPF:
+                </Typography>
+              </Grid>
+              <Grid item lg={10}>
+                <Typography align='left' className={classes.content} >
+                  045.319.137-10
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item container justifyContent="flex-start" alignItems="center" lg={3} spacing={2}>
+              <Grid item lg={4}>
+                <Typography className={classes.title} >
+                  Telefone:
+                </Typography>
+              </Grid>
+              <Grid item lg={8}>
+                <Typography align='left' className={classes.content}>
+                  (21) 97538-6001
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+  );
+}
+
+export default HeaderPacient;

@@ -31,11 +31,11 @@ const useStyles = makeStyles(()=> ({
        fontSize: 'small',
        marginBlockStart: '-4px'
      },
-     height: '25px',
+     height: '27px',
      backgroundColor: 'white',
      width: '250px',
      '& input': {
-       height: '10px',
+       height: '11px',
        fontSize: 'smaller',
      }
    },
