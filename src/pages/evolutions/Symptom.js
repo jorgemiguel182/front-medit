@@ -1,72 +1,46 @@
-import { Button, CardContent, CardHeader, Divider, Grid, Paper, TextField, Typography } from '@material-ui/core';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Modal from '@material-ui/core/Modal';
-import { makeStyles } from '@material-ui/core/styles';
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import modalHook from './modalHook';
+import {
+  Box, Button, Card, CardContent, CardHeader, Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Typography
+} from '@material-ui/core';
+import React from 'react';
+import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import modalHook from './components/modalHook';
+import IndexHook from './indexHook';
+import moment from 'moment';
 
+import ModalComponent from './components/ModalComponent';
 
-const ModalButtons = styled('div')`
-  display: flex;
-  justify-content: space-between;
-  aling-items: center;
-`
+const Symptom = () => {
 
-const ModalCardContent = styled('div')`
-  overflow-y: scroll;
-  overflow-x: hidden;
-  max-height: 400px;
-`
+  const {
+    symptomTable
+  } = IndexHook();
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'scroll',
-    marginTop: '50px',
-    marginBottom: '50px',
-    borderRadius: '5px'
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    // border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    borderRadius: '0px',
-    // maxHeight: '300px',
-    overflowY: 'auto',
-    minWidth: '1200px',
-    maxWidth: '1200px'
-  },
-}));
-
-export default function TransitionsModal({ handleClose, open, symptomTable }) {
-  const classes = useStyles();
   const {values, setValues, handleChange, handleSubmit} = modalHook({symptomTable});
-  
+
+  const { id } = useParams();
+  const history = useHistory();
+
   return (
-    <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
+    <>
+      <Helmet>
+        <title>Sintoma</title>
+      </Helmet>
+      <Box
+        sx={{
+          backgroundColor: 'background.default',
+          minHeight: '100%',
+          py: 3
         }}
       >
-        <Fade in={open}>
-          <form autoComplete="off" onSubmit={(e) => handleSubmit(e)} >
-            <Paper className={classes.paper}>
-              <CardHeader title="Tabela dos sintomas" />
-              <Divider />
-              <ModalCardContent>
-                <CardContent>
+        <Container maxWidth="xl">
+          <Grid container spacing={3}>
+            <Grid item lg={12} md={12} xs={12}>
+              <Card>
+                  <CardHeader title="Sintoma" />
+                  <Divider />
+                  <CardContent>
                   <Grid container spacing={3}>
                     <Grid item md={6} xs={12}>
                       <TextField
@@ -933,18 +907,30 @@ export default function TransitionsModal({ handleClose, open, symptomTable }) {
                 </CardContent>
                 <Divider />
 
-              </ModalCardContent>
-              <Divider />
-              <CardContent>
-                <ModalButtons>
-                  <Button variant="outlined" onClick={() => handleClose()}>Cancelar</Button>
-                  <Button variant="contained" onClick={() => handleSubmit()} >Salvar</Button>
-                </ModalButtons>
-              </CardContent>
-            </Paper>
-          </form>
-        </Fade>
-      </Modal>
-    </div>
-  );
-}
+                  <Divider />
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      onClick={()=>history.push(`/evolutions/${id}`)}
+                    >
+                      Voltar
+                    </Button>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleSubmit()}
+                    >
+                      Salvar sintoma
+                    </Button>
+                  </Box>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </>
+  )
+};
+
+export default Symptom;

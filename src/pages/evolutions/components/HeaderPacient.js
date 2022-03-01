@@ -34,9 +34,9 @@ const HeaderPacient = ({data}) => {
       <Card className={classes.filterCard} style={{backgroundColor: '#F3F6F4', width: '100%', display: 'flex'}}>
         <CardContent style={{width: '100%'}}>
           <Grid container spacing={2}>
-            <Grid item container justifyContent="flex-start" alignItems="center" lg={6}>
+            <Grid item container justifyContent="flex-start" alignItems="center" lg={4} spacing={1}>
               <Grid item lg={2}>
-                <Typography className={classes.title} >
+                <Typography className={classes.title}  align='right'>
                   Paciente:
                 </Typography>
               </Grid>
@@ -46,9 +46,21 @@ const HeaderPacient = ({data}) => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item container justifyContent="flex-start" alignItems="center" lg={3} spacing={3}>
+            <Grid item container justifyContent="flex-start" alignItems="center" lg={2} spacing={1}>
+              <Grid item lg={6}>
+                <Typography className={classes.title} align='right'>
+                  Idade (anos):
+                </Typography>
+              </Grid>
+              <Grid item lg={4}>
+                <Typography align='left' className={classes.content} >
+                  47
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item container justifyContent="flex-start" alignItems="center" lg={3} spacing={1}>
               <Grid item lg={2}>
-                <Typography className={classes.title} >
+                <Typography align='right' className={classes.title} >
                   CPF:
                 </Typography>
               </Grid>
@@ -58,9 +70,9 @@ const HeaderPacient = ({data}) => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item container justifyContent="flex-start" alignItems="center" lg={3} spacing={2}>
+            <Grid item container justifyContent="flex-start" alignItems="center" lg={3} spacing={1}>
               <Grid item lg={4}>
-                <Typography className={classes.title} >
+                <Typography className={classes.title} align='right'>
                   Telefone:
                 </Typography>
               </Grid>

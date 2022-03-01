@@ -31,31 +31,31 @@ const columns = [
   },
 ];
 
-const DatatableComponent = ({data, id}) => {
+const DatatableSymptoms = ({data, id}) => {
   const history = useHistory();
 
-  const handleGoToEvolution = (row) => {
-    history.push(`/evolutions/${id}/edit/${row.evolution_id}`);
+  const handleGoToSymptom = (row = {}) => {
+    history.push(`/symptoms/${id}/edit/${row.evolution_id}`);
   }
 
   const handleGoToNew = () => {
-    history.push(`/evolutions/${id}/new`);
+    history.push(`/symptoms/${id}/new`);
   }
 
   return (
     <Card >
       <PerfectScrollbar>
-        <Box sx={{ minWidth: 1050 }}>
+        <Box >
           <DataTable
             columns={columns}
-            data={data[0]?.evolutions}
-            title="Lista de evoluções"
+            data={data[0]?.symptom_table}
+            title="Sintomas"
             pagination
             pointerOnHover
-            onRowClicked={(row) => handleGoToEvolution(row)}
+            onRowClicked={(row) => handleGoToSymptom(row)}
             actions={
               <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleGoToNew()}>
-                Nova Evolução
+                Novo Sintoma
               </Button>
             }
           />
@@ -65,4 +65,4 @@ const DatatableComponent = ({data, id}) => {
   );
 };
 
-export default DatatableComponent;
+export default DatatableSymptoms;

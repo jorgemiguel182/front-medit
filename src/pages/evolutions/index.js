@@ -2,8 +2,10 @@ import {
   Box, Button, Card, CardContent, CardHeader, Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField
 } from '@material-ui/core';
 import React from 'react';
+import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import PacientHook from './indexHook';
+import IndexHook from './indexHook';
 import moment from 'moment';
 
 import ModalComponent from './components/ModalComponent';
@@ -21,7 +23,10 @@ const Evolution = () => {
     handleChangeMultiple,
     handleClose,
     handleOpen
-  } = PacientHook();
+  } = IndexHook();
+
+  const { id } = useParams();
+  const history = useHistory();
 
   return (
     <>
@@ -253,7 +258,14 @@ const Evolution = () => {
                     </Grid>
                   </CardContent>
                   <Divider />
-                  <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 2 }}>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      onClick={()=>history.push(`/evolutions/${id}`)}
+                    >
+                      Voltar
+                    </Button>
                     <Button
                       color="primary"
                       variant="contained"
@@ -264,16 +276,23 @@ const Evolution = () => {
                     </Button>
                   </Box>
                 </form>
-                <Divider />
+                {/* <Divider />
                 <CardHeader title="Lançamentos diários" />
                 <CardContent>
                   <Button variant="contained" color="primary" onClick={() => handleOpen()}>Novo lançamento de sintomas</Button>
                 </CardContent>
                 <CardContent>
                   {data[0]?.symptom_table?.map((item) => (
-                    <Button style={{marginRight: '30px', marginBottom: '30px'}} onClick={() => handleOpen(item)} variant="outlined" key={item.id} color="primary">{moment(item.date_created).format('DD/MM/YYYY')}</Button>
+                    <Button style={{marginRight: '30px', marginBottom: '30px'}} 
+                      onClick={() => handleOpen(item)} 
+                      variant="outlined" 
+                      key={item.id} 
+                      color="primary"
+                    >
+                      {moment(item.date_created).format('DD/MM/YYYY')}
+                    </Button>
                   ))}
-                </CardContent>
+                </CardContent> */}
               </Card>
             </Grid>
           </Grid>
