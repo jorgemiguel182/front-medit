@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import moment from 'moment';
 
 import api from '../../services/api';
 
-const PacientHook = () => {
+const EvolutionHook = () => {
 
   const { id, evolution_id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
@@ -13,6 +14,8 @@ const PacientHook = () => {
   const [data, setData] = useState([]);
   const [symptomTable, setSymptomTable] = useState({});
   const [block, setBlock] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
   const [values, setValues] = useState({
     name: '',
     date: moment().format('YYYY-MM-DD'),
@@ -81,12 +84,16 @@ const PacientHook = () => {
       evolution_id,
       ...values
     }
+    setLoading(true);
     try{
       const response = await api.post('/new-medical-evolution', data);
       enqueueSnackbar('Evolução salva com sucesso', {variant: 'success'});
       setBlock(true);
+      history.push(`/evolutions/${id}`)
     }catch{
       enqueueSnackbar('Não foi possível salvar a evolução', {variant: 'error'})
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -104,9 +111,10 @@ const PacientHook = () => {
     handleSubmit,
     handleChangeMultiple,
     handleOpen,
-    handleClose
+    handleClose,
+    loading
   }
 
 };
 
-export default PacientHook;
+export default EvolutionHook;

@@ -705,7 +705,7 @@ const Pacient = () => {
                               label="Se está com sintomas, teve contato com quantas pessoas?"
                               name="have_contact_with_others"
                               disabled
-                              value={values.have_contact_with_others}
+                              value={values.have_contact_with_others || ''}
                               variant="filled"
                             />
                       </Grid>

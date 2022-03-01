@@ -1,5 +1,7 @@
 import {
-  Box, Button, Card, CardContent, CardHeader, Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField
+  Box, Button, Card, CardContent, CardHeader, Container, 
+  Divider, FormControl, FormControlLabel, FormLabel, Grid, 
+  Radio, RadioGroup, TextField, CircularProgress
 } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router';
@@ -22,7 +24,8 @@ const Evolution = () => {
     handleSubmit,
     handleChangeMultiple,
     handleClose,
-    handleOpen
+    handleOpen,
+    loading
   } = IndexHook();
 
   const { id } = useParams();
@@ -141,7 +144,7 @@ const Evolution = () => {
                           label="Celular"
                           name="celular"
                           onChange={handleChange}
-                          value={values.celular}
+                          value={values.celular || ''}
                           variant="filled"
                         />
                       </Grid>
@@ -266,14 +269,24 @@ const Evolution = () => {
                     >
                       Voltar
                     </Button>
-                    <Button
+                    {loading ? (
+                      <Button
+                      style={{width: '165px'}}
                       color="primary"
                       variant="contained"
-                      type="submit"
-                      disabled={block}
                     >
-                      Salvar evolução
+                      <CircularProgress size={20} style={{color: 'white'}} />
                     </Button>
+                    ) : (
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        type="submit"
+                        disabled={block}
+                      >
+                        Salvar evolução
+                      </Button>
+                    )}
                   </Box>
                 </form>
                 {/* <Divider />
@@ -299,7 +312,7 @@ const Evolution = () => {
         </Container>
       </Box>
 
-      <ModalComponent handleClose={handleClose} open={open} symptomTable={symptomTable} />
+      {/* <ModalComponent handleClose={handleClose} open={open} symptomTable={symptomTable} /> */}
     </>
   )
 };
