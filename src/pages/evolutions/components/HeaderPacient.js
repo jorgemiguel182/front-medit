@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import theme from 'src/theme';
 
 import {
   Card,
@@ -17,7 +18,7 @@ const useStyles = makeStyles(()=> ({
     height: '60px'
   },
   content: {
-    color: '#001537',
+    color: theme.palette.primary.main,
     fontSize: '1.2em !important',
     fontWeight: 'bold !important'
   },

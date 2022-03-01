@@ -27,6 +27,9 @@ const useStyles = makeStyles(() => createStyles({
       height: '100%',
       width: '100%'
     },
+    '.MuiAppBar-colorPrimary':{
+      color: 'green'
+    }
   }
 }));
 

@@ -13,12 +13,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import Logo from './Logo';
+import { ThemeProvider } from '@material-ui/core';
+import theme from 'src/theme';
 
 const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
   const [notifications] = useState([]);
 
   return (
+    <ThemeProvider theme={theme}>
     <AppBar
+      color="primary"
       elevation={0}
       {...rest}
     >
@@ -51,6 +55,7 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
         </Hidden>
       </Toolbar>
     </AppBar>
+    </ThemeProvider>
   );
 };
 

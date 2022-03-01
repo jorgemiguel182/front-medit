@@ -21,9 +21,11 @@ const App = () => {
 return (
     <div>
       <HttpInterceptor>
+      <ThemeProvider theme={theme}>
         <GlobalStyles />
         {/* <GlobalAppStyle /> */}
         <Routes />
+        </ThemeProvider>
       </HttpInterceptor>
     </div>
   );
