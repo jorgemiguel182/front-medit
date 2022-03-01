@@ -54,6 +54,11 @@ const items = [
     icon: MailOutlineIcon,
     title: 'Envio de Pesquisa COVID'
   },
+  {
+    href: '/users',
+    icon: UsersIcon,
+    title: 'Cadastro dos médicos'
+  },
   // {
   //   href: '/app/products',
   //   icon: ShoppingBagIcon,

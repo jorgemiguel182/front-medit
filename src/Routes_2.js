@@ -18,6 +18,8 @@ import evolutionsList from './pages/evolutions/List';
 import evolutionsView from './pages/evolutions'; 
 import symptomsView from './pages/evolutions/Symptom'; 
 import emailView from './pages/email'; 
+import usersList from './pages/users/List'; 
+import userView from './pages/users'; 
 
 export default function Routes() {
   return (
@@ -35,6 +37,9 @@ export default function Routes() {
         <DashboardPrivateRoute component={symptomsView} path="/symptoms/:id/new" exact />
         <DashboardPrivateRoute component={symptomsView} path="/symptoms/:id/edit/:evolution_id" exact />
         <DashboardPrivateRoute component={emailView} path="/emails" exact />
+        <DashboardPrivateRoute component={usersList} path="/users" exact />
+        <DashboardPrivateRoute component={userView} path="/users/:crm" exact />
+        <DashboardPrivateRoute component={userView} path="/users/new" exact />
 
         {/* <MainLayoutPublicRoute component={LoginView} path="/login" exact />
         <MainLayoutPublicRoute
