@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Box, Container} from '@material-ui/core';
 import DataTableComponent from './components/DataTableComponent';
 import ModalComponent from './components/ModalComponent';
@@ -10,10 +10,17 @@ const ProductList = () => {
 
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [filter, setFilter] = useState({
+    name: ''
+  });
 
-  const handleSearch = (filter) => {
-    api.post("/filter-prontuarios", filter).then((response) => {
-      setData(response.data);
+  const handleSearch = (filterDefault) => {
+    api.post("/filter-prontuarios", filterDefault).then((response) => {
+      let result = response.data;
+      if (filter.name){
+        result = result.filter(el => el.name.toLowerCase().includes(filter.name.toLowerCase()));
+      }
+      setData(result);
     }).catch(() => {
       
     });
@@ -26,6 +33,10 @@ const ProductList = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    handleSearch();
+  }, [filter])
 
   return (
     <>
@@ -40,7 +51,7 @@ const ProductList = () => {
         }}
       >
         <Container maxWidth={false}>
-          <DataTableComponent handleOpen={handleOpen} data={data} handleSearch={handleSearch} />
+          <DataTableComponent handleOpen={handleOpen} data={data} handleSearch={handleSearch} setFilter={setFilter}/>
           <ModalComponent handleClose={handleClose} open={open} handleSearch={handleSearch} />
         </Container>
       </Box>

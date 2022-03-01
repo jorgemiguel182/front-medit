@@ -1,18 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import {
-  Box, Card,
-  Button,
-  TextField
+  Box, Card, Button, Typography
 } from '@material-ui/core';
 import DataTable from 'react-data-table-component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
-
-import ModalComponent from './ModalComponent';
-
-import api from '../../../services/api';
+import SearchMedicalRecords from './SearchMedicalRecords';
 
 const columns = [
   {
@@ -22,7 +17,7 @@ const columns = [
 		reorder: true,
   },
   {
-    name: 'Data de criação',
+    name: 'Data prontuário',
     selector: row => moment(row.date_created).format('DD/MM/YYYY'),
     sortable: true,
 		reorder: true,
@@ -30,9 +25,10 @@ const columns = [
 ];
 
 
-const DatatableComponent = ({handleOpen, handleSearch, data}) => {
+const DatatableComponent = ({handleOpen, handleSearch, data, setFilter}) => {
 
   const history = useHistory();
+  
 
   const goToEvolution = (row) => {
     history.push(`/evolutions/${row.id}`);
@@ -42,9 +38,15 @@ const DatatableComponent = ({handleOpen, handleSearch, data}) => {
     history.push('/prontuarios/new');
   }
 
-  useEffect(() => {
-    handleSearch();
-  }, [])
+  const Title = () => {
+    return (
+      <>
+        <Typography variant='h5'>Lista de prontuários</Typography>
+        <SearchMedicalRecords setFilter={setFilter}/>
+      </>
+
+    );
+  };
 
   return (
     <Card>
@@ -53,7 +55,7 @@ const DatatableComponent = ({handleOpen, handleSearch, data}) => {
           <DataTable
             columns={columns}
             data={data}
-            title="Lista de prontuários"
+            title={Title()}
             pagination
             pointerOnHover
             onRowClicked={(row) => goToEvolution(row)}

@@ -18,6 +18,7 @@ const ModalButtons = styled('div')`
 `
 
 const ModalCardContent = styled('div')`
+  width: 1200px;
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 400px;
@@ -43,46 +44,64 @@ const PacientCard = ({ data, handleSelected, pacientData }) => {
     <>
       <Card>
         <CardContent>
-          <Grid container spacing={3}>
-            <Grid item container md={10} xs={12}>
-              <Grid item md={12} xs={12}>
-                <Typography>
-                  Nome do paciente: <b>{data.name}</b>
-                </Typography>
-                <br />
-              </Grid>
+          <Grid container spacing={2}>
               <Grid item md={3} xs={12}>
                 <Typography>
-                  CPF: <b>{data.cpf}</b>
+                  Paciente:
+                </Typography>
+              </Grid>
+              <Grid item md={2} xs={12}>
+                <Typography>
+                  CPF:
+                </Typography>
+              </Grid>
+              <Grid item md={1} xs={12}>
+                <Typography>
+                  Gênero:
+                </Typography>
+              </Grid>
+              <Grid item md={1} xs={12}>
+                <Typography>
+                  Etnia:
+                </Typography>
+              </Grid>
+              <Grid item md={2} xs={12}>
+                <Typography>
+                  Data pesquisa:
+                </Typography>
+              </Grid>
+          </Grid>
+          <Grid container spacing={2}>
+              <Grid item md={3} xs={12}>
+                <Typography>
+                  <b>{data.name}</b>
+                </Typography>
+              </Grid>
+              <Grid item md={2} xs={12}>
+                <Typography>
+                  <b>{data.cpf}</b>
+                </Typography>
+              </Grid>
+              <Grid item md={1} xs={12}>
+                <Typography>
+                  <b>{data.gender}</b>
+                </Typography>
+              </Grid>
+              <Grid item md={1} xs={12}>
+                <Typography>
+                  <b>{data.ethnicity}</b>
+                </Typography>
+              </Grid>
+              <Grid item md={2} xs={12}>
+                <Typography>
+                  <b> {moment(data.date_created).format('DD/MM/YYYY')}</b>
                 </Typography>
               </Grid>
               <Grid item md={3} xs={12}>
-                <Typography>
-                  Gênero: <b>{data.gender}</b>
-                </Typography>
+                  <Button variant="contained" onClick={() => handleSelected(data)}>
+                    Criar prontuário
+                  </Button>
               </Grid>
-              <Grid item md={3} xs={12}>
-                <Typography>
-                  Etnia: <b>{data.ethnicity}</b>
-                </Typography>
-              </Grid>
-              <Grid item md={3} xs={12}>
-                <Typography>
-                  Data de criação: <b> {moment(data.date_created).format('DD/MM/YYYY')}</b>
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid item md={2} xs={12}>
-              {pacientData.id === data.id ? (
-                <Button variant="contained" onClick={() => handleSelected(data)}>
-                  Selecionado
-                </Button>
-              ): (
-                <Button variant="outlined" onClick={() => handleSelected(data)}>
-                  Selecionar
-                </Button>
-              )}
-            </Grid>
           </Grid>
         </CardContent>
       </Card>
@@ -112,7 +131,6 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
         setLoading(false);
       } else {
         setPacientList(response.data);
-        // setPacientData(response.data[0]);
         setLoading(false);
       }
     } catch {
@@ -132,14 +150,18 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
       const response = await api.post('/new-prontuario', data);
       enqueueSnackbar(response.data.msg, { variant: 'success' });
       setLoading(false);
-      handleSearch();
+      setPacientList([]);
     } catch {
       enqueueSnackbar('Este paciente já tem um prontuário vinculado', { variant: 'error' });
       setLoading(false);
+    } finally {
+      handleClose();
+      handleSearch();
     }
   }
 
   const handleSelected = (data) => {
+    setPacientData({});
     setPacientData(data);
   }
 
@@ -148,6 +170,12 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
     setLoading(false);
     setPacientData({});
   }, [open])
+
+  useEffect(()=>{
+    if(pacientData?.id && pacientData?.name){
+      handleSubmit();
+    }
+  },[pacientData]);
 
   return (
     <div>
@@ -202,8 +230,7 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
             <Divider />
             <CardContent>
               <ModalButtons>
-                <Button variant="outlined" onClick={() => handleClose()}>Cancelar</Button>
-                <Button variant="contained" onClick={() => handleSubmit()} >Criar prontuário</Button>
+                <Button variant="outlined" onClick={() => handleClose()}>Voltar</Button>
               </ModalButtons>
             </CardContent>
           </Paper>
