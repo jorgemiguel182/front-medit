@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 
@@ -79,6 +80,7 @@ const PacientHook = () => {
   const [have_any_deseases, set_have_any_deseases] = useState([])
   const [smoker, set_smoker] = useState([])
   const [alcohool, set_alcohool] = useState([])
+  const history = useHistory();
 
   const handleChange = (event) => {
     setValues({
@@ -108,6 +110,7 @@ const PacientHook = () => {
     try {
       const response = await api.post('/new-prontuario', data);
       enqueueSnackbar(response.data.msg, { variant: 'success' });
+      // history.push(`/evolutions/${}`)
     } catch {
       enqueueSnackbar('Este paciente já tem um prontuário vinculado', { variant: 'error' });
     }

@@ -35,7 +35,7 @@ const columns = [
   },
   {
     name: 'Status',
-    selector: row => "Pendente Pagamento",
+    selector: row => row.status,
     sortable: true,
 		reorder: true,
   }

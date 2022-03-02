@@ -102,8 +102,9 @@ const Login = () => {
                   <Typography
                     color="textPrimary"
                     variant="h2"
+                    align="center"
                   >
-                    Kumuã
+                    MCare
                   </Typography>
                   {/* <Typography
                     color="textSecondary"

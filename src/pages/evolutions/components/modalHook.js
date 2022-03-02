@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {useSnackbar} from 'notistack';
 
 import api from '../../../services/api';
 
 const modalHook = ({symptomTable}) => {
-
+  const history = useHistory();
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
   const [values, setValues] = useState({
@@ -91,6 +92,7 @@ const modalHook = ({symptomTable}) => {
     try{
       const response = await api.post('/new-symptom-table', data);
       enqueueSnackbar('Tabela de sintomas salva com sucesso', {variant: 'success'});
+      history.push(`/evolutions/${id}`)
     }catch{
       enqueueSnackbar('Não foi possível salvar', {variant: 'error'});
     }

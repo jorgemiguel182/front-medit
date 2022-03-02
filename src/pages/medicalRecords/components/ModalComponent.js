@@ -122,7 +122,8 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
   const handleSearchByName = async () => {
     setLoading(true)
     const data = {
-      name
+      name,
+      type: "new_pront"
     }
     try {
       const response = await api.post('/filter-researchs', data);

@@ -97,7 +97,7 @@ const Symptom = () => {
                       <TextField
                         size="small"
                         fullWidth
-                        label="CÃIMBRAS"
+                        label="CÂIMBRAS"
                         name="caimbras"
                         onChange={handleChange}
                         value={values?.caimbras}
