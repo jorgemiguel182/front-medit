@@ -19,11 +19,11 @@ const useStyles = makeStyles(()=> ({
   },
   content: {
     color: theme.palette.primary.main,
-    fontSize: '1.2em !important',
+    fontSize: '1em !important',
     fontWeight: 'bold !important'
   },
   title: {
-    fontSize: '1.2em !important'
+    fontSize: '1em !important'
   }
 }));
 
@@ -50,12 +50,12 @@ const HeaderPacient = ({data}) => {
             <Grid item container justifyContent="flex-start" alignItems="center" lg={2} spacing={1}>
               <Grid item lg={6}>
                 <Typography className={classes.title} align='right'>
-                  Idade (anos):
+                  Idade:
                 </Typography>
               </Grid>
               <Grid item lg={4}>
                 <Typography align='left' className={classes.content} >
-                  47
+                  {`47 anos`}
                 </Typography>
               </Grid>
             </Grid>
