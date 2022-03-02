@@ -23,7 +23,7 @@ import {
 const Email = () => {
 
   const { enqueueSnackbar } = useSnackbar();
-  const [type, setType] = useState('email');
+  const [type, setType] = useState('whatsapp');
   const [values, setValues] = useState({
     email: '',
     phone: ''
@@ -31,17 +31,20 @@ const Email = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      const data = {
-        email: type.includes('email') ? values.email : "",
-        phone: type.includes('whatsapp') ? returnNumbers(values.phone) : ""
-      };
-      try{
-        const response = await api.post('/send-research', data);
-        enqueueSnackbar('Pesquisa enviada com sucesso', {variant: 'success'});
-        setValues({email:'', phone:''});
-      }catch{
-        enqueueSnackbar('Não foi possível enviar a pesquisa', {variant: 'error'});
+    let data = {}
+      if (type.includes('whatsapp'))   {
+        data = {phone: values.phone}
+      } else {
+        data = {email: values.email}
       }
+
+    try{
+      const response = await api.post('/send-research', data);
+      enqueueSnackbar('Pesquisa enviada com sucesso', {variant: 'success'});
+      setValues({email:'', phone:''});
+    }catch{
+      enqueueSnackbar('Não foi possível enviar a pesquisa', {variant: 'error'});
+    }
   }
 
   const handleChange = (event) => {
@@ -109,8 +112,8 @@ const Email = () => {
                         <FormControl component="fieldset">
                           <FormLabel component="legend">Meio para envio:</FormLabel>
                           <RadioGroup row value={type} onChange={event=>setType(event.target.value)}>
-                            <FormControlLabel value="email" control={<Radio color="primary" />} label="E-mail" />
                             <FormControlLabel value="whatsapp" control={<Radio color="primary" />} label="WhatsApp" />
+                            <FormControlLabel value="email" control={<Radio color="primary" />} label="E-mail" />
                           </RadioGroup>
                         </FormControl>
                       </Grid>
@@ -119,17 +122,6 @@ const Email = () => {
                         md={6}
                         xs={12}
                       >
-                        {type.includes('email') && (
-                          <TextField
-                            style={{width: '400px'}}
-                            label='E-mail preferencial'
-                            name="email"
-                            onChange={handleChange}
-                            required
-                            value={values.email}
-                            variant="outlined"
-                          />
-                        )}
                         {type.includes('whatsapp') && (
                           <InputMask  
                             mask="(99) 99999-9999" 
@@ -145,6 +137,17 @@ const Email = () => {
                               variant="outlined"
                             />}
                           </InputMask>
+                        )}
+                        {type.includes('email') && (
+                          <TextField
+                            style={{width: '400px'}}
+                            label='E-mail preferencial'
+                            name="email"
+                            onChange={handleChange}
+                            required
+                            value={values.email}
+                            variant="outlined"
+                          />
                         )}
                       </Grid>
                     </Grid>
