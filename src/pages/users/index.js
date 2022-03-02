@@ -14,6 +14,7 @@ import {
   Button,
   TextField,
 } from '@material-ui/core';
+import formValidate from 'src/utils/formValidate';
 
 const User = () => {
   const history = useHistory();
@@ -23,6 +24,13 @@ const User = () => {
     handleChange,
     handleSubmit,
   } = UserHook();
+
+  const allFiledsFilled = () => {
+    return (formValidate.isEmail(values.email) &&  
+            !formValidate.isEmpty(values.password) && 
+            !formValidate.isEmpty(values.name) && 
+            !formValidate.isEmpty(values.password));
+  }
 
   return (
     <>
@@ -56,6 +64,32 @@ const User = () => {
                         <TextField
                           size="small"
                           fullWidth
+                          label="E-mail (Login)"
+                          name="email"
+                          onChange={handleChange}
+                          value={values.email}
+                          variant="filled"
+                        />
+                      </Grid>
+                      <Grid item md={2} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
+                          label="Senha"
+                          name="password"
+                          type='password'
+                          onChange={handleChange}
+                          value={values.password}
+                          variant="filled"
+                        />
+                      </Grid>
+                    </Grid>
+                    <br/>
+                    <Grid container spacing={3}>
+                      <Grid item md={4} xs={12}>
+                        <TextField
+                          size="small"
+                          fullWidth
                           label="Nome"
                           name="name"
                           onChange={handleChange}
@@ -74,32 +108,9 @@ const User = () => {
                           variant="filled"
                         />
                       </Grid>
-                      <Grid item md={3} xs={12}>
-                        <TextField
-                          size="small"
-                          fullWidth
-                          label="E-mail"
-                          name="email"
-                          onChange={handleChange}
-                          value={values.email}
-                          variant="filled"
-                        />
-                      </Grid>
-                      <Grid item md={3} xs={12}>
-                        <TextField
-                          size="small"
-                          fullWidth
-                          label="Senha"
-                          name="password"
-                          type='password'
-                          onChange={handleChange}
-                          value={values.password}
-                          variant="filled"
-                        />
-                      </Grid>
                     </Grid>
-                    <Divider />
                     <br />
+
                   </CardContent>
                   <Divider />
                   <Box sx={{ display: 'flex', justifyContent: "space-between", p: 2 }}>
@@ -111,6 +122,7 @@ const User = () => {
                       Voltar
                     </Button>
                     <Button
+                      disabled={!allFiledsFilled()}
                       color="primary"
                       variant="contained"
                       type="submit"

@@ -30,6 +30,7 @@ const Evolution = () => {
 
   const { id } = useParams();
   const history = useHistory();
+  const isEditMode = history.location.pathname.includes('edit');
 
   return (
     <>
@@ -67,7 +68,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           label="Data de atendimento"
                           name="date"
@@ -80,7 +81,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           label="Telefone"
                           name="tel"
@@ -97,7 +98,7 @@ const Evolution = () => {
                       <Grid item md={9} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           label="Registro"
                           name="register"
@@ -109,7 +110,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           label="Data do registro"
                           name="register_date"
@@ -127,7 +128,7 @@ const Evolution = () => {
                       <Grid item md={6} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           label="Email"
                           name="email"
@@ -139,7 +140,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           label="Celular"
                           name="celular"
@@ -154,7 +155,7 @@ const Evolution = () => {
                   <CardContent>
                     <Grid container spacing={3}>
                       <Grid item md={3} >
-                        <FormControl component="fieldset">
+                        <FormControl component="fieldset" disabled={block || isEditMode}>
                           <FormLabel component="legend">Teste de COVID-19</FormLabel>
                           <RadioGroup aria-label="test_covid" name="test_covid" value={values.test_covid} onChange={handleChange}>
                             <FormControlLabel value="yes" control={<Radio color="primary" />} label="Sim" />
@@ -165,7 +166,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           multiline
                           rows={5}
@@ -182,7 +183,7 @@ const Evolution = () => {
                   <CardContent>
                     <Grid container spacing={3}>
                       <Grid item md={3} >
-                        <FormControl component="fieldset">
+                        <FormControl component="fieldset" disabled={block || isEditMode}>
                           <FormLabel component="legend">Alergias</FormLabel>
                           <RadioGroup aria-label="allergies" name="allergies" value={values.allergies} onChange={handleChange}>
                             <FormControlLabel value="yes" control={<Radio color="primary" />} label="Sim" />
@@ -193,7 +194,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           multiline
                           rows={5}
@@ -212,7 +213,7 @@ const Evolution = () => {
                       <Grid item md={6} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           label="Problemas de saúde"
                           name="health_issues"
@@ -230,7 +231,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           label="Sintomas"
                           name="symptoms"
@@ -248,7 +249,7 @@ const Evolution = () => {
                       <Grid item md={3} xs={12}>
                         <TextField
                           size="small"
-                          disabled={block}
+                          disabled={block || isEditMode}
                           fullWidth
                           label="Data de início dos sintomas"
                           name="symptoms_date"
@@ -277,15 +278,17 @@ const Evolution = () => {
                     >
                       <CircularProgress size={20} style={{color: 'white'}} />
                     </Button>
+                    ) : !isEditMode ? (
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          type="submit"
+                          disabled={block}
+                        >
+                          Salvar evolução
+                        </Button>
                     ) : (
-                      <Button
-                        color="primary"
-                        variant="contained"
-                        type="submit"
-                        disabled={block}
-                      >
-                        Salvar evolução
-                      </Button>
+                      <></>
                     )}
                   </Box>
                 </form>

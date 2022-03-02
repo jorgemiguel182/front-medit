@@ -25,7 +25,7 @@ const columns = [
 		reorder: true,
   },
   {
-    name: 'E-mail (login)',
+    name: 'E-mail (Login)',
     selector: row => row.email,
     sortable: true,
 		reorder: true,

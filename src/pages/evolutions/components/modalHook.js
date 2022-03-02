@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import {useSnackbar} from 'notistack';
+import moment from 'moment';
 
 import api from '../../../services/api';
 
@@ -10,7 +11,7 @@ const modalHook = ({symptomTable}) => {
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
   const [values, setValues] = useState({
-    date_created: '1111-11-11',
+    date_created: moment().format('YYYY-MM-DD'),
     ageusa:'',
     anosmia:'',
     astralgia:'',
