@@ -173,6 +173,7 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
     setName('');
     setLoading(false);
     setPacientData({});
+    setPacientList([]);
   }, [open])
 
   useEffect(()=>{
@@ -218,17 +219,9 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
                 </Grid>
               </Grid>
               <br />
-              {!loading ?
-                (
-                  <>
-                    {pacientList?.map((item) => (
-                      <PacientCard data={item} key={item.id} handleSelected={handleSelected} />
-                    ))}
-                  </>
-                ) :
-                (<CircularProgress />)
-              }
-
+              {pacientList?.map((item) => (
+                <PacientCard data={item} key={item.id} handleSelected={handleSelected} loading={loading}/>
+              ))}
             </CardContent>
             </ModalCardContent>
             <Divider />
