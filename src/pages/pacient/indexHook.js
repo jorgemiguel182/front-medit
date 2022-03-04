@@ -104,7 +104,10 @@ const PacientHook = () => {
     e.preventDefault();
     const data = {
       id_research_client: values.id,
-      name: values.name
+      name: values.name,
+      cpf: values.cpf,
+      phone: values.tel,
+      born_date: values.born_date
     }
 
     try {

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import theme from 'src/theme';
-
+import moment from 'moment';
 import {
   Card,
   Button,
@@ -55,7 +55,7 @@ const HeaderPacient = ({data}) => {
               </Grid>
               <Grid item lg={4}>
                 <Typography align='left' className={classes.content} >
-                  {`47 anos`}
+                  {Math.floor(moment(new Date()).diff(moment(data[0]?.born_date,"YYYY-MM-DD"),'years',true))+" anos"}
                 </Typography>
               </Grid>
             </Grid>
@@ -67,7 +67,7 @@ const HeaderPacient = ({data}) => {
               </Grid>
               <Grid item lg={10}>
                 <Typography align='left' className={classes.content} >
-                  045.319.137-10
+                  {data[0]?.cpf}
                 </Typography>
               </Grid>
             </Grid>
@@ -79,7 +79,7 @@ const HeaderPacient = ({data}) => {
               </Grid>
               <Grid item lg={8}>
                 <Typography align='left' className={classes.content}>
-                  (21) 97538-6001
+                {data[0]?.phone}
                 </Typography>
               </Grid>
             </Grid>

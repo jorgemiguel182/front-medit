@@ -144,7 +144,10 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
 
     const data = {
       id_research_client: pacientData.id,
-      name: pacientData.name
+      name: pacientData.name,
+      cpf: pacientData.cpf,
+      phone: pacientData.tel,
+      born_date: pacientData.born_date
     }
 
     try {
