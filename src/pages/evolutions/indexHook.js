@@ -8,7 +8,7 @@ import api from '../../services/api';
 
 const EvolutionHook = () => {
 
-  const { id, evolution_id } = useParams();
+  const { id, evolution_id, symptom_id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState('');
   const [data, setData] = useState([]);
@@ -32,7 +32,7 @@ const EvolutionHook = () => {
     symptoms: 'none',
     symptoms_date: moment().format('YYYY-MM-DD'),
   });
-  
+
   const handleOpen = (data) => {
     setSymptomTable(data);
     setOpen(true);

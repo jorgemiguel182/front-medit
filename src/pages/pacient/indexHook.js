@@ -110,7 +110,7 @@ const PacientHook = () => {
     try {
       const response = await api.post('/new-prontuario', data);
       enqueueSnackbar(response.data.msg, { variant: 'success' });
-      // history.push(`/evolutions/${}`)
+      history.push(`/evolutions/${response.data.id}`)
     } catch {
       enqueueSnackbar('Este paciente já tem um prontuário vinculado', { variant: 'error' });
     }

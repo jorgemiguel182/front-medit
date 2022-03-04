@@ -35,7 +35,7 @@ export default function Routes() {
         <DashboardPrivateRoute component={evolutionsView} path="/evolutions/:id/new" exact />
         <DashboardPrivateRoute component={evolutionsView} path="/evolutions/:id/edit/:evolution_id" exact />
         <DashboardPrivateRoute component={symptomsView} path="/symptoms/:id/new" exact />
-        <DashboardPrivateRoute component={symptomsView} path="/symptoms/:id/edit/:evolution_id" exact />
+        <DashboardPrivateRoute component={symptomsView} path="/symptoms/:id/edit/:symptom_id" exact />
         <DashboardPrivateRoute component={emailView} path="/emails" exact />
         <DashboardPrivateRoute component={usersList} path="/users" exact />
         <DashboardPrivateRoute component={userView} path="/users/:crm" exact />

@@ -1,26 +1,33 @@
 import {
   Box, Button, Card, CardContent, CardHeader, Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Typography
 } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import modalHook from './components/modalHook';
-import IndexHook from './indexHook';
-import moment from 'moment';
-
-import ModalComponent from './components/ModalComponent';
+import { useSnackbar } from 'notistack';
 
 const Symptom = () => {
-
-  const {
-    symptomTable
-  } = IndexHook();
-
-  const {values, setValues, handleChange, handleSubmit} = modalHook({symptomTable});
-
+  const { enqueueSnackbar } = useSnackbar();
+  const {values, setValues, handleChange, handleSubmit} = modalHook();
   const { id } = useParams();
   const history = useHistory();
+  const dateInput = useRef(null);
+  const newSymptom = history.location.pathname.includes('new');
+  
+  const checkDateFilled = () => {
+    if (!values.date_created){
+      enqueueSnackbar('Obrigatório informar a data', { variant: 'warning' });
+      dateInput.current.focus();
+    }
+  }
+
+  useEffect(()=>{
+    if (newSymptom){
+      dateInput.current.focus();
+    }
+  },[]);
 
   return (
     <>
@@ -44,12 +51,15 @@ const Symptom = () => {
                   <Grid container spacing={3}>
                     <Grid item md={6} xs={12}>
                       <TextField
+                        inputRef={dateInput}
                         size="small"
                         fullWidth
                         label="Data/Sintoma"
                         name="date_created"
                         type="date"
+                        required
                         onChange={handleChange}
+                        onBlur={()=>checkDateFilled()}
                         value={values?.date_created}
                         variant="filled"
                       />

@@ -25,7 +25,7 @@ const columns = [
   },
   {
     name: 'Data de criação',
-    selector: row => moment(row.date_created).format('DD/MM/YYYY'),
+    selector: row => moment(row.date_created.substr(0, 10)).format('DD/MM/YYYY'),
     sortable: true,
 		reorder: true,
   },
@@ -34,8 +34,8 @@ const columns = [
 const DatatableSymptoms = ({data, id}) => {
   const history = useHistory();
 
-  const handleGoToSymptom = (row = {}) => {
-    history.push(`/symptoms/${id}/edit/${row.evolution_id}`);
+  const handleGoToSymptom = (row) => {
+    history.push(`/symptoms/${id}/edit/${row.symptom_table_id}`);
   }
 
   const handleGoToNew = () => {

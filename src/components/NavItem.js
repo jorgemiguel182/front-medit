@@ -13,11 +13,7 @@ const NavItem = ({
   ...rest
 }) => {
   const location = useLocation();
-
-  const active = href ? !!matchPath({
-    path: href,
-    end: false
-  }, location.pathname) : false;
+  const active = href === location.pathname
 
   return (
     <ListItem
@@ -39,7 +35,8 @@ const NavItem = ({
           textTransform: 'none',
           width: '100%',
           ...(active && {
-            color: 'primary.main'
+            color: 'primary.main',
+            fontWeight: 'bolder'
           }),
           '& svg': {
             mr: 1

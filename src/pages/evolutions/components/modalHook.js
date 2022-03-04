@@ -6,12 +6,12 @@ import moment from 'moment';
 
 import api from '../../../services/api';
 
-const modalHook = ({symptomTable}) => {
+const modalHook = () => {
   const history = useHistory();
-  const { id } = useParams();
+  const { id, symptom_id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
   const [values, setValues] = useState({
-    date_created: moment().format('YYYY-MM-DD'),
+    date_created:'',
     ageusa:'',
     anosmia:'',
     astralgia:'',
@@ -99,11 +99,29 @@ const modalHook = ({symptomTable}) => {
     }
   }
 
-  useEffect(() => {
-    if(symptomTable){
-      setValues(symptomTable);
+  const handleSearch = async () => {
+    try{
+      let symptom = {};
+      const response = await api.post("/filter-prontuarios", {id: id});
+      if(response.data.status === 'OK'){
+        enqueueSnackbar('Sintomas não encontrados.', { variant: 'error' });
+      }else{
+        symptom = response.data[0].symptom_table.find((item) => {
+        return item.symptom_table_id === symptom_id
+        });
+        if (symptom) {
+          symptom.date_created = moment(symptom.date_created.substr(0,10)).format("YYYY-MM-DD")
+        }
+        setValues ({...values, ...symptom})
+      }
+    }catch{
+      enqueueSnackbar('Sintomas não encontradosXXXX', {variant: 'error'});
     }
-  }, [symptomTable])
+  }
+
+  useEffect(() => {
+    handleSearch();
+  }, [])
 
   return {
     values,
