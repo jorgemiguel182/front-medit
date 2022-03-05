@@ -29,6 +29,17 @@ const columns = [
     selector: row => row.email,
     sortable: true,
 		reorder: true,
+  },
+  {
+    name: 'Validação e-mail',
+    selector: row => { 
+      if (row.status === 'CONFIRMED') {
+        return 'Concluída'
+      } 
+      return 'Pendente'
+    },
+    sortable: true,
+		reorder: true,
   }
 ];
 
@@ -43,8 +54,8 @@ const DatatableComponent = ({...rest}) => {
   });
   
 
-  const handleSearch = (filterDefault) => {
-    api.post("/filter-researchs", filterDefault).then((response) => {
+  const handleSearch = (filterDefault = {}) => {
+    api.post("/list-users", filterDefault).then((response) => {
       let result = response.data;
       if (filter.name){
         result = result.filter(el => el.name.toLowerCase().includes(filter.name.toLowerCase()));
@@ -60,7 +71,7 @@ const DatatableComponent = ({...rest}) => {
 
   const handleGoToTask = (row = null) => {
     if (row) {
-      history.push(`/users/${row.crm}`);
+      history.push(`/users/${row.username}`);
     } else {
       history.push(`/users/new`);
     }

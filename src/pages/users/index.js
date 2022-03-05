@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import UserHook from './indexHook';
@@ -14,23 +14,21 @@ import {
   Button,
   TextField,
 } from '@material-ui/core';
-import formValidate from 'src/utils/formValidate';
+import PasswordValidationSection from './components/PasswordValidationSection'
 
 const User = () => {
   const history = useHistory();
-
+  const newUser = history.location.pathname.includes('new');
+  const [showPwdHint, setShowPwdHint] = useState(false);
   const {
     values,
     handleChange,
     handleSubmit,
+    alertPwdDif,
+    allFiledsFilled,
+    setConfirmPwd,
+    confirmPwd
   } = UserHook();
-
-  const allFiledsFilled = () => {
-    return (formValidate.isEmail(values.email) &&  
-            !formValidate.isEmpty(values.password) && 
-            !formValidate.isEmpty(values.name) && 
-            !formValidate.isEmpty(values.password));
-  }
 
   return (
     <>
@@ -49,7 +47,7 @@ const User = () => {
             container
             spacing={3}
           >
-            <Grid item lg={12} md={12} xs={12}>
+            <Grid item lg={4} md={8} xs={12}>
               <form autoComplete="off" onSubmit={(e) => handleSubmit(e)} >
                 <Card>
                   <CardHeader
@@ -57,36 +55,54 @@ const User = () => {
                   />
                   <Divider />
                   <CardContent>
-
-                    {/* dados iniciais */}
-                    <Grid container spacing={3}>
-                      <Grid item md={4} xs={12}>
+                      <Grid item md={12} xs={12}>
                         <TextField
                           size="small"
                           fullWidth
                           label="E-mail (Login)"
                           name="email"
+                          disabled={!newUser}
                           onChange={handleChange}
                           value={values.email}
                           variant="filled"
                         />
                       </Grid>
-                      <Grid item md={2} xs={12}>
-                        <TextField
-                          size="small"
-                          fullWidth
-                          label="Senha"
-                          name="password"
-                          type='password'
-                          onChange={handleChange}
-                          value={values.password}
-                          variant="filled"
-                        />
-                      </Grid>
-                    </Grid>
                     <br/>
+                    {newUser && (
+                      <>
+                        <Grid container spacing={3}>
+                          <Grid item md={6} xs={12}>
+                            <TextField
+                              size="small"
+                              fullWidth
+                              label="Senha"
+                              name="password"
+                              type='password'
+                              onChange={handleChange}
+                              onFocus={()=>setShowPwdHint(true)}
+                              value={values.password}
+                              variant="filled"
+                            />
+                          </Grid>
+                          <Grid item md={6} xs={12}>
+                            <TextField
+                              size="small"
+                              fullWidth
+                              label="Confirmar senha"
+                              type='password'
+                              name="confirmPwd"
+                              onChange={(e)=>setConfirmPwd(e.target.value)}
+                              onBlur={(e)=>alertPwdDif(e.target.value)}
+                              value={confirmPwd}
+                              variant="filled"
+                            />
+                          </Grid>
+                        </Grid>
+                        <br/>
+                      </>
+                    )}
                     <Grid container spacing={3}>
-                      <Grid item md={4} xs={12}>
+                      <Grid item md={12} xs={12}>
                         <TextField
                           size="small"
                           fullWidth
@@ -97,7 +113,10 @@ const User = () => {
                           variant="filled"
                         />
                       </Grid>
-                      <Grid item md={2} xs={12}>
+                    </Grid>
+                    <br />
+                    <Grid container spacing={3}>
+                      <Grid item md={6} xs={12}>
                         <TextField
                           size="small"
                           fullWidth
@@ -133,6 +152,15 @@ const User = () => {
                 </Card>
               </form>
             </Grid>
+            {newUser && showPwdHint && (
+            <Grid item lg={4} md={4} xs={12}>
+              <Box mt={11}>
+              <PasswordValidationSection password={values.password}/>
+
+              </Box>
+            </Grid>
+
+            )}
           </Grid>
         </Container>
       </Box>

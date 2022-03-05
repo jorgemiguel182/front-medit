@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -7,7 +7,8 @@ import {
   Box,
   Hidden,
   IconButton,
-  Toolbar
+  Toolbar,
+  Tooltip
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
@@ -25,12 +26,14 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
       color="primary"
       elevation={0}
       {...rest}
-    >
-      <Toolbar>
-        <RouterLink to="/">
-          <Logo />
-        </RouterLink>
-        <Box sx={{ flexGrow: 1 }} />
+      >
+        <Toolbar>
+        <Tooltip title="Logout">
+          <RouterLink to="/">
+              <Logo />
+          </RouterLink>
+        </Tooltip>
+          <Box sx={{ flexGrow: 1 }} ml={2}></Box>
         <Hidden lgDown>
           <IconButton color="inherit">
             <Badge

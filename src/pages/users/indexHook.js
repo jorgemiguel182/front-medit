@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
+import axios from 'axios';
+import formValidate from 'src/utils/formValidate';
 
 const UserHook = () => {
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
-  const { crm } = useParams();
+  const { username } = useParams();
+  const [confirmPwd, setConfirmPwd] = useState('');
   const [values, setValues] = useState({
     name: "",
     crm: "",
     email: "",
-    password: "",
+    password: ""
   });
 
   const newUser = history.location.pathname.includes('new');
@@ -24,39 +27,92 @@ const UserHook = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const addUserRequest = () => {
     const data = {
       crm: values.crm,
       name: values.name,
       email: values.email,
       password: values.password
     }
-    console.log(data);
-    // try {
-    //   const response = await api.post('/new-user', data);
-    //   enqueueSnackbar(response.data.msg, { variant: 'success' });
-    // } catch {
-    //   enqueueSnackbar('Não foi possível cadastrar o médico', { variant: 'error' });
-    // }
+    axios.post(`${process.env.REACT_APP_COGNITO_AUTH_URL}/signup`, data)
+      .then(() => {
+        enqueueSnackbar('Cadastro realizado! É necessário acessar o e-mail para validar o cadastro.', { variant: 'success', persistent: true });
+        history.push('/users');
+      }).catch(function (error) {
+        if (error.response) {
+          if (error.response.data === 'This username already exists') {
+            enqueueSnackbar('Este e-mail já existe no cadastro', { variant: 'error' });
+          } else {
+            enqueueSnackbar(error.response.data, { variant: 'error' });
+          }
+        } 
+      });
+  }
+
+  const editUserRequest = async () => {
+    const data = {
+      username,
+      name: values.name,
+      crm: values.crm
+    }
+   try {
+      const response = await api.post('/edit-user', data);
+      enqueueSnackbar('Cadastro atualizado!', { variant: 'success' });
+      history.push('/users');
+    } catch {
+      enqueueSnackbar('Não foi possível cadastrar o médico', { variant: 'error' });
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (newUser) {
+      addUserRequest();
+    } else {
+      editUserRequest();
+    }
+  }
+
+  const alertPwdDif = () => {
+    if (confirmPwd !== values.password) {
+      enqueueSnackbar('As senhas informadas diferem, verifique!', { variant: 'warning' })
+    } 
+  }
+
+  const allFiledsFilled = () => {
+    if (!newUser) {
+      return (
+        !formValidate.isEmpty(values.name) && 
+        !formValidate.isEmpty(values.crm) 
+      );
+    } else {
+      return (
+        formValidate.isEmail(values.email) &&  
+        !formValidate.isEmpty(values.name) && 
+        !formValidate.isEmpty(values.crm) &&
+        !formValidate.isEmpty(values.password) &&
+        (confirmPwd === values.password) 
+      );
+    }
   }
 
   useEffect(() => {
     if(!newUser){
-      const filter = {
-        cpf: "0"  //! MUDAR PARA CRM
-      }
-      api.post('/filter-researchs', filter).then((response) => {
-        setValues(response.data[0]);
+      api.post('/list-users', {}).then((response) => {
+        const user = response.data.find(el => el.username === username)
+        setValues(user);
       })
     }
   }, [])
 
   return {
-    crm,
     values,
     handleChange,
-    handleSubmit
+    handleSubmit,
+    alertPwdDif,
+    allFiledsFilled,
+    setConfirmPwd,
+    confirmPwd
   }
 
 };

@@ -1390,13 +1390,15 @@ const Pacient = () => {
                     >
                       Voltar
                     </Button>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      type="submit"
-                    >
-                      Criar Prontuário
-                    </Button>
+                    {values.status === 'paid' && (
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        type="submit"
+                      >
+                        Criar Prontuário
+                      </Button>
+                    )}
                   </Box>
                 </Card>
               </form>

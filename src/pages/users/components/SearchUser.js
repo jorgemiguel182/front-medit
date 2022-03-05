@@ -42,7 +42,7 @@ const SearchPacient = ({setFilter}) => {
   const [crm, setCrm] = useState('');
 
   return (
-      <Card className={classes.filterCard} style={{backgroundColor: '#F3F6F4', width: '515px', display: 'flex'}}>
+      <Card className={classes.filterCard} style={{backgroundColor: '#F3F6F4', width: '533px', display: 'flex'}}>
         <CardContent>
           <Grid container spacing={2}>
             <Grid item lg={7}>
