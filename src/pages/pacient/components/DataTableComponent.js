@@ -35,7 +35,18 @@ const columns = [
   },
   {
     name: 'Status',
-    selector: row => row.status,
+    selector: row => {
+      switch(row.status) {
+        case 'paid':
+          return 'Pendente prontuário';
+        case 'answered':
+          return 'Pendente pagamento';
+        case 'done':
+          return 'Prontuário cadastrado';
+        default:
+          return row.status;    
+      }
+    },
     sortable: true,
 		reorder: true,
   }
