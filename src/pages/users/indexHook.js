@@ -36,7 +36,7 @@ const UserHook = () => {
     }
     axios.post(`${process.env.REACT_APP_COGNITO_AUTH_URL}/signup`, data)
       .then(() => {
-        enqueueSnackbar('Cadastro realizado! É necessário acessar o e-mail para validar o cadastro.', { variant: 'success', persistent: true });
+        enqueueSnackbar('Cadastro realizado! É necessário acessar o e-mail para validar o cadastro.', { variant: 'info', persist: true,});
         history.push('/users');
       }).catch(function (error) {
         if (error.response) {
