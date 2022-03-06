@@ -20,13 +20,13 @@ ReactDOM.render((
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'center',
-    }}
-    ref={notistackRef}
-    action={key => (
-      <Button onClick={onClickDismiss(key)}>
-        <CloseIcon style={{color: 'white'}} />
-      </Button>
-    )}
+      }}
+      ref={notistackRef}
+      action={key => (
+        <Button onClick={onClickDismiss(key)}>
+          <CloseIcon style={{color: 'white'}} />
+        </Button>
+      )}
     >
       <App />
     </SnackbarProvider>
