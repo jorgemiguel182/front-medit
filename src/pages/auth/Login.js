@@ -13,7 +13,6 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
-import LoginProvider, { useLogin } from 'src/Context/LoginContext';
 
 const Login = () => {
   const history = useHistory();
@@ -33,7 +32,7 @@ const Login = () => {
   }
 
   return (
-    <LoginProvider>
+    <>
       <Helmet>
         <title>Login</title>
       </Helmet>
@@ -57,7 +56,6 @@ const Login = () => {
               password: Yup.string().max(255).required('Password is required')
             })}
             onSubmit={(values) => {
-              ()=>{useLogin().setLogin(values.username)};
               handleOnSubmit(values);
             }}
           >
@@ -79,13 +77,6 @@ const Login = () => {
                     >
                       MCare
                     </Typography>
-                    {/* <Typography
-                      color="textSecondary"
-                      gutterBottom
-                      variant="body2"
-                    >
-                      Sign in on the internal platform
-                    </Typography> */}
                   </Box>
                   <TextField
                     error={Boolean(touched.username && errors.username)}
@@ -143,7 +134,7 @@ const Login = () => {
           </Formik>
         </Container>
       </Box>
-    </LoginProvider>
+    </>
   );
 };
 

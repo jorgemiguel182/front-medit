@@ -153,7 +153,7 @@ const User = () => {
               </form>
             </Grid>
             {newUser && showPwdHint && (
-            <Grid item lg={4} md={4} xs={12}>
+            <Grid item lg={2} md={2} xs={12}>
               <Box mt={11}>
               <PasswordValidationSection password={values.password}/>
 
