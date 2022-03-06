@@ -11,6 +11,7 @@ const UserHook = () => {
   const history = useHistory();
   const { username } = useParams();
   const [confirmPwd, setConfirmPwd] = useState('');
+  const [pwdValid, setPwdValid] = useState(false);
   const [values, setValues] = useState({
     name: "",
     crm: "",
@@ -90,7 +91,7 @@ const UserHook = () => {
         formValidate.isEmail(values.email) &&  
         !formValidate.isEmpty(values.name) && 
         !formValidate.isEmpty(values.crm) &&
-        !formValidate.isEmpty(values.password) &&
+        pwdValid &&
         (confirmPwd === values.password) 
       );
     }
@@ -112,7 +113,9 @@ const UserHook = () => {
     alertPwdDif,
     allFiledsFilled,
     setConfirmPwd,
-    confirmPwd
+    confirmPwd,
+    pwdValid,
+    setPwdValid
   }
 
 };

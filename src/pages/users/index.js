@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import UserHook from './indexHook';
@@ -27,7 +27,9 @@ const User = () => {
     alertPwdDif,
     allFiledsFilled,
     setConfirmPwd,
-    confirmPwd
+    confirmPwd,
+    pwdValid,
+    setPwdValid
   } = UserHook();
 
   return (
@@ -73,6 +75,7 @@ const User = () => {
                         <Grid container spacing={3}>
                           <Grid item md={6} xs={12}>
                             <TextField
+                              error={!pwdValid && values.password.length > 0}
                               size="small"
                               fullWidth
                               label="Senha"
@@ -80,6 +83,7 @@ const User = () => {
                               type='password'
                               onChange={handleChange}
                               onFocus={()=>setShowPwdHint(true)}
+                              onBlur={()=>setShowPwdHint(false)}
                               value={values.password}
                               variant="filled"
                             />
@@ -155,7 +159,7 @@ const User = () => {
             {newUser && showPwdHint && (
             <Grid item lg={2} md={2} xs={12}>
               <Box mt={11}>
-              <PasswordValidationSection password={values.password}/>
+              <PasswordValidationSection password={values.password} setPwdValid={setPwdValid}/>
 
               </Box>
             </Grid>

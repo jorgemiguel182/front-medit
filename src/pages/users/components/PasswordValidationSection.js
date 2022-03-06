@@ -63,8 +63,7 @@ function haveLength(str, val) {
   return str.length >= val;
 }
 
-const PasswordValidationSection = ({ password }) => {
-  const [validationChecks, setValidationChecks] = useState([]);
+const PasswordValidationSection = ({ password, setPwdValid }) => {
   const { t } = useTranslation();
 
   const validationList = [
@@ -95,9 +94,7 @@ const PasswordValidationSection = ({ password }) => {
     }
   ];
 
-  useEffect(() => {
-    setValidationChecks(validationList);
-  }, [t]);
+  const [validationChecks, setValidationChecks] = useState(validationList);
 
   const changeControlLabels = (id, boolean) => {
     const validationCopy = [...validationChecks];
@@ -116,8 +113,18 @@ const PasswordValidationSection = ({ password }) => {
     changeControlLabels('length', haveLength(password, 8));
   };
 
+  const checkPasswordValid = () => {
+    const invalid = validationChecks.find(el => el.valid === false)
+    if (!invalid) {
+      setPwdValid(true);
+    } else {
+      setPwdValid(false);
+    }
+  }
+
   useEffect(() => {
     processPassword();
+    checkPasswordValid()
   }, [password]);
 
   return (
