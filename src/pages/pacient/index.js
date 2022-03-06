@@ -52,7 +52,7 @@ const Pacient = () => {
   return (
     <>
       <Helmet>
-        <title>Pesquisa | Material Kit</title>
+        <title>Pacientes | Detalhe</title>
       </Helmet>
       <Box
         sx={{

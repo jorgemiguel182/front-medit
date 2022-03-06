@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 const UsersList = () => (
   <>
     <Helmet>
-      <title>Médicos</title>
+      <title>Médicos | Listagem</title>
     </Helmet>
     <Box
       sx={{

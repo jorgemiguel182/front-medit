@@ -35,7 +35,7 @@ const User = () => {
   return (
     <>
       <Helmet>
-        <title>Médicos | Material Kit</title>
+        <title>Médicos | Detalhe</title>
       </Helmet>
       <Box
         sx={{

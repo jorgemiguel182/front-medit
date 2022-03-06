@@ -41,7 +41,7 @@ const ProductList = () => {
   return (
     <>
       <Helmet>
-        <title>Prontuários</title>
+        <title>Prontuários | Listagem</title>
       </Helmet>
       <Box
         sx={{
