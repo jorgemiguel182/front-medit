@@ -8,16 +8,20 @@ import {
   Box,
   Button,
   Container,
-  Grid,
+  CircularProgress,
   Link,
   TextField,
   Typography
 } from '@material-ui/core';
+import { useState } from 'react';
 
 const Login = () => {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState(false);
+
   const handleOnSubmit = (values) => {
+    setLoading(true);
     axios.post(`${process.env.REACT_APP_COGNITO_AUTH_URL}/login`, values)
       .then((response) => {
         localStorage.setItem('refresh_token', response.data.data.refresh_token);
@@ -28,6 +32,8 @@ const Login = () => {
         if (error.response) {
           enqueueSnackbar(error.response.data.message, { variant: 'error' });
         } 
+      }).finally(()=>{
+        setLoading(false);
       });
   }
 
@@ -105,17 +111,27 @@ const Login = () => {
                     variant="outlined"
                   />
                   <Box sx={{ py: 2 }}>
-                    <Button
-                      color="primary"
-                      // disabled={isSubmitting}
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                      onClick={handleOnSubmit}
-                    >
-                      Login
-                    </Button>
+                    {loading ? (
+                       <Button
+                       fullWidth
+                       color="primary"
+                       variant="contained"
+                     >
+                       <CircularProgress size={30} style={{color: 'white'}} />
+                     </Button>
+                    ):
+                    (
+                      <Button
+                        color="primary"
+                        fullWidth
+                        size="large"
+                        type="submit"
+                        variant="contained"
+                        onClick={handleOnSubmit}
+                      >
+                        Login
+                      </Button>
+                    )}
                   </Box>
                   <Typography
                     color="textSecondary"

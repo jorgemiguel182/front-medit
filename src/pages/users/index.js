@@ -13,6 +13,7 @@ import {
   Divider,
   Button,
   TextField,
+  CircularProgress
 } from '@material-ui/core';
 import PasswordValidationSection from './components/PasswordValidationSection'
 
@@ -29,7 +30,8 @@ const User = () => {
     setConfirmPwd,
     confirmPwd,
     pwdValid,
-    setPwdValid
+    setPwdValid,
+    loading
   } = UserHook();
 
   return (
@@ -144,14 +146,24 @@ const User = () => {
                     >
                       Voltar
                     </Button>
-                    <Button
-                      disabled={!allFiledsFilled()}
-                      color="primary"
-                      variant="contained"
-                      type="submit"
-                    >
-                      Salvar
-                    </Button>
+                    {loading ? (
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        style={{width: '86px'}}
+                      >
+                        <CircularProgress size={24} style={{color: 'white'}} />
+                      </Button>
+                    ):(
+                      <Button
+                        disabled={!allFiledsFilled()}
+                        color="primary"
+                        variant="contained"
+                        type="submit"
+                      >
+                        Salvar
+                      </Button>
+                    )}
                   </Box>
                 </Card>
               </form>

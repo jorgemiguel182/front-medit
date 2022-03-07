@@ -16,6 +16,7 @@ import {
   TextField,
   Select,
   Link,
+  CircularProgress
 } from '@material-ui/core';
 
 const Pacient = () => {
@@ -45,7 +46,8 @@ const Pacient = () => {
     set_alcohool,
     handleChange,
     handleSubmit,
-    handleChangeMultiple
+    handleChangeMultiple,
+    loading
 
   } = PacientHook();
 
@@ -1390,7 +1392,16 @@ const Pacient = () => {
                     >
                       Voltar
                     </Button>
-                    {values.status === 'paid' && (
+                    {values.status === 'paid' &&  loading && (
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        style={{width: '168px'}}
+                      >
+                        <CircularProgress size={23} style={{color: 'white'}} />
+                      </Button>
+                    )}
+                    {values.status === 'paid' &&  !loading && (
                       <Button
                         color="primary"
                         variant="contained"

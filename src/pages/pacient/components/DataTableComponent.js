@@ -57,6 +57,7 @@ const DatatableComponent = ({...rest}) => {
 
   const history = useHistory();
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState({
     name: '',
     status: ''
@@ -64,6 +65,7 @@ const DatatableComponent = ({...rest}) => {
   
 
   const handleSearch = (filterDefault) => {
+    setLoading(true);
     api.post("/filter-researchs", filterDefault).then((response) => {
       let result = response.data;
       if (filter.name){
@@ -73,8 +75,9 @@ const DatatableComponent = ({...rest}) => {
         result = result.filter(el => el?.status === filter.status)
       }
       setData(result);
-    }).catch(() => {
-      
+    }).catch(() => {})
+    .finally(()=>{
+      setLoading(false);
     });
   }
 
@@ -86,7 +89,7 @@ const DatatableComponent = ({...rest}) => {
     return (
       <>
         <Typography variant='h5'>Lista de pesquisas respondidas pelos pacientes</Typography>
-        <SearchPacient setFilter={setFilter}/>
+        <SearchPacient setFilter={setFilter} loading={loading} />
       </>
 
     );

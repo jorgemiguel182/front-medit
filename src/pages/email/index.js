@@ -17,7 +17,8 @@ import {
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel
+  FormLabel,
+  CircularProgress
 } from '@material-ui/core';
 import formValidate from '../../utils/formValidate';
 
@@ -25,6 +26,7 @@ const Email = () => {
 
   const { enqueueSnackbar } = useSnackbar();
   const [type, setType] = useState('whatsapp');
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     email: '',
     phone: ''
@@ -39,12 +41,15 @@ const Email = () => {
         data = {email: values.email}
       }
 
+    setLoading(true);  
     try{
       const response = await api.post('/send-research', data);
       enqueueSnackbar('Pesquisa enviada com sucesso', {variant: 'success'});
       setValues({email:'', phone:''});
     }catch{
       enqueueSnackbar('Não foi possível enviar a pesquisa', {variant: 'error'});
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -155,17 +160,27 @@ const Email = () => {
                       p: 2
                     }}
                   >
-                    <Button
-                      disabled={
-                        (type.includes('email') && ! formValidate.isEmail(values.email)) ||
-                        (type.includes('whatsapp') && returnNumbers(values.phone).length !== 11)
-                      }
+                    {loading ? (
+                      <Button
                       color="primary"
                       variant="contained"
-                      type="submit"
+                      style={{width: '83px'}}
                     >
-                      Enviar
+                      <CircularProgress size={24} style={{color: 'white'}} />
                     </Button>
+                    ):(
+                      <Button
+                        disabled={
+                          (type.includes('email') && ! formValidate.isEmail(values.email)) ||
+                          (type.includes('whatsapp') && returnNumbers(values.phone).length !== 11)
+                        }
+                        color="primary"
+                        variant="contained"
+                        type="submit"
+                      >
+                        Enviar
+                      </Button>
+                    )}
                   </Box>
                 </Card>
               </form>

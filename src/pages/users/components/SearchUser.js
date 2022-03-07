@@ -6,9 +6,7 @@ import {
   TextField,
   Grid,
   CardContent,
-  Select,
-  option,
-  FormControl,
+  CircularProgress,
   makeStyles
 } from '@material-ui/core';
 
@@ -36,7 +34,7 @@ const useStyles = makeStyles(()=> ({
    },
 }));
 
-const SearchPacient = ({setFilter}) => {
+const SearchPacient = ({setFilter, loadingSearch}) => {
   const classes = useStyles();
   const [name, setName] = useState('');
   const [crm, setCrm] = useState('');
@@ -68,7 +66,17 @@ const SearchPacient = ({setFilter}) => {
               />
             </Grid>
             <Grid item lg={1} style={{marginInlinStart: '65px'}}>
-              <Button 
+              {loadingSearch ? (
+                <Button
+                style={{width: '72px'}}
+                color="primary"
+                variant="outlined"
+                >
+                  <CircularProgress size={15} style={{color: '#02255C'}} />
+                </Button>
+              )
+              : (
+                <Button 
                 className={classes.filterButton}
                 size="small"
                 variant="outlined" 
@@ -78,7 +86,9 @@ const SearchPacient = ({setFilter}) => {
                   crm
                 })}
                 >
-                  Filtrar</Button>
+                  Filtrar
+                </Button>
+              )}
             </Grid>
           </Grid>
         </CardContent>

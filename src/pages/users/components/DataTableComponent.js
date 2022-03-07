@@ -45,9 +45,9 @@ const columns = [
 
 
 const DatatableComponent = ({...rest}) => {
-
   const history = useHistory();
   const [data, setData] = useState([]);
+  const [loadingSearch, setLoadingSearch] = useState(false);
   const [filter, setFilter] = useState({
     name: '',
     crm: ''
@@ -55,6 +55,7 @@ const DatatableComponent = ({...rest}) => {
   
 
   const handleSearch = (filterDefault = {}) => {
+    setLoadingSearch(true);
     api.post("/list-users", filterDefault).then((response) => {
       let result = response.data;
       if (filter.name){
@@ -64,8 +65,9 @@ const DatatableComponent = ({...rest}) => {
         result = result.filter(el => el?.crm === filter.crm)
       }
       setData(result);
-    }).catch(() => {
-      
+    }).catch(() => {})
+    .finally(()=>{
+      setLoadingSearch(false);
     });
   }
 
@@ -81,7 +83,7 @@ const DatatableComponent = ({...rest}) => {
     return (
       <>
         <Typography variant='h5'>Lista dos médicos</Typography>
-        <SearchUser setFilter={setFilter}/>
+        <SearchUser setFilter={setFilter} loadingSearch={loadingSearch} />
       </>
 
     );

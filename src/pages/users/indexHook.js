@@ -12,6 +12,8 @@ const UserHook = () => {
   const { username } = useParams();
   const [confirmPwd, setConfirmPwd] = useState('');
   const [pwdValid, setPwdValid] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loadingSearch, setLoadingSearch] = useState(false);
   const [values, setValues] = useState({
     name: "",
     crm: "",
@@ -47,6 +49,8 @@ const UserHook = () => {
             enqueueSnackbar(error.response.data, { variant: 'error' });
           }
         } 
+      }).finally(()=>{
+        setLoading(false);
       });
   }
 
@@ -62,11 +66,14 @@ const UserHook = () => {
       history.push('/users');
     } catch {
       enqueueSnackbar('Não foi possível cadastrar o médico', { variant: 'error' });
+    } finally {
+      setLoading(false);
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (newUser) {
       addUserRequest();
     } else {
@@ -99,9 +106,13 @@ const UserHook = () => {
 
   useEffect(() => {
     if(!newUser){
+      setLoadingSearch(true);
       api.post('/list-users', {}).then((response) => {
         const user = response.data.find(el => el.username === username)
         setValues(user);
+      }).catch((error)=>{console.log(error)})
+      .finally(()=>{
+        setLoadingSearch(false);
       })
     }
   }, [])
@@ -115,7 +126,9 @@ const UserHook = () => {
     setConfirmPwd,
     confirmPwd,
     pwdValid,
-    setPwdValid
+    setPwdValid,
+    loading,
+    loadingSearch
   }
 
 };

@@ -9,7 +9,8 @@ import {
   Select,
   option,
   FormControl,
-  makeStyles
+  makeStyles,
+  CircularProgress
 } from '@material-ui/core';
 
 const useStyles = makeStyles(()=> ({
@@ -41,7 +42,7 @@ const useStyles = makeStyles(()=> ({
    },
 }));
 
-const SearchPacient = ({setFilter}) => {
+const SearchPacient = ({setFilter, loading}) => {
   const classes = useStyles();
   const [name, setName] = useState('');
   const [status, setStatus] = useState('');
@@ -81,17 +82,29 @@ const SearchPacient = ({setFilter}) => {
               </FormControl>
             </Grid>
             <Grid item lg={1} style={{marginInlinStart: '65px'}}>
-              <Button 
-                className={classes.filterButton}
-                size="small"
-                variant="outlined" 
+              {loading ? (
+                <Button
+                style={{width: '72px'}}
                 color="primary"
-                onClick={()=>setFilter({
-                  name,
-                  status
-                })}
-                >
-                  Filtrar</Button>
+                variant="outlined"
+              >
+                <CircularProgress size={15} style={{color: '#02255C'}} />
+              </Button>
+              )
+              : (
+                <Button 
+                  className={classes.filterButton}
+                  size="small"
+                  variant="outlined" 
+                  color="primary"
+                  onClick={()=>setFilter({
+                    name,
+                    status
+                  })}
+                  >
+                    Filtrar
+                  </Button>
+              )}
             </Grid>
           </Grid>
         </CardContent>

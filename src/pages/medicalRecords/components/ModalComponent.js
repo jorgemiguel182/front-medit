@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PacientCard = ({ data, handleSelected }) => {
+const PacientCard = ({ data, handleSelected, loading }) => {
   return (
     <>
       <Card>
@@ -98,9 +98,15 @@ const PacientCard = ({ data, handleSelected }) => {
                 </Typography>
               </Grid>
               <Grid item md={3} xs={12}>
+                {loading ? (
+                  <Button variant="contained" style={{width: '168px'}}>
+                    <CircularProgress size={23} style={{color: 'white'}} />
+                  </Button>
+                ):(
                   <Button variant="contained" onClick={() => handleSelected(data)}>
                     Criar prontuário
                   </Button>
+                )}
               </Grid>
           </Grid>
         </CardContent>
@@ -117,10 +123,11 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
   const [pacientData, setPacientData] = useState({});
   const [pacientList, setPacientList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingSearch, setLoadingSearch] = useState(false);
   const [selected, setSelected] = useState('');
 
   const handleSearchByName = async () => {
-    setLoading(true)
+    setLoadingSearch(true)
     const data = {
       name,
       type: "new_pront"
@@ -129,19 +136,18 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
       const response = await api.post('/filter-researchs', data);
       if (response.data.status === 'OK') {
         enqueueSnackbar('Não foi possível encontrar o paciente', { variant: 'error' });
-        setLoading(false);
       } else {
         setPacientList(response.data);
-        setLoading(false);
       }
     } catch {
       console.log('error');
+    } finally {
+      setLoadingSearch(false);
     }
   }
 
   const handleSubmit = async () => {
-    setLoading(true);
-
+    
     const data = {
       id_research_client: pacientData.id,
       name: pacientData.name,
@@ -149,16 +155,16 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
       phone: pacientData.tel,
       born_date: pacientData.born_date
     }
-
+    
+    setLoading(true);
     try {
       const response = await api.post('/new-prontuario', data);
       enqueueSnackbar(response.data.msg, { variant: 'success' });
-      setLoading(false);
       setPacientList([]);
     } catch {
       enqueueSnackbar('Este paciente já tem um prontuário vinculado', { variant: 'error' });
-      setLoading(false);
     } finally {
+      setLoading(false);
       handleClose();
       handleSearch();
     }
@@ -215,7 +221,17 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
                   />
                 </Grid>
                 <Grid item md={3} xs={12}>
-                  <Button variant="outlined" onClick={() => handleSearchByName()}><SearchIcon /> Buscar</Button>
+                  {loadingSearch ? (
+                    <Button
+                      style={{width: '111px'}}
+                      color="primary"
+                      variant="outlined"
+                    >
+                      <CircularProgress size={23} style={{color: '#02255C'}} />
+                    </Button>
+                  ):(
+                    <Button variant="outlined" onClick={() => handleSearchByName()}><SearchIcon /> Buscar</Button>
+                  )}
                 </Grid>
               </Grid>
               <br />

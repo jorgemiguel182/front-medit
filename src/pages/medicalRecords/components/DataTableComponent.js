@@ -25,7 +25,7 @@ const columns = [
 ];
 
 
-const DatatableComponent = ({handleOpen, handleSearch, data, setFilter}) => {
+const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, loading}) => {
 
   const history = useHistory();
   
@@ -42,7 +42,7 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter}) => {
     return (
       <>
         <Typography variant='h5'>Lista de prontuários</Typography>
-        <SearchMedicalRecords setFilter={setFilter}/>
+        <SearchMedicalRecords setFilter={setFilter} loading={loading} />
       </>
 
     );

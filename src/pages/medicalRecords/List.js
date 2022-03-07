@@ -10,19 +10,22 @@ const ProductList = () => {
 
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState({
     name: ''
   });
 
   const handleSearch = (filterDefault) => {
+    setLoading(true);
     api.post("/filter-prontuarios", filterDefault).then((response) => {
       let result = response.data;
       if (filter.name){
         result = result.filter(el => el.name.toLowerCase().includes(filter.name.toLowerCase()));
       }
       setData(result);
-    }).catch(() => {
-      
+    }).catch(() => {})
+    .finally(()=>{
+      setLoading(false);
     });
   }
 
@@ -51,7 +54,7 @@ const ProductList = () => {
         }}
       >
         <Container maxWidth={false}>
-          <DataTableComponent handleOpen={handleOpen} data={data} handleSearch={handleSearch} setFilter={setFilter}/>
+          <DataTableComponent handleOpen={handleOpen} data={data} handleSearch={handleSearch} setFilter={setFilter} loading={loading}/>
           <ModalComponent handleClose={handleClose} open={open} handleSearch={handleSearch} />
         </Container>
       </Box>

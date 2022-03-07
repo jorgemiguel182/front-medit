@@ -80,6 +80,8 @@ const PacientHook = () => {
   const [have_any_deseases, set_have_any_deseases] = useState([])
   const [smoker, set_smoker] = useState([])
   const [alcohool, set_alcohool] = useState([])
+
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const handleChange = (event) => {
@@ -109,13 +111,15 @@ const PacientHook = () => {
       phone: values.tel,
       born_date: values.born_date
     }
-
+    setLoading(true);
     try {
       const response = await api.post('/new-prontuario', data);
       enqueueSnackbar(response.data.msg, { variant: 'success' });
       history.push(`/prontuarios`)
     } catch {
       enqueueSnackbar('Este paciente já tem um prontuário vinculado', { variant: 'error' });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -169,7 +173,8 @@ const PacientHook = () => {
     setValues,
     handleChange,
     handleSubmit,
-    handleChangeMultiple
+    handleChangeMultiple,
+    loading
   }
 
 };
