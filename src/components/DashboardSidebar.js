@@ -34,11 +34,11 @@ const user = {
 };
 
 const items = [
-  // {
-  //   href: '/app/dashboard',
-  //   icon: BarChartIcon,
-  //   title: 'Dashboard'
-  // },
+  {
+    href: '/emails',
+    icon: MailOutlineIcon,
+    title: 'Envio de Pesquisa COVID'
+  },
   {
     href: '/pacients',
     icon: ListAltIcon,
@@ -49,46 +49,11 @@ const items = [
     icon: AssignmentTurnedInIcon,
     title: 'Prontuários'
   },
-  {
-    href: '/emails',
-    icon: MailOutlineIcon,
-    title: 'Envio de Pesquisa COVID'
-  },
-  {
-    href: '/users',
-    icon: UsersIcon,
-    title: 'Cadastro dos médicos'
-  },
   // {
-  //   href: '/app/products',
-  //   icon: ShoppingBagIcon,
-  //   title: 'Products'
+  //   href: '/users',
+  //   icon: UsersIcon,
+  //   title: 'Cadastro dos médicos'
   // },
-  // {
-  //   href: '/app/account',
-  //   icon: UserIcon,
-  //   title: 'Account'
-  // },
-  // {
-  //   href: '/app/settings',
-  //   icon: SettingsIcon,
-  //   title: 'Settings'
-  // },
-  // {
-  //   href: '/login',
-  //   icon: LockIcon,
-  //   title: 'Login'
-  // },
-  // {
-  //   href: '/register',
-  //   icon: UserPlusIcon,
-  //   title: 'Register'
-  // },
-  // {
-  //   href: '/404',
-  //   icon: AlertCircleIcon,
-  //   title: 'Error'
-  // }
 ];
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
@@ -108,49 +73,25 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
         height: '100%'
       }}
     >
-      {/* <Box
-        sx={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          p: 2
-        }}
-      >
-        <Avatar
-          component={RouterLink}
-          src={user.avatar}
-          sx={{
-            cursor: 'pointer',
-            width: 64,
-            height: 64
-          }}
-          to="/app/account"
-        />
-        <Typography
-          color="textPrimary"
-          variant="h5"
-        >
-          {user.name}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.jobTitle}
-        </Typography>
-      </Box> */}
-      {/* <Divider /> */}
       <Box sx={{ p: 2 }}>
         <List>
           {items.map((item) => (
             <NavItem
-              href={item.href}
-              key={item.title}
-              title={item.title}
-              icon={item.icon}
+            href={item.href}
+            key={item.title}
+            title={item.title}
+            icon={item.icon}
             />
-          ))}
+            ))}
         </List>
+            <Divider />
+        <List>
+          <NavItem
+            href='/users'
+            title='Cadastro dos médicos'
+            icon={UsersIcon}
+          />
+        </List>    
       </Box>
       <Box sx={{ flexGrow: 1 }} />
       

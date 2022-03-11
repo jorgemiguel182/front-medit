@@ -27,7 +27,7 @@ const Login = () => {
         localStorage.setItem('refresh_token', response.data.data.refresh_token);
         localStorage.setItem('access_token', response.data.data.id_token);
       }).then(() => {
-        history.push('/pacients');
+        history.push('/emails');
       }).catch(function (error) {
         if (error.response) {
           enqueueSnackbar(error.response.data.message, { variant: 'error' });

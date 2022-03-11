@@ -20,6 +20,8 @@ import {
   FormLabel,
   CircularProgress
 } from '@material-ui/core';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import formValidate from '../../utils/formValidate';
 
 const Email = () => {
@@ -63,6 +65,28 @@ const Email = () => {
   function returnNumbers(value) {
     return value.replace(/\D/g, '');
   }
+
+  const LabelWhatsapp = () => (
+    <Grid container spacing={0} alignItems="normal" style={{ marginBlockStart: '6px', marginInlineEnd: '10px'}}>
+      <Grid item>
+        <WhatsAppIcon fontSize='small' style={{ marginInlineEnd: '2px'}}/>
+      </Grid>
+      <Grid item style={{ marginBlockStart: '-1px'}}>
+        WhatsApp
+      </Grid>
+    </Grid>
+  )
+
+  const LabelEmail = () => (
+    <Grid container spacing={0} alignItems="normal" style={{ marginBlockStart: '6px', marginInlineEnd: '10px'}}>
+      <Grid item>
+        <MailOutlineIcon fontSize='small' style={{ marginInlineEnd: '2px'}}/>
+      </Grid>
+      <Grid item style={{ marginBlockStart: '-1px'}}>
+        E-mail
+      </Grid>
+    </Grid>
+  )
 
   return (
     <>
@@ -109,13 +133,13 @@ const Email = () => {
                         md={6}
                         xs={12}
                       >
-                        <FormControl component="fieldset">
-                          <FormLabel component="legend">Meio para envio:</FormLabel>
-                          <RadioGroup row value={type} onChange={event=>setType(event.target.value)}>
-                            <FormControlLabel value="whatsapp" control={<Radio color="primary" />} label="WhatsApp" />
-                            <FormControlLabel value="email" control={<Radio color="primary" />} label="E-mail" />
-                          </RadioGroup>
-                        </FormControl>
+                          <FormControl component="fieldset">
+                            <FormLabel component="legend">Meio para envio:</FormLabel>
+                            <RadioGroup row value={type} onChange={event=>setType(event.target.value)}>
+                              <FormControlLabel value="whatsapp" control={<Radio color="primary" />} label={<LabelWhatsapp/>} />
+                              <FormControlLabel value="email" control={<Radio color="primary" />} label={<LabelEmail/>} />
+                            </RadioGroup>
+                          </FormControl>
                       </Grid>
                       <Grid
                         item
