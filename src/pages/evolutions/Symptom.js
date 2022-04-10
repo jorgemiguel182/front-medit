@@ -16,10 +16,18 @@ const Symptom = () => {
   const dateInput = useRef(null);
   const newSymptom = history.location.pathname.includes('new');
   
-  const checkDateFilled = () => {
+  const isDateFilled = () => {
     if (!values.date_created){
       enqueueSnackbar('Obrigatório informar a data', { variant: 'warning' });
       dateInput.current.focus();
+      return false;
+    }
+    return true;
+  }
+
+  const checkSubmit = () => {
+    if(isDateFilled()){
+      handleSubmit();
     }
   }
 
@@ -49,7 +57,7 @@ const Symptom = () => {
                   <Divider />
                   <CardContent>
                   <Grid container spacing={3}>
-                    <Grid item md={6} xs={12}>
+                    <Grid item md={3} xs={12}>
                       <TextField
                         inputRef={dateInput}
                         size="small"
@@ -59,7 +67,7 @@ const Symptom = () => {
                         type="date"
                         required
                         onChange={handleChange}
-                        onBlur={()=>checkDateFilled()}
+                        // onBlur={()=>checkDateFilled()}
                         value={values?.date_created}
                         variant="filled"
                       />
@@ -929,7 +937,7 @@ const Symptom = () => {
                     <Button
                       color="primary"
                       variant="contained"
-                      onClick={() => handleSubmit()}
+                      onClick={() => checkSubmit()}
                     >
                       Salvar sintoma
                     </Button>

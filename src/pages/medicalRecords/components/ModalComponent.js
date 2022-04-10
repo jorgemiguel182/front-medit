@@ -230,7 +230,12 @@ export default function TransitionsModal({ handleClose, open, handleSearch }) {
                       <CircularProgress size={23} style={{color: '#02255C'}} />
                     </Button>
                   ):(
-                    <Button variant="outlined" onClick={() => handleSearchByName()}><SearchIcon /> Buscar</Button>
+                    <Button 
+                    disabled={name.trim().length === 0}
+                    variant="outlined" 
+                    onClick={() => handleSearchByName()}>
+                      <SearchIcon /> Buscar
+                    </Button>
                   )}
                 </Grid>
               </Grid>

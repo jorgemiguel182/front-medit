@@ -96,7 +96,7 @@ const DatatableComponent = ({...rest}) => {
   return (
     <Card {...rest}>
       <PerfectScrollbar>
-        <Box sx={{ minWidth: 1050 }}>
+        <Box>
           <DataTable
             columns={columns}
             data={data}

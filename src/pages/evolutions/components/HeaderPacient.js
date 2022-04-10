@@ -3,8 +3,6 @@ import theme from 'src/theme';
 import moment from 'moment';
 import {
   Card,
-  Button,
-  TextField,
   Grid,
   CardContent,
   makeStyles,
@@ -15,76 +13,65 @@ const useStyles = makeStyles(()=> ({
   filterCard: {
     marginBlock: '10px',
     borderRadius: '20px',
-    height: '60px'
+    height: '90px'
   },
   content: {
     color: theme.palette.primary.main,
-    fontSize: '1em !important',
+    fontSize: '1.2em !important',
     fontWeight: 'bold !important'
   },
   title: {
-    fontSize: '1em !important'
+    fontSize: '1.2em !important'
   }
 }));
 
 const HeaderPacient = ({data}) => {
   const classes = useStyles();
-  const [name, setName] = useState('');
+  const paciente = data[0];
 
   return (
       <Card className={classes.filterCard} style={{backgroundColor: '#F3F6F4', width: '100%', display: 'flex'}}>
         <CardContent style={{width: '100%'}}>
-          <Grid container spacing={2}>
-            <Grid item container justifyContent="flex-start" alignItems="center" lg={4} spacing={1}>
-              <Grid item lg={2}>
-                <Typography className={classes.title}  align='right'>
-                  Paciente:
-                </Typography>
-              </Grid>
-              <Grid item lg={9}>
-                <Typography align='left' className={classes.content} >
-                  {data[0]?.name}
-                </Typography>
-              </Grid>
+          <Grid container spacing={1} direction="column" >
+            <Grid item container md={12}  spacing={8}>
+                <Grid item md={1}>
+                  <Typography className={classes.title}  align='left'>
+                    Paciente:
+                  </Typography>
+                </Grid>
+                <Grid item md={11}>
+                  <Typography align='left' className={classes.content} >
+                    {paciente?.name}
+                  </Typography>
+                </Grid>
             </Grid>
-            <Grid item container justifyContent="flex-start" alignItems="center" lg={2} spacing={1}>
-              <Grid item lg={6}>
-                <Typography className={classes.title} align='right'>
-                  Idade:
-                </Typography>
-              </Grid>
-              <Grid item lg={4}>
-                <Typography align='left' className={classes.content} >
-                  {Math.floor(moment(new Date()).diff(moment(data[0]?.born_date,"YYYY-MM-DD"),'years',true))+" anos"}
-                </Typography>
-              </Grid>
+            <Grid item container md={12} justifyContent="flex-start" spacing={8} >
+                <Grid item lg={1}>
+                  <Typography className={classes.title} align='left'>
+                    Telefone:
+                  </Typography>
+                </Grid>
+                <Grid item lg={2}>
+                  <Typography align='left' className={classes.content}>
+                  {paciente?.phone}
+                  </Typography>
+                </Grid>
+                <Grid item lg={1} style={{marginInlineStart: '-15px'}}>
+                  <Typography className={classes.title} align='left'>
+                    Idade:
+                  </Typography>
+                </Grid>
+                <Grid item lg={2} style={{marginInlineStart: '-25px'}} >
+                  <Typography align='left' className={classes.content} >
+                    {paciente && Math.floor(moment(new Date()).diff(moment(paciente?.born_date,"YYYY-MM-DD"),'years',true))+" anos"}
+                  </Typography>
+                </Grid>
+                
             </Grid>
-            <Grid item container justifyContent="flex-start" alignItems="center" lg={3} spacing={1}>
-              <Grid item lg={2}>
-                <Typography align='right' className={classes.title} >
-                  CPF:
-                </Typography>
-              </Grid>
-              <Grid item lg={10}>
-                <Typography align='left' className={classes.content} >
-                  {data[0]?.cpf}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid item container justifyContent="flex-start" alignItems="center" lg={3} spacing={1}>
-              <Grid item lg={4}>
-                <Typography className={classes.title} align='right'>
-                  Telefone:
-                </Typography>
-              </Grid>
-              <Grid item lg={8}>
-                <Typography align='left' className={classes.content}>
-                {data[0]?.phone}
-                </Typography>
-              </Grid>
-            </Grid>
+            
           </Grid>
         </CardContent>
+        
       </Card>
   );
 }

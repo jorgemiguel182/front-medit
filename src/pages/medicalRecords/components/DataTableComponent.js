@@ -51,7 +51,7 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, loading}
   return (
     <Card>
       <PerfectScrollbar>
-        <Box sx={{ minWidth: 1050 }}>
+        <Box >
           <DataTable
             columns={columns}
             data={data}
