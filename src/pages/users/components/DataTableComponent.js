@@ -31,6 +31,12 @@ const columns = [
 		reorder: true,
   },
   {
+    name: 'Telefone',
+    selector: row => row.phone,
+    sortable: true,
+		reorder: true,
+  },
+  {
     name: 'Validação e-mail',
     selector: row => { 
       if (row.status === 'CONFIRMED') {

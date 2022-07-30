@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import UserHook from './indexHook';
+import InputMask from 'react-input-mask';
 
 import {
   Box,
@@ -132,6 +133,23 @@ const User = () => {
                           value={values.crm}
                           variant="filled"
                         />
+                      </Grid>
+                      <Grid item md={6} xs={12}>
+                        <InputMask  
+                          mask="(99) 99999-9999" 
+                          maskChar=" "
+                          onChange={handleChange}
+                          value={values.phone}
+                          >
+                          {() => <TextField 
+                            style={{width: '160px'}}
+                            label='Celular com DDD'
+                            name="phone"
+                            variant="filled"
+                            size='small'
+                            fullWidth
+                          />}
+                        </InputMask>
                       </Grid>
                     </Grid>
                     <br />

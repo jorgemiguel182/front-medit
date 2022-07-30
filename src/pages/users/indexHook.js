@@ -18,7 +18,8 @@ const UserHook = () => {
     name: "",
     crm: "",
     email: "",
-    password: ""
+    password: "",
+    phone: ""
   });
 
   const newUser = history.location.pathname.includes('new');
@@ -35,7 +36,8 @@ const UserHook = () => {
       crm: values.crm,
       name: values.name,
       email: values.email,
-      password: values.password
+      password: values.password,
+      phone: values.phone
     }
     axios.post(`${process.env.REACT_APP_COGNITO_AUTH_URL}/signup`, data)
       .then(() => {
@@ -58,7 +60,8 @@ const UserHook = () => {
     const data = {
       username,
       name: values.name,
-      crm: values.crm
+      crm: values.crm,
+      phone: values.phone
     }
    try {
       const response = await api.post('/edit-user', data);
@@ -88,18 +91,20 @@ const UserHook = () => {
   }
 
   const allFiledsFilled = () => {
-    if (!newUser) {
-      return (
-        !formValidate.isEmpty(values.name) && 
-        !formValidate.isEmpty(values.crm) 
-      );
-    } else {
+    if (newUser) {
       return (
         formValidate.isEmail(values.email) &&  
         !formValidate.isEmpty(values.name) && 
         !formValidate.isEmpty(values.crm) &&
+        formValidate.isPhone(values.phone) &&
         pwdValid &&
         (confirmPwd === values.password) 
+      );
+    } else {
+      return (
+        !formValidate.isEmpty(values.name) && 
+        !formValidate.isEmpty(values.crm) &&
+        formValidate.isPhone(values.phone)
       );
     }
   }
@@ -109,6 +114,9 @@ const UserHook = () => {
       setLoadingSearch(true);
       api.post('/list-users', {}).then((response) => {
         const user = response.data.find(el => el.username === username)
+        if (!user.phone) {
+          user.phone = ''
+        }
         setValues(user);
       }).catch((error)=>{console.log(error)})
       .finally(()=>{

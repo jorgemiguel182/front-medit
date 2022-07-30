@@ -62,10 +62,6 @@ const Email = () => {
     });
   };
 
-  function returnNumbers(value) {
-    return value.replace(/\D/g, '');
-  }
-
   const LabelWhatsapp = () => (
     <Grid container spacing={0} alignItems="normal" style={{ marginBlockStart: '6px', marginInlineEnd: '10px'}}>
       <Grid item>
@@ -196,7 +192,7 @@ const Email = () => {
                       <Button
                         disabled={
                           (type.includes('email') && ! formValidate.isEmail(values.email)) ||
-                          (type.includes('whatsapp') && returnNumbers(values.phone).length !== 11)
+                          (type.includes('whatsapp') && ! formValidate.isPhone(values.phone) )
                         }
                         color="primary"
                         variant="contained"

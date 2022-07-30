@@ -3,8 +3,12 @@ const isEmail = (email) => {
   return regexp.test(String(email).toLowerCase());
 }
 
+const isPhone = (phone) => {
+    return phone.replace(/\D/g, '').length === 11;
+}
+
 const isEmpty = (str) => {
   return str.trim().length === 0
 }
 
-export default {isEmail, isEmpty}
+export default {isEmail, isPhone, isEmpty}
