@@ -140,6 +140,7 @@ const User = () => {
                           maskChar=" "
                           onChange={handleChange}
                           value={values.phone}
+                          fullWidth
                           >
                           {() => <TextField 
                             style={{width: '160px'}}
@@ -147,7 +148,6 @@ const User = () => {
                             name="phone"
                             variant="filled"
                             size='small'
-                            fullWidth
                           />}
                         </InputMask>
                       </Grid>

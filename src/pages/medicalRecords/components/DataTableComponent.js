@@ -7,6 +7,7 @@ import {
 import DataTable from 'react-data-table-component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import SearchMedicalRecords from './SearchMedicalRecords';
 
 const columns = [
@@ -25,7 +26,7 @@ const columns = [
 ];
 
 
-const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, loading}) => {
+const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, filter, loading, handleDownload}) => {
 
   const history = useHistory();
   
@@ -34,9 +35,11 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, loading}
     history.push(`/evolutions/${row.id}`);
   }
 
-  const handleGoToNew = () => {
-    history.push('/prontuarios/new');
-  }
+  // const handleGoToNew = () => {
+  //   history.push('/prontuarios/new');
+  // }
+
+  
 
   const Title = () => {
     return (
@@ -60,9 +63,16 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, loading}
             pointerOnHover
             onRowClicked={(row) => goToEvolution(row)}
             actions={
+              <>
+              {filter.startDate && filter.endDate && filter.name === '' && (
+              <Button startIcon={<GetAppIcon />} variant="contained" color="primary" onClick={e => handleDownload()}>
+                Download
+              </Button>
+              )}
               <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleOpen(true)}>
                 Novo prontuário
               </Button>
+              </>
             }
           />
         </Box>

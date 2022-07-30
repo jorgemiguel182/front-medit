@@ -3,7 +3,7 @@ import {Box, Container} from '@material-ui/core';
 import DataTableComponent from './components/DataTableComponent';
 import ModalComponent from './components/ModalComponent';
 import api from '../../services/api';
-
+import moment from 'moment';
 import { Helmet } from 'react-helmet';
 
 const ProductList = () => {
@@ -12,7 +12,9 @@ const ProductList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState({
-    name: ''
+    name: '',
+    startDate: '',
+    endDate: '',
   });
 
   const handleSearch = (filterDefault) => {
@@ -21,6 +23,13 @@ const ProductList = () => {
       let result = response.data;
       if (filter.name){
         result = result.filter(el => el.name.toLowerCase().includes(filter.name.toLowerCase()));
+      }
+      if (filter.startDate && filter.endDate){
+        const startDate = moment(filter.startDate, 'dd/MM/yyyy')._i
+        const endDate =  moment(filter.endDate, 'dd/MM/yyyy')._i + 'T23:59:59'
+        result = result.filter(el => 
+          moment(el.date_created, 'dd/MM/yyyy')._i > startDate && moment(el.date_created, 'dd/MM/yyyy')._i < endDate
+        )
       }
       setData(result);
     }).catch(() => {})
@@ -36,6 +45,10 @@ const ProductList = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleDownload = () => {
+    console.log(`ENDPOINT DOWNLOAD PAYLOAD: ${filter.startDate} & ${filter.endDate}` )
+  }
 
   useEffect(() => {
     handleSearch();
@@ -54,7 +67,7 @@ const ProductList = () => {
         }}
       >
         <Container maxWidth={false}>
-          <DataTableComponent handleOpen={handleOpen} data={data} handleSearch={handleSearch} setFilter={setFilter} loading={loading}/>
+          <DataTableComponent handleOpen={handleOpen} data={data} handleSearch={handleSearch} setFilter={setFilter} filter={filter} loading={loading} handleDownload={handleDownload}/>
           <ModalComponent handleClose={handleClose} open={open} handleSearch={handleSearch} />
         </Container>
       </Box>

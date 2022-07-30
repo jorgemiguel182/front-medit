@@ -25,7 +25,7 @@ const useStyles = makeStyles(()=> ({
        marginBlockStart: '-4px'
      },
      height: '27px',
-     backgroundColor: 'white',
+     backgroundColor: 'aliceblue',
      width: '250px',
      '& input': {
        height: '11px',
