@@ -46,10 +46,6 @@ const ProductList = () => {
     setOpen(false);
   };
 
-  const handleDownload = () => {
-    console.log(`ENDPOINT DOWNLOAD PAYLOAD: ${filter.startDate} & ${filter.endDate}` )
-  }
-
   useEffect(() => {
     handleSearch();
   }, [filter])
@@ -67,7 +63,7 @@ const ProductList = () => {
         }}
       >
         <Container maxWidth={false}>
-          <DataTableComponent handleOpen={handleOpen} data={data} handleSearch={handleSearch} setFilter={setFilter} filter={filter} loading={loading} handleDownload={handleDownload}/>
+          <DataTableComponent handleOpen={handleOpen} data={data} handleSearch={handleSearch} setFilter={setFilter} filter={filter} loading={loading} />
           <ModalComponent handleClose={handleClose} open={open} handleSearch={handleSearch} />
         </Container>
       </Box>

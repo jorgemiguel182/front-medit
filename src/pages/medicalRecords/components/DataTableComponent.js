@@ -9,6 +9,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import SearchMedicalRecords from './SearchMedicalRecords';
+import downloadMedicalRecords from 'src/utils/downloadMedicalRecords';
 
 const columns = [
   {
@@ -65,7 +66,7 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, filter, 
             actions={
               <>
               {filter.startDate && filter.endDate && filter.name === '' && (
-              <Button startIcon={<GetAppIcon />} variant="contained" color="primary" onClick={e => handleDownload()}>
+              <Button startIcon={<GetAppIcon />} variant="contained" color="primary" onClick={e => downloadMedicalRecords.handleDownload(filter.startDate, filter.endDate)}>
                 Download
               </Button>
               )}
