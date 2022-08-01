@@ -1,6 +1,8 @@
 import api from '../services/api';
 
 const handleDownload = (date_ini, date_fim, id_prontuario = null) => {
+  date_ini = date_ini + "T00:00:00"
+  date_fim = date_fim + "T23:59:59"
   let postData = {};
   if (id_prontuario) {
     postData = {id_prontuario};
