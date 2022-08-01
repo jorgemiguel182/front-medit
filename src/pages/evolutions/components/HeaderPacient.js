@@ -48,7 +48,7 @@ const HeaderPacient = ({data}) => {
                   </Typography>
                 </Grid>
                 <Grid item md={1}>
-                <Button startIcon={<GetAppIcon />} variant="contained" color="primary" onClick={e => downloadMedicalRecords.handleDownload(null, null, paciente.id)}>
+                <Button startIcon={<GetAppIcon />} variant="contained" color="primary" onClick={e => downloadMedicalRecords.handleDownload(null, null, paciente.id_research_client)}>
                 Download
               </Button>
                 </Grid>
