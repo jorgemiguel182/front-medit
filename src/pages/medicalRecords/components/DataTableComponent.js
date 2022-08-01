@@ -42,10 +42,10 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, filter, 
 
   const Title = () => {
     return (
-      <>
+      <div style={{height: '123px'}}>
         <Typography variant='h5'>Lista de prontuários</Typography>
         <SearchMedicalRecords setFilter={setFilter} loading={loading} />
-      </>
+      </div>
 
     );
   };
@@ -62,7 +62,7 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, filter, 
             pointerOnHover
             onRowClicked={(row) => goToEvolution(row)}
             actions={
-             <div style={{display: "flex", flexDirection: "column", gap: "10px", justifyContent: "flex-end", marginBlockStart: showDownloadButton ? '38px' : '0px' }}>
+             <div style={{display: "flex", flexDirection: "column", gap: "10px", justifyContent: "flex-end", marginBlockStart: showDownloadButton ? '40px' : '0px' }}>
               <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleOpen(true)}>
                 Novo prontuário
               </Button>
