@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import {
@@ -30,7 +30,7 @@ const columns = [
 const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, filter, loading, handleDownload}) => {
 
   const history = useHistory();
-  
+  const showDownloadButton = filter.startDate && filter.endDate && filter.name === '';
 
   const goToEvolution = (row) => {
     history.push(`/evolutions/${row.id}`);
@@ -39,8 +39,6 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, filter, 
   // const handleGoToNew = () => {
   //   history.push('/prontuarios/new');
   // }
-
-  
 
   const Title = () => {
     return (
@@ -64,16 +62,16 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, filter, 
             pointerOnHover
             onRowClicked={(row) => goToEvolution(row)}
             actions={
-              <>
-              {filter.startDate && filter.endDate && filter.name === '' && (
+             <div style={{display: "flex", flexDirection: "column", gap: "10px", justifyContent: "flex-end", marginBlockStart: showDownloadButton ? '38px' : '0px' }}>
+              <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleOpen(true)}>
+                Novo prontuário
+              </Button>
+              { showDownloadButton && (
               <Button startIcon={<GetAppIcon />} variant="contained" color="primary" onClick={e => downloadMedicalRecords.handleDownload(filter.startDate, filter.endDate)}>
                 Download
               </Button>
               )}
-              <Button startIcon={<ControlPointIcon />} variant="contained" color="primary" onClick={e => handleOpen(true)}>
-                Novo prontuário
-              </Button>
-              </>
+            </div> 
             }
           />
         </Box>

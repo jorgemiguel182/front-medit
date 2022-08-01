@@ -51,8 +51,9 @@ const User = () => {
           <Grid
             container
             spacing={3}
+            justifyContent="center"
           >
-            <Grid item lg={4} md={8} xs={12}>
+            <Grid item lg={5} md={8} xs={12}>
               <form autoComplete="off" onSubmit={(e) => handleSubmit(e)} >
                 <Card>
                   <CardHeader

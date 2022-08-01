@@ -36,13 +36,13 @@ const HeaderPacient = ({data}) => {
       <Card className={classes.filterCard} style={{backgroundColor: '#F3F6F4', width: '100%', display: 'flex'}}>
         <CardContent style={{width: '100%'}}>
           <Grid container spacing={1} direction="column" >
-            <Grid item container md={12}  spacing={8}>
+            <Grid item container md={12}  spacing={4}>
                 <Grid item md={1}>
                   <Typography className={classes.title}  align='left'>
                     Paciente:
                   </Typography>
                 </Grid>
-                <Grid item md={4}>
+                <Grid item md={9}>
                   <Typography align='left' className={classes.content} >
                     {paciente?.name}
                   </Typography>
@@ -53,7 +53,7 @@ const HeaderPacient = ({data}) => {
               </Button>
                 </Grid>
             </Grid>
-            <Grid item container md={12} justifyContent="flex-start" spacing={8} >
+            <Grid item container md={12} justifyContent="flex-start" spacing={4} >
                 <Grid item lg={1}>
                   <Typography className={classes.title} align='left'>
                     Telefone:
