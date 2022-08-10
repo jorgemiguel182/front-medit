@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import {
-  Box, Card, Button, Typography
+  Box, Card, Button, Typography, CircularProgress
 } from '@material-ui/core';
 import DataTable from 'react-data-table-component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -30,6 +30,7 @@ const columns = [
 const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, filter, loading, handleDownload}) => {
 
   const history = useHistory();
+  const [loadingDownload, setLoadingDownload] = useState(false);
   const showDownloadButton = filter.startDate && filter.endDate && filter.name === '';
 
   const goToEvolution = (row) => {
@@ -67,7 +68,7 @@ const DatatableComponent = ({handleOpen, handleSearch, data, setFilter, filter, 
                 Novo prontuário
               </Button>
               { showDownloadButton && (
-              <Button startIcon={<GetAppIcon />} variant="contained" color="primary" onClick={e => downloadMedicalRecords.handleDownload(filter.startDate, filter.endDate)}>
+              <Button startIcon={loadingDownload ? <CircularProgress size={20} style={{color: 'white'}} /> : <GetAppIcon /> } variant="contained" color="primary" onClick={e => downloadMedicalRecords.handleDownload(setLoadingDownload, filter.startDate, filter.endDate)}>
                 Download
               </Button>
               )}

@@ -9,7 +9,8 @@ import {
   CardContent,
   makeStyles,
   Typography,
-  Button
+  Button,
+  CircularProgress
 } from '@material-ui/core';
 
 const useStyles = makeStyles(()=> ({
@@ -31,6 +32,7 @@ const useStyles = makeStyles(()=> ({
 const HeaderPacient = ({data}) => {
   const classes = useStyles();
   const paciente = data[0];
+  const [loading, setLoading] = useState(false);
 
   return (
       <Card className={classes.filterCard} style={{backgroundColor: '#F3F6F4', width: '100%', display: 'flex'}}>
@@ -48,7 +50,7 @@ const HeaderPacient = ({data}) => {
                   </Typography>
                 </Grid>
                 <Grid item md={1}>
-                <Button startIcon={<GetAppIcon />} variant="contained" color="primary" onClick={e => downloadMedicalRecords.handleDownload(null, null, paciente.id)}>
+                <Button startIcon={loading ? <CircularProgress size={20} style={{color: 'white'}} /> : <GetAppIcon /> } variant="contained" color="primary" onClick={e => downloadMedicalRecords.handleDownload(setLoading, null, null, paciente.id)}>
                 Download
               </Button>
                 </Grid>
