@@ -41,6 +41,10 @@ const columns = [
           return 'Pendente prontuário';
         case 'answered':
           return 'Pendente pagamento';
+        case 'pending':
+          return 'Pendente pagamento';
+        case 'canceled':
+          return 'Pagamento cancelado';
         case 'done':
           return 'Prontuário cadastrado';
         default:
